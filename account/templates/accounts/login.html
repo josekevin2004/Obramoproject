@@ -1,0 +1,45 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'accounts/css/stylelogin.css' %}">
+    <link rel="stylesheet" href="{% static 'accounts/css/styleregister.css' %}">
+</head>
+
+<body>
+    {% include 'partials/_nav-header.html' %}
+    <div class="container" style="width:100vw;min-height:100vh;max-width:none;padding:0;margin:0;">
+        <div class="left-panel"></div>
+        <div class="right-panel">
+            <div class="login-card">
+                <h1>Bem-vindo(a)</h1>
+                <p class="subtitle">Entre com suas credenciais para continuar</p>
+
+                <form>
+                    <div class="input-group">
+                        <input type="email" placeholder="E-mail" required>
+                    </div>
+                    <div class="input-group">
+                        <input type="password" placeholder="Senha" required>
+                    </div>
+
+                    <a href="{% url 'redefinir_senha' %}" class="forgot-password">Esqueci minha senha</a>
+
+                    <button type="submit" class="btn-login">Entrar</button>
+
+                    <p class="signup-text">
+                        Não tem conta? <a href="{% url 'register' %}">Criar agora</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,1353 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Obramo - Conectando Clientes e Profissionais de TI</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #1E40AF 0%, #3B82F6 100%);
+        }
+        .nav-active {
+            border-bottom: 2px solid #3B82F6;
+        }
+        .step-card {
+            transition: all 0.3s ease;
+        }
+        .step-card:hover {
+            transform: translateY(-5px);
+        }
+        .testimonial-card {
+            transition: all 0.3s ease;
+        }
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        .feature-icon {
+            background-color: rgba(59, 130, 246, 0.1);
+        }
+        .payment-card {
+            transition: all 0.3s ease;
+        }
+        .payment-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        .dashboard-tab {
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .dashboard-tab.active {
+            border-bottom: 2px solid #3B82F6;
+            color: #3B82F6;
+        }
+        .pro-badge {
+            background-color: #3B82F6;
+            color: white;
+            font-size: 12px;
+            padding: 2px 8px;
+            border-radius: 12px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Cabeçalho -->
+    <header class="bg-white shadow-sm fixed w-full top-0 z-50">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <div class="text-2xl font-bold text-blue-600"><a href="{% url 'home' %}">Obramo</a></div>
+                </div>
+                <nav class="hidden md:flex space-x-6">
+                    <a href="#home" class="font-medium text-gray-700 hover:text-blue-600 nav-active">Início</a>
+                    <a href="#search" class="font-medium text-gray-700 hover:text-blue-600 ">Buscar</a>
+                    <a href="#how-it-works" class="font-medium text-gray-700 hover:text-blue-600">Como Funciona</a>
+                    <a href="#professionals" class="font-medium text-gray-700 hover:text-blue-600">Profissionais</a>
+                    <a href="#contact" class="font-medium text-gray-700 hover:text-blue-600">Contato</a>
+                </nav>
+                <div class="flex items-center space-x-4">
+                    <a href="{% url 'login' %}" class="font-medium text-gray-700 hover:text-blue-600">Entrar</a>
+                    <a href="{% url 'register' %}" class="bg-blue-600 text-white px-4 py-2 rounded-md font-medium hover:bg-blue-700">Cadastrar</a>
+                </div>
+                <button class="md:hidden text-gray-700">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Seção Principal (Hero) -->
+    <section id="home" class="hero-gradient text-white pt-24 pb-16">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div class="pt-10">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-4">Conecte-se com os Melhores Profissionais de TI</h1>
+                    <p class="text-lg mb-8">Encontre especialistas qualificados para resolver seus projetos de tecnologia. Rápido, seguro e eficiente.</p>
+                    <div class="bg-white p-6 rounded-lg shadow-lg">
+                        <h2 class="text-gray-800 font-semibold mb-4">O que você precisa?</h2>
+                        <div class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-2">
+                            <select class="border rounded-md p-3 flex-grow text-gray-700">
+                                <option>Desenvolvimento Web</option>
+                                <option>Desenvolvimento Mobile</option>
+                                <option>DevOps</option>
+                                <option>Segurança</option>
+                                <option>Suporte Técnico</option>
+                                <option>Infraestrutura</option>
+                                <option>BI & Analytics</option>
+                                <option>Design UX/UI</option>
+                                <option>Banco de Dados</option>
+                            </select>
+                            <select class="border rounded-md p-3 flex-grow text-gray-700">
+                                <option>São Paulo, SP</option>
+                                <option>Rio de Janeiro, RJ</option>
+                                <option>Belo Horizonte, MG</option>
+                                <option>Brasília, DF</option>
+                                <option>Remoto</option>
+                            </select>
+                            <button class="bg-blue-600 text-white p-3 rounded-md hover:bg-blue-700 px-6">Buscar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Estatísticas -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                <div>
+                    <p class="text-4xl font-bold text-blue-600">5,000+</p>
+                    <p class="text-gray-600">Profissionais Cadastrados</p>
+                </div>
+                <div>
+                    <p class="text-4xl font-bold text-blue-600">10,000+</p>
+                    <p class="text-gray-600">Projetos Concluídos</p>
+                </div>
+                <div>
+                    <p class="text-4xl font-bold text-blue-600">4.8/5</p>
+                    <p class="text-gray-600">Avaliação Média</p>
+                </div>
+                <div>
+                    <p class="text-4xl font-bold text-blue-600">98%</p>
+                    <p class="text-gray-600">Clientes Satisfeitos</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Como Funciona -->
+    <section id="how-it-works" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Como Funciona</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Nossa plataforma facilita a conexão entre clientes e profissionais de TI em apenas três passos simples</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-lg shadow-md step-card">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-file-alt text-2xl text-blue-600"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3 text-center">Crie seu Projeto</h3>
+                    <p class="text-gray-600 text-center">Descreva suas necessidades, expectativas e prazos para que os profissionais possam entender melhor sua demanda.</p>
+                </div>
+                
+                <div class="bg-white p-8 rounded-lg shadow-md step-card">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-user-tie text-2xl text-blue-600"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3 text-center">Escolha o Profissional</h3>
+                    <p class="text-gray-600 text-center">Compare propostas, preços, avaliações e perfis dos profissionais para escolher o melhor para sua necessidade.</p>
+                </div>
+                
+                <div class="bg-white p-8 rounded-lg shadow-md step-card">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6 mx-auto">
+                        <i class="fas fa-laptop-code text-2xl text-blue-600"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3 text-center">Comece a Trabalhar</h3>
+                    <p class="text-gray-600 text-center">Contrate e inicie seu projeto com segurança. Nosso sistema garante o pagamento somente após a sua aprovação.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Serviços -->
+    <section id="services" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Serviços Disponíveis</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Nossa plataforma oferece uma ampla gama de serviços de TI para atender às suas necessidades específicas</p>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all text-center">
+                    <div class="w-16 h-16 feature-icon rounded-full flex items-center justify-center mb-4 mx-auto">
+                        <i class="fas fa-laptop-code text-2xl text-blue-600"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-800">Desenvolvimento Web</h3>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all text-center">
+                    <div class="w-16 h-16 feature-icon rounded-full flex items-center justify-center mb-4 mx-auto">
+                        <i class="fas fa-mobile-alt text-2xl text-blue-600"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-800">Apps Mobile</h3>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all text-center">
+                    <div class="w-16 h-16 feature-icon rounded-full flex items-center justify-center mb-4 mx-auto">
+                        <i class="fas fa-server text-2xl text-blue-600"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-800">Infraestrutura</h3>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all text-center">
+                    <div class="w-16 h-16 feature-icon rounded-full flex items-center justify-center mb-4 mx-auto">
+                        <i class="fas fa-shield-alt text-2xl text-blue-600"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-800">Segurança</h3>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all text-center">
+                    <div class="w-16 h-16 feature-icon rounded-full flex items-center justify-center mb-4 mx-auto">
+                        <i class="fas fa-database text-2xl text-blue-600"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-800">Banco de Dados</h3>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all text-center">
+                    <div class="w-16 h-16 feature-icon rounded-full flex items-center justify-center mb-4 mx-auto">
+                        <i class="fas fa-chart-pie text-2xl text-blue-600"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-800">BI & Analytics</h3>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all text-center">
+                    <div class="w-16 h-16 feature-icon rounded-full flex items-center justify-center mb-4 mx-auto">
+                        <i class="fas fa-paint-brush text-2xl text-blue-600"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-800">UX/UI Design</h3>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-all text-center">
+                    <div class="w-16 h-16 feature-icon rounded-full flex items-center justify-center mb-4 mx-auto">
+                        <i class="fas fa-headset text-2xl text-blue-600"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-800">Suporte Técnico</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Busca -->
+    <section id="search" class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Encontre o Profissional Ideal</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Use filtros avançados para encontrar exatamente o que você precisa</p>
+            </div>
+            
+            <div class="bg-white p-6 rounded-lg shadow-lg mb-8">
+                <div class="grid md:grid-cols-4 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Especialidade</label>
+                        <select class="w-full border rounded-md p-2 text-gray-700">
+                            <option>Todas as especialidades</option>
+                            <option>Desenvolvimento Front-end</option>
+                            <option>Desenvolvimento Back-end</option>
+                            <option>Desenvolvimento Mobile</option>
+                            <option>DevOps</option>
+                            <option>Cloud Computing</option>
+                            <option>Segurança da Informação</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Preço/Hora</label>
+                        <select class="w-full border rounded-md p-2 text-gray-700">
+                            <option>Qualquer preço</option>
+                            <option>Até R$ 50/h</option>
+                            <option>R$ 50 - R$ 100/h</option>
+                            <option>R$ 100 - R$ 150/h</option>
+                            <option>Acima de R$ 150/h</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Avaliação</label>
+                        <select class="w-full border rounded-md p-2 text-gray-700">
+                            <option>Todas as avaliações</option>
+                            <option>4+ estrelas</option>
+                            <option>3+ estrelas</option>
+                            <option>2+ estrelas</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Localização</label>
+                        <select class="w-full border rounded-md p-2 text-gray-700">
+                            <option>Brasil</option>
+                            <option>São Paulo</option>
+                            <option>Rio de Janeiro</option>
+                            <option>Minas Gerais</option>
+                            <option>Remoto</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mt-4 flex justify-end">
+                    <button class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">Buscar Profissionais</button>
+                </div>
+            </div>
+            
+            <!-- Search Results Preview -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Professional Card 1 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="p-6">
+                        <div class="flex items-start justify-between">
+                            <div class="flex items-center">
+                                <div class="w-14 h-14 rounded-full bg-gray-300 flex items-center justify-center">
+                                    <i class="fas fa-user text-gray-500"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <h3 class="text-xl font-semibold text-gray-800">Ricardo Silva</h3>
+                                    <p class="text-gray-600">Desenvolvedor Full-Stack</p>
+                                </div>
+                            </div>
+                            <span class="pro-badge">PRO</span>
+                        </div>
+                        
+                        <div class="mt-4">
+                            <div class="flex items-center mb-2">
+                                <div class="flex text-yellow-400">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <span class="text-gray-600 ml-2">4.8 (120 avaliações)</span>
+                            </div>
+                            
+                            <p class="text-gray-600 text-sm mb-4">Especialista em React, Node.js e AWS com 8 anos de experiência em desenvolvimento de aplicações web.</p>
+                            
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">React</span>
+                                <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Node.js</span>
+                                <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">AWS</span>
+                                <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">TypeScript</span>
+                            </div>
+                            
+                            <div class="flex justify-between items-center">
+                                <span class="font-bold text-gray-800">R$ 120/hora</span>
+                                <button class="bg-blue-600 text-white px-4 py-2 rounded-md text-sm hover:bg-blue-700">Ver Perfil</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Professional Card 2 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="p-6">
+                        <div class="flex items-start justify-between">
+                            <div class="flex items-center">
+                                <div class="w-14 h-14 rounded-full bg-gray-300 flex items-center justify-center">
+                                    <i class="fas fa-user text-gray-500"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <h3 class="text-xl font-semibold text-gray-800">Ana Ferreira</h3>
+                                    <p class="text-gray-600">UX/UI Designer</p>
+                                </div>
+                            </div>
+                            <span class="pro-badge">PRO</span>
+                        </div>
+                        
+                        <div class="mt-4">
+                            <div class="flex items-center mb-2">
+                                <div class="flex text-yellow-400">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <span class="text-gray-600 ml-2">5.0 (87 avaliações)</span>
+                            </div>
+                            
+                            <p class="text-gray-600 text-sm mb-4">Designer com foco em experiência do usuário e interfaces intuitivas para aplicações web e mobile.</p>
+                            
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Figma</span>
+                                <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Adobe XD</span>
+                                <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Protótipo</span>
+                                <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">UI/UX</span>
+                            </div>
+                            
+                            <div class="flex justify-between items-center">
+                                <span class="font-bold text-gray-800">R$ 90/hora</span>
+                                <button class="bg-blue-600 text-white px-4 py-2 rounded-md text-sm hover:bg-blue-700">Ver Perfil</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Professional Card 3 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="p-6">
+                        <div class="flex items-start justify-between">
+                            <div class="flex items-center">
+                                <div class="w-14 h-14 rounded-full bg-gray-300 flex items-center justify-center">
+                                    <i class="fas fa-user text-gray-500"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <h3 class="text-xl font-semibold text-gray-800">Carlos Santos</h3>
+                                    <p class="text-gray-600">DevOps Engineer</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4">
+                            <div class="flex items-center mb-2">
+                                <div class="flex text-yellow-400">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                                <span class="text-gray-600 ml-2">4.1 (45 avaliações)</span>
+                            </div>
+                            
+                            <p class="text-gray-600 text-sm mb-4">Especialista em integração e entrega contínua, automação de infraestrutura e containers.</p>
+                            
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Docker</span>
+                                <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Kubernetes</span>
+                                <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Jenkins</span>
+                                <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">AWS</span>
+                            </div>
+                            
+                            <div class="flex justify-between items-center">
+                                <span class="font-bold text-gray-800">R$ 110/hora</span>
+                                <button class="bg-blue-600 text-white px-4 py-2 rounded-md text-sm hover:bg-blue-700">Ver Perfil</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8 text-center">
+                <button class="bg-white border border-blue-600 text-blue-600 px-6 py-2 rounded-md hover:bg-blue-50">Carregar mais profissionais</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Perfil Profissional -->
+    <section id="professional-profile" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Perfil Profissional</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Exemplo de perfil de profissional com todas as informações relevantes</p>
+            </div>
+            
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <!-- Profile Header -->
+                <div class="bg-blue-600 text-white p-6">
+                    <div class="flex flex-col md:flex-row justify-between items-center">
+                        <div class="flex items-center mb-4 md:mb-0">
+                            <div class="w-20 h-20 rounded-full bg-white flex items-center justify-center">
+                                <i class="fas fa-user text-blue-600 text-3xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-2xl font-bold">Ricardo Silva</h3>
+                                <p>Desenvolvedor Full-Stack</p>
+                            </div>
+                        </div>
+                        <div class="flex space-x-3">
+                            <button class="bg-white text-blue-600 px-4 py-2 rounded-md hover:bg-blue-50">Enviar Mensagem</button>
+                            <button class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600">Contratar</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Profile Content -->
+                <div class="p-6">
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <!-- Left Column - Details -->
+                        <div class="md:col-span-2">
+                            <div class="mb-6">
+                                <h4 class="text-lg font-semibold text-gray-800 mb-2">Sobre mim</h4>
+                                <p class="text-gray-600">Desenvolvedor Full-Stack com mais de 8 anos de experiência em desenvolvimento de aplicações web e mobile. Especialista em React, Node.js e AWS, com foco em soluções escaláveis e de alto desempenho. Trabalho com metodologias ágeis e tenho experiência em liderar equipes técnicas.</p>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <h4 class="text-lg font-semibold text-gray-800 mb-2">Habilidades</h4>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded">React</span>
+                                    <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded">Node.js</span>
+                                    <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded">TypeScript</span>
+                                    <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded">AWS</span>
+                                    <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded">MongoDB</span>
+                                    <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded">PostgreSQL</span>
+                                    <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded">Docker</span>
+                                    <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded">CI/CD</span>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <h4 class="text-lg font-semibold text-gray-800 mb-2">Experiência</h4>
+                                <div class="mb-4">
+                                    <div class="flex justify-between items-center">
+                                        <h5 class="font-medium text-gray-800">Tech Solutions Inc.</h5>
+                                        <span class="text-sm text-gray-600">2018 - Presente</span>
+                                    </div>
+                                    <p class="text-gray-600">Desenvolvedor Sênior - Responsável pelo desenvolvimento de aplicações web de alta escala usando React e Node.js.</p>
+                                </div>
+                                <div class="mb-4">
+                                    <div class="flex justify-between items-center">
+                                        <h5 class="font-medium text-gray-800">Digital Innovate</h5>
+                                        <span class="text-sm text-gray-600">2015 - 2018</span>
+                                    </div>
+                                    <p class="text-gray-600">Desenvolvedor Web - Atuei no desenvolvimento de sites e sistemas web para clientes de diversos segmentos.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <h4 class="text-lg font-semibold text-gray-800 mb-2">Projetos Recentes</h4>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div class="border rounded-lg p-4">
+                                        <h5 class="font-medium text-gray-800">E-commerce App</h5>
+                                        <p class="text-gray-600 text-sm">Plataforma completa de e-commerce com integração de pagamentos e gestão de estoque.</p>
+                                    </div>
+                                    <div class="border rounded-lg p-4">
+                                        <h5 class="font-medium text-gray-800">CRM Financeiro</h5>
+                                        <p class="text-gray-600 text-sm">Sistema de gestão financeira para pequenas e médias empresas.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Right Column - Reviews and Contact -->
+                        <div>
+                            <div class="bg-gray-50 p-4 rounded-lg mb-6">
+                                <h4 class="text-lg font-semibold text-gray-800 mb-2">Informações</h4>
+                                <div class="flex items-center mb-2">
+                                    <i class="fas fa-map-marker-alt text-gray-600 w-5"></i>
+                                    <span class="text-gray-600 ml-2">São Paulo, SP - Brasil</span>
+                                </div>
+                                <div class="flex items-center mb-2">
+                                    <i class="fas fa-clock text-gray-600 w-5"></i>
+                                    <span class="text-gray-600 ml-2">Disponível para novos projetos</span>
+                                </div>
+                                <div class="flex items-center mb-2">
+                                    <i class="fas fa-language text-gray-600 w-5"></i>
+                                    <span class="text-gray-600 ml-2">Português, Inglês</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-money-bill-wave text-gray-600 w-5"></i>
+                                    <span class="text-gray-600 ml-2">R$ 120/hora</span>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-6">
+                                <h4 class="text-lg font-semibold text-gray-800 mb-2">Avaliações</h4>
+                                <div class="flex items-center mb-2">
+                                    <div class="flex text-yellow-400">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star-half-alt"></i>
+                                    </div>
+                                    <span class="text-gray-600 ml-2">4.8 (120 avaliações)</span>
+                                </div>
+                                
+                                <!-- Review items -->
+                                <div class="border-t pt-4 mt-4">
+                                    <div class="mb-4">
+                                        <div class="flex justify-between">
+                                            <span class="font-medium text-gray-800">Maria C.</span>
+                                            <div class="flex text-yellow-400">
+                                                <i class="fas fa-star text-xs"></i>
+                                                <i class="fas fa-star text-xs"></i>
+                                                <i class="fas fa-star text-xs"></i>
+                                                <i class="fas fa-star text-xs"></i>
+                                                <i class="fas fa-star text-xs"></i>
+                                            </div>
+                                        </div>
+                                        <p class="text-gray-600 text-sm">Excelente profissional! Entregou o projeto antes do prazo e com qualidade excepcional.</p>
+                                    </div>
+                                    <div class="mb-4">
+                                        <div class="flex justify-between">
+                                            <span class="font-medium text-gray-800">Pedro A.</span>
+                                            <div class="flex text-yellow-400">
+                                                <i class="fas fa-star text-xs"></i>
+                                                <i class="fas fa-star text-xs"></i>
+                                                <i class="fas fa-star text-xs"></i>
+                                                <i class="fas fa-star text-xs"></i>
+                                                <i class="fas fa-star text-xs"></i>
+                                            </div>
+                                        </div>
+                                        <p class="text-gray-600 text-sm">Muito comunicativo e profissional. Recomendo fortemente!</p>
+                                    </div>
+                                </div>
+                                
+                                <a href="#" class="text-blue-600 hover:text-blue-800 text-sm">Ver todas as avaliações</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Contrato e Pagamento -->
+    <section id="contract-payment" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Contratação e Pagamento</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Processo seguro e transparente para contratar profissionais</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Contract Process -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-6">Processo de Contratação</h3>
+                    
+                    <div class="flex mb-6">
+                        <div class="mr-4">
+                            <div class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center">1</div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-800">Solicite uma proposta</h4>
+                            <p class="text-gray-600">Entre em contato com o profissional e solicite uma proposta detalhada para seu projeto.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex mb-6">
+                        <div class="mr-4">
+                            <div class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center">2</div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-800">Analise e negocie</h4>
+                            <p class="text-gray-600">Avalie a proposta, esclareça dúvidas e negocie os termos do trabalho.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex mb-6">
+                        <div class="mr-4">
+                            <div class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center">3</div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-800">Crie um contrato</h4>
+                            <p class="text-gray-600">Use nosso modelo de contrato ou personalize conforme suas necessidades.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex">
+                        <div class="mr-4">
+                            <div class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center">4</div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-800">Inicie o projeto</h4>
+                            <p class="text-gray-600">Após a assinatura do contrato, o trabalho pode começar oficialmente.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6">
+                        <button class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">Modelo de Contrato</button>
+                    </div>
+                </div>
+                
+                <!-- Payment Process -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-6">Formas de Pagamento</h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                        <div class="payment-card p-4 border rounded-lg">
+                            <div class="mb-4">
+                                <i class="fas fa-lock text-green-500 text-2xl"></i>
+                            </div>
+                            <h4 class="font-semibold text-gray-800 mb-2">Pagamento Seguro</h4>
+                            <p class="text-gray-600 text-sm">O valor fica retido até que você aprove a entrega do trabalho.</p>
+                        </div>
+                        
+                        <div class="payment-card p-4 border rounded-lg">
+                            <div class="mb-4">
+                                <i class="fas fa-calendar-alt text-blue-500 text-2xl"></i>
+                            </div>
+                            <h4 class="font-semibold text-gray-800 mb-2">Pagamento por Etapas</h4>
+                            <p class="text-gray-600 text-sm">Divida o pagamento de acordo com marcos do projeto.</p>
+                        </div>
+                        
+                        <div class="payment-card p-4 border rounded-lg">
+                            <div class="mb-4">
+                                <i class="fas fa-credit-card text-purple-500 text-2xl"></i>
+                            </div>
+                            <h4 class="font-semibold text-gray-800 mb-2">Múltiplos Métodos</h4>
+                            <p class="text-gray-600 text-sm">Cartão, PIX, transferência bancária e boleto.</p>
+                        </div>
+                        
+                        <div class="payment-card p-4 border rounded-lg">
+                            <div class="mb-4">
+                                <i class="fas fa-shield-alt text-orange-500 text-2xl"></i>
+                            </div>
+                            <h4 class="font-semibold text-gray-800 mb-2">Garantia</h4>
+                            <p class="text-gray-600 text-sm">30 dias de garantia após a conclusão do projeto.</p>
+                        </div>
+                    </div>
+                    
+                    <h4 class="font-semibold text-gray-800 mb-2">Métodos Aceitos</h4>
+                    <div class="flex space-x-4">
+                        <div class="w-12 h-8 bg-gray-200 rounded flex items-center justify-center">
+                            <i class="fab fa-cc-visa text-blue-800"></i>
+                        </div>
+                        <div class="w-12 h-8 bg-gray-200 rounded flex items-center justify-center">
+                            <i class="fab fa-cc-mastercard text-red-600"></i>
+                        </div>
+                        <div class="w-12 h-8 bg-gray-200 rounded flex items-center justify-center">
+                            <i class="fas fa-money-bill-wave text-green-600"></i>
+                        </div>
+                        <div class="w-12 h-8 bg-gray-200 rounded flex items-center justify-center">
+                            <i class="fas fa-qrcode text-gray-800"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Visualização do Dashboard -->
+    <section id="dashboard" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Dashboard</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Gerencie seus projetos e monitore o progresso em tempo real</p>
+            </div>
+            
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <!-- Dashboard Tabs -->
+                <div class="flex border-b">
+                    <div class="dashboard-tab active px-6 py-4 font-medium">Projetos</div>
+                    <div class="dashboard-tab px-6 py-4 font-medium">Mensagens</div>
+                    <div class="dashboard-tab px-6 py-4 font-medium">Pagamentos</div>
+                    <div class="dashboard-tab px-6 py-4 font-medium">Profissionais</div>
+                    <div class="dashboard-tab px-6 py-4 font-medium">Configurações</div>
+                </div>
+                
+                <!-- Dashboard Content -->
+                <div class="p-6">
+                    <div class="mb-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-xl font-semibold text-gray-800">Meus Projetos</h3>
+                            <button class="bg-blue-600 text-white px-4 py-2 rounded-md text-sm hover:bg-blue-700">Novo Projeto</button>
+                        </div>
+                        
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full bg-white">
+                                <thead>
+                                    <tr class="bg-gray-100 text-gray-600 text-left">
+                                        <th class="py-3 px-4 font-semibold">Projeto</th>
+                                        <th class="py-3 px-4 font-semibold">Profissional</th>
+                                        <th class="py-3 px-4 font-semibold">Status</th>
+                                        <th class="py-3 px-4 font-semibold">Prazo</th>
+                                        <th class="py-3 px-4 font-semibold">Valor</th>
+                                        <th class="py-3 px-4 font-semibold">Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="border-b hover:bg-gray-50">
+                                        <td class="py-3 px-4">Website Corporativo</td>
+                                        <td class="py-3 px-4">Ricardo Silva</td>
+                                        <td class="py-3 px-4"><span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">Em andamento</span></td>
+                                        <td class="py-3 px-4">15/12/2023</td>
+                                        <td class="py-3 px-4">R$ 4.500</td>
+                                        <td class="py-3 px-4">
+                                            <button class="text-blue-600 hover:text-blue-800 mr-2"><i class="fas fa-eye"></i></button>
+                                            <button class="text-blue-600 hover:text-blue-800"><i class="fas fa-comment"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr class="border-b hover:bg-gray-50">
+                                        <td class="py-3 px-4">App Mobile</td>
+                                        <td class="py-3 px-4">Ana Ferreira</td>
+                                        <td class="py-3 px-4"><span class="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded">Aguardando</span></td>
+                                        <td class="py-3 px-4">30/01/2024</td>
+                                        <td class="py-3 px-4">R$ 8.200</td>
+                                        <td class="py-3 px-4">
+                                            <button class="text-blue-600 hover:text-blue-800 mr-2"><i class="fas fa-eye"></i></button>
+                                            <button class="text-blue-600 hover:text-blue-800"><i class="fas fa-comment"></i></button>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="py-3 px-4">Sistema de Gestão</td>
+                                        <td class="py-3 px-4">Carlos Santos</td>
+                                        <td class="py-3 px-4"><span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Proposta</span></td>
+                                        <td class="py-3 px-4">--</td>
+                                        <td class="py-3 px-4">R$ 12.000</td>
+                                        <td class="py-3 px-4">
+                                            <button class="text-blue-600 hover:text-blue-800 mr-2"><i class="fas fa-eye"></i></button>
+                                            <button class="text-blue-600 hover:text-blue-800"><i class="fas fa-comment"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <!-- Atividades recentes -->
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-800 mb-4">Atividades Recentes</h3>
+                            <div class="border rounded-lg">
+                                <div class="border-b p-4">
+                                    <div class="flex items-start">
+                                        <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center mr-3">
+                                            <i class="fas fa-file-alt text-blue-600"></i>
+                                        </div>
+                                        <div>
+                                            <p class="text-gray-800">Ricardo enviou uma atualização do projeto</p>
+                                            <p class="text-gray-500 text-sm">Hoje, 09:45</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="border-b p-4">
+                                    <div class="flex items-start">
+                                        <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center mr-3">
+                                            <i class="fas fa-money-bill text-green-600"></i>
+                                        </div>
+                                        <div>
+                                            <p class="text-gray-800">Pagamento confirmado: R$ 2.200</p>
+                                            <p class="text-gray-500 text-sm">Ontem, 15:30</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="border-b p-4">
+                                    <div class="flex items-start">
+                                        <div class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center mr-3">
+                                            <i class="fas fa-comment text-purple-600"></i>
+                                        </div>
+                                        <div>
+                                            <p class="text-gray-800">Nova mensagem de Ana Ferreira</p>
+                                            <p class="text-gray-500 text-sm">Ontem, 10:15</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Análise de projetos -->
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-800 mb-4">Análise de Projetos</h3>
+                            <div class="border rounded-lg p-4">
+                                <div class="mb-4">
+                                    <h4 class="font-medium text-gray-700 mb-2">Status dos Projetos</h4>
+                                    <div class="h-4 w-full bg-gray-200 rounded-full overflow-hidden">
+                                        <div class="flex h-full">
+                                            <div class="bg-green-500 h-full" style="width: 45%;"></div>
+                                            <div class="bg-yellow-500 h-full" style="width: 30%;"></div>
+                                            <div class="bg-blue-500 h-full" style="width: 25%;"></div>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between mt-2 text-xs">
+                                        <div class="flex items-center">
+                                            <div class="w-3 h-3 bg-green-500 rounded-full mr-1"></div>
+                                            <span>Em andamento (45%)</span>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <div class="w-3 h-3 bg-yellow-500 rounded-full mr-1"></div>
+                                            <span>Aguardando (30%)</span>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <div class="w-3 h-3 bg-blue-500 rounded-full mr-1"></div>
+                                            <span>Proposta (25%)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <h4 class="font-medium text-gray-700 mb-2">Categoria de Serviços</h4>
+                                    <div class="grid grid-cols-2 gap-2">
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-sm text-gray-600">Dev Web</span>
+                                            <span class="text-sm font-medium">35%</span>
+                                        </div>
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-sm text-gray-600">App Mobile</span>
+                                            <span class="text-sm font-medium">25%</span>
+                                        </div>
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-sm text-gray-600">Design UX/UI</span>
+                                            <span class="text-sm font-medium">20%</span>
+                                        </div>
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-sm text-gray-600">Infraestrutura</span>
+                                            <span class="text-sm font-medium">15%</span>
+                                        </div>
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-sm text-gray-600">Outros</span>
+                                            <span class="text-sm font-medium">5%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sistema de Avaliações -->
+    <section id="ratings" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Sistema de Avaliações</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Avaliações transparentes para garantir a qualidade dos serviços</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Formulário de revisão -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-6">Avaliar Profissional</h3>
+                    
+                    <div class="mb-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 rounded-full bg-gray-300 flex items-center justify-center">
+                                <i class="fas fa-user text-gray-500"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="font-medium text-gray-800">Ricardo Silva</h4>
+                                <p class="text-gray-600">Desenvolvedor Full-Stack</p>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="block text-gray-700 font-medium mb-2">Sua Avaliação</label>
+                            <div class="flex text-3xl text-gray-300">
+                                <i class="fas fa-star cursor-pointer hover:text-yellow-400"></i>
+                                <i class="fas fa-star cursor-pointer hover:text-yellow-400"></i>
+                                <i class="fas fa-star cursor-pointer hover:text-yellow-400"></i>
+                                <i class="fas fa-star cursor-pointer hover:text-yellow-400"></i>
+                                <i class="fas fa-star cursor-pointer hover:text-yellow-400"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <div class="grid grid-cols-2 gap-4 mb-4">
+                                <div>
+                                    <label class="block text-gray-700 text-sm mb-2">Qualidade do Trabalho</label>
+                                    <div class="flex text-yellow-400">
+                                        <i class="fas fa-star text-sm"></i>
+                                        <i class="fas fa-star text-sm"></i>
+                                        <i class="fas fa-star text-sm"></i>
+                                        <i class="fas fa-star text-sm"></i>
+                                        <i class="fas fa-star text-sm"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700 text-sm mb-2">Comunicação</label>
+                                    <div class="flex text-yellow-400">
+                                        <i class="fas fa-star text-sm"></i>
+                                        <i class="fas fa-star text-sm"></i>
+                                        <i class="fas fa-star text-sm"></i>
+                                        <i class="fas fa-star text-sm"></i>
+                                        <i class="far fa-star text-sm"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700 text-sm mb-2">Cumprimento de Prazos</label>
+                                    <div class="flex text-yellow-400">
+                                        <i class="fas fa-star text-sm"></i>
+                                        <i class="fas fa-star text-sm"></i>
+                                        <i class="fas fa-star text-sm"></i>
+                                        <i class="fas fa-star text-sm"></i>
+                                        <i class="fas fa-star text-sm"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700 text-sm mb-2">Relação Custo-Benefício</label>
+                                    <div class="flex text-yellow-400">
+                                        <i class="fas fa-star text-sm"></i>
+                                        <i class="fas fa-star text-sm"></i>
+                                        <i class="fas fa-star text-sm"></i>
+                                        <i class="fas fa-star text-sm"></i>
+                                        <i class="far fa-star text-sm"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="block text-gray-700 font-medium mb-2">Seu Comentário</label>
+                            <textarea class="w-full border rounded-md p-2 text-gray-700" rows="4" placeholder="Conte como foi sua experiência com este profissional..."></textarea>
+                        </div>
+                        
+                        <button class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700">Enviar Avaliação</button>
+                    </div>
+                </div>
+                
+                <!-- Análise de classificação -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-6">Estatísticas de Avaliações</h3>
+                    
+                    <div class="flex items-center mb-8">
+                        <div class="text-5xl font-bold text-gray-800 mr-4">4.8</div>
+                        <div>
+                            <div class="flex text-yellow-400 mb-1">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <p class="text-gray-600">Baseado em 120 avaliações</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <div class="flex items-center mb-2">
+                            <div class="text-sm text-gray-600 w-8">5 ★</div>
+                            <div class="w-full bg-gray-200 h-2 rounded-full ml-2 mr-2">
+                                <div class="bg-yellow-400 h-2 rounded-full" style="width: 75%;"></div>
+                            </div>
+                            <div class="text-sm text-gray-600">75%</div>
+                        </div>
+                        <div class="flex items-center mb-2">
+                            <div class="text-sm text-gray-600 w-8">4 ★</div>
+                            <div class="w-full bg-gray-200 h-2 rounded-full ml-2 mr-2">
+                                <div class="bg-yellow-400 h-2 rounded-full" style="width: 20%;"></div>
+                            </div>
+                            <div class="text-sm text-gray-600">20%</div>
+                        </div>
+                        <div class="flex items-center mb-2">
+                            <div class="text-sm text-gray-600 w-8">3 ★</div>
+                            <div class="w-full bg-gray-200 h-2 rounded-full ml-2 mr-2">
+                                <div class="bg-yellow-400 h-2 rounded-full" style="width: 5%;"></div>
+                            </div>
+                            <div class="text-sm text-gray-600">5%</div>
+                        </div>
+                        <div class="flex items-center mb-2">
+                            <div class="text-sm text-gray-600 w-8">2 ★</div>
+                            <div class="w-full bg-gray-200 h-2 rounded-full ml-2 mr-2">
+                                <div class="bg-yellow-400 h-2 rounded-full" style="width: 0%;"></div>
+                            </div>
+                            <div class="text-sm text-gray-600">0%</div>
+                        </div>
+                        <div class="flex items-center mb-2">
+                            <div class="text-sm text-gray-600 w-8">1 ★</div>
+                            <div class="w-full bg-gray-200 h-2 rounded-full ml-2 mr-2">
+                                <div class="bg-yellow-400 h-2 rounded-full" style="width: 0%;"></div>
+                            </div>
+                            <div class="text-sm text-gray-600">0%</div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h4 class="font-semibold text-gray-800 mb-3">Análise por Categoria</h4>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm text-gray-600">Qualidade do Trabalho</span>
+                                    <span class="text-sm text-gray-800">4.9</span>
+                                </div>
+                                <div class="w-full bg-gray-200 h-2 rounded-full">
+                                    <div class="bg-green-400 h-2 rounded-full" style="width: 98%;"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm text-gray-600">Comunicação</span>
+                                    <span class="text-sm text-gray-800">4.7</span>
+                                </div>
+                                <div class="w-full bg-gray-200 h-2 rounded-full">
+                                    <div class="bg-green-400 h-2 rounded-full" style="width: 94%;"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm text-gray-600">Cumprimento de Prazos</span>
+                                    <span class="text-sm text-gray-800">4.8</span>
+                                </div>
+                                <div class="w-full bg-gray-200 h-2 rounded-full">
+                                    <div class="bg-green-400 h-2 rounded-full" style="width: 96%;"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm text-gray-600">Relação Custo-Benefício</span>
+                                    <span class="text-sm text-gray-800">4.5</span>
+                                </div>
+                                <div class="w-full bg-gray-200 h-2 rounded-full">
+                                    <div class="bg-green-400 h-2 rounded-full" style="width: 90%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Depoimentos -->
+    <section id="testimonials" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Depoimentos</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">O que nossos clientes e profissionais dizem sobre a plataforma</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="testimonial-card bg-white rounded-lg shadow-md p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-gray-300 flex items-center justify-center">
+                            <i class="fas fa-user text-gray-500"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="font-semibold text-gray-800">Marcos Oliveira</h4>
+                            <p class="text-gray-600">CEO, Tech Inovation</p>
+                        </div>
+                    </div>
+                    <div class="mb-4 text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-600 italic">"Encontrei excelentes profissionais através da plataforma. O processo de contratação é simplificado e seguro. Recomendo para empresas de todos os tamanhos."</p>
+                </div>
+                
+                <div class="testimonial-card bg-white rounded-lg shadow-md p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-gray-300 flex items-center justify-center">
+                            <i class="fas fa-user text-gray-500"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="font-semibold text-gray-800">Juliana Costa</h4>
+                            <p class="text-gray-600">Desenvolvedora Front-end</p>
+                        </div>
+                    </div>
+                    <div class="mb-4 text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-600 italic">"Como profissional, a plataforma me ajudou a encontrar clientes de qualidade e projetos interessantes. O sistema de pagamento garante que eu sempre receba pelo meu trabalho."</p>
+                </div>
+                
+                <div class="testimonial-card bg-white rounded-lg shadow-md p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-gray-300 flex items-center justify-center">
+                            <i class="fas fa-user text-gray-500"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="font-semibold text-gray-800">Roberto Mendes</h4>
+                            <p class="text-gray-600">Gerente de Projetos</p>
+                        </div>
+                    </div>
+                    <div class="mb-4 text-yellow-400">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <p class="text-gray-600 italic">"A plataforma nos permitiu escalar nossos projetos de TI rapidamente, encontrando especialistas em diferentes áreas sempre que precisamos. Excelente ferramenta!"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Torne-se um Profissional -->
+    <section id="become-pro" class="py-16 hero-gradient text-white">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div>
+                    <h2 class="text-3xl font-bold mb-4">É um profissional de TI? Junte-se a nós!</h2>
+                    <p class="text-lg mb-6">Encontre novos clientes, gerencie projetos e receba pagamentos de forma segura em nossa plataforma.</p>
+                    <div class="grid grid-cols-2 gap-4 mb-6">
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle mr-2"></i>
+                            <span>Clientes qualificados</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle mr-2"></i>
+                            <span>Projetos interessantes</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle mr-2"></i>
+                            <span>Pagamentos garantidos</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle mr-2"></i>
+                            <span>Visibilidade no mercado</span>
+                        </div>
+                    </div>
+                    <button class="bg-white text-blue-600 px-6 py-3 rounded-md font-medium hover:bg-gray-100">Cadastrar como Profissional</button>
+                </div>
+                <div class="hidden md:flex justify-center">
+                    <div class="bg-white rounded-lg shadow-xl p-6 text-gray-800 max-w-md">
+                        <h3 class="text-xl font-bold mb-4">Como funciona para profissionais</h3>
+                        <div class="mb-4">
+                            <div class="flex mb-2">
+                                <div class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center mr-3 flex-shrink-0">1</div>
+                                <div>
+                                    <h4 class="font-medium">Crie seu perfil</h4>
+                                    <p class="text-gray-600 text-sm">Destaque suas habilidades, experiências e portfolio.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <div class="flex mb-2">
+                                <div class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center mr-3 flex-shrink-0">2</div>
+                                <div>
+                                    <h4 class="font-medium">Receba propostas</h4>
+                                    <p class="text-gray-600 text-sm">Ou encontre projetos disponíveis na plataforma.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <div class="flex mb-2">
+                                <div class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center mr-3 flex-shrink-0">3</div>
+                                <div>
+                                    <h4 class="font-medium">Entregue seu trabalho</h4>
+                                    <p class="text-gray-600 text-sm">Utilize nossa plataforma para gerenciar projetos.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex mb-2">
+                                <div class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center mr-3 flex-shrink-0">4</div>
+                                <div>
+                                    <h4 class="font-medium">Receba o pagamento</h4>
+                                    <p class="text-gray-600 text-sm">Pagamento garantido após aprovação do cliente.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Chamada para Ação (CTA) -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">Pronto para Começar?</h2>
+            <p class="text-gray-600 max-w-2xl mx-auto mb-8">Cadastre-se gratuitamente e comece a conectar-se com os melhores profissionais de TI do mercado</p>
+            <div class="flex justify-center space-x-4">
+                <button class="bg-blue-600 text-white px-6 py-3 rounded-md font-medium hover:bg-blue-700">Buscar Profissionais</button>
+                <button class="bg-white border border-blue-600 text-blue-600 px-6 py-3 rounded-md font-medium hover:bg-blue-50">Cadastrar-se como Profissional</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rodapé -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Obramo</h3>
+                    <p class="text-gray-400 mb-4">Conectando clientes a profissionais de TI de forma simples, segura e eficiente.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Para Clientes</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Como Funciona</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Buscar Profissionais</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Contratar</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Pagamentos</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Avaliações</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Para Profissionais</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Como Funciona</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Encontrar Projetos</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Receber Pagamentos</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Criar Perfil</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Comunidade</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Sobre</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Sobre Nós</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Careers</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Blog</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Termos de Serviço</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Política de Privacidade</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400">© 2025 Obramo. Todos os direitos reservados.</p>
+                <div class="flex space-x-4 mt-4 md:mt-0">
+                    <a href="#"><img src="#" alt="App Store" class="h-10 w-32 bg-gray-700 rounded"></a>
+                    <a href="#"><img src="#" alt="Google Play" class="h-10 w-32 bg-gray-700 rounded"></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    // JavaScript simples para interações
+        document.addEventListener('DOMContentLoaded', function() {
+            // Abas do Dashboard
+            const tabs = document.querySelectorAll('.dashboard-tab');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+            
+            // Estrelas de avaliação
+            const stars = document.querySelectorAll('.fa-star.cursor-pointer');
+            stars.forEach((star, index) => {
+                star.addEventListener('click', function() {
+                    stars.forEach((s, i) => {
+                        if (i <= index) {
+                            s.classList.add('text-yellow-400');
+                            s.classList.remove('text-gray-300');
+                        } else {
+                            s.classList.remove('text-yellow-400');
+                            s.classList.add('text-gray-300');
+                        }
+                    });
+                });
+                
+                star.addEventListener('mouseover', function() {
+                    stars.forEach((s, i) => {
+                        if (i <= index) {
+                            s.classList.add('text-yellow-400');
+                            s.classList.remove('text-gray-300');
+                        } else {
+                            s.classList.remove('text-yellow-400');
+                            s.classList.add('text-gray-300');
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

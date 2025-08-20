@@ -1,0 +1,326 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Obramo - Bem-vindo à Plataforma</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Ícones e Fonte -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS Externo -->
+    <link rel="stylesheet" href="{% static 'accounts/css/styleregister.css' %}">
+  </head>
+  <body>
+    
+    <!-- Header -->
+    {% include 'partials/_nav-header.html' %}
+    
+    <!-- Onboarding -->
+    {% load static %}
+    <section class="onboarding">
+        <div class="container">
+
+            <!-- Título -->
+            <div class="title-center">
+                <h1>Bem-vindo ao Obramo!</h1>
+                <p>Vamos configurar seu perfil em alguns passos simples</p>
+            </div>
+
+            <!-- Progresso -->
+            <div class="progress">
+                <div class="progress-top">
+                    <span>Etapa <span id="currentStep">1</span> de 5</span>
+                    <span><span id="progressPercent">20</span>% concluído</span>
+                </div>
+                <div class="progress-bar-bg">
+                    <div id="progressBar" class="progress-bar" style="width: 20%"></div>
+                </div>
+            </div>
+
+            <!-- ETAPA 1: Tipo de usuário -->
+            <div id="step1" class="step-content">
+                <div class="title-center">
+                    <h2>Como você pretende usar o Obramo?</h2>
+                    <p>Selecione a opção que melhor descreve seu objetivo</p>
+                </div>
+
+                <div class="grid-2">
+                    <div class="card user-type-card" data-type="client">
+                        <div class="icon-circle"><i class="fas fa-briefcase"></i></div>
+                        <h3>Sou Cliente</h3>
+                        <p>Preciso contratar profissionais de TI para meus projetos</p>
+                        <ul class="list">
+                            <li><i class="fas fa-check"></i>Postar projetos</li>
+                            <li><i class="fas fa-check"></i>Buscar profissionais</li>
+                            <li><i class="fas fa-check"></i>Gerenciar contratos</li>
+                            <li><i class="fas fa-check"></i>Sistema de pagamento seguro</li>
+                        </ul>
+                    </div>
+
+                    <div class="card user-type-card" data-type="professional">
+                        <div class="icon-circle"><i class="fas fa-user-tie"></i></div>
+                        <h3>Sou Profissional</h3>
+                        <p>Quero oferecer meus serviços de TI e encontrar clientes</p>
+                        <ul class="list">
+                            <li><i class="fas fa-check"></i>Criar perfil profissional</li>
+                            <li><i class="fas fa-check"></i>Receber propostas</li>
+                            <li><i class="fas fa-check"></i>Mostrar portfólio</li>
+                            <li><i class="fas fa-check"></i>Receber pagamentos</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ETAPA 2: Informações básicas -->
+            <div id="step2" class="step-content hidden">
+                <div class="title-center">
+                    <h2>Informações Básicas</h2>
+                    <p>Conte-nos um pouco sobre você</p>
+                </div>
+
+                <div class="card">
+                    <div class="grid-2 gap-24">
+                        <div class="form-group">
+                            <label>Nome Completo *</label>
+                            <input id="nameInput" type="text" class="input" placeholder="Seu nome completo">
+                        </div>
+                        <div class="form-group">
+                            <label>Email *</label>
+                            <input id="emailInput" type="email" class="input" placeholder="seu@email.com">
+                        </div>
+                        <div class="form-group">
+                            <label>Telefone</label>
+                            <input type="tel" class="input" placeholder="(11) 99999-9999">
+                        </div>
+                        <div class="form-group">
+                            <label>Localização</label>
+                            <select class="select">
+                                <option>Selecione sua cidade</option>
+                                <option>São Paulo, SP</option>
+                                <option>Rio de Janeiro, RJ</option>
+                                <option>Belo Horizonte, MG</option>
+                                <option>Brasília, DF</option>
+                                <option>Salvador, BA</option>
+                                <option>Outro</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Senha *</label>
+                            <input type="password" class="input" placeholder="Digite sua senha">
+                        </div>
+                        <!-- Confirmar senha -->
+                        <div class="form-group">
+                            <label>Confirmar Senha *</label>
+                            <input type="password" class="input" placeholder="Confirme sua senha">
+                        </div>
+                    </div>
+
+                    <div class="form-group mt-20">
+                        <label>Foto de Perfil</label>
+                        <div class="avatar-row">
+                            <div class="avatar"><i class="fas fa-user"></i></div>
+                            <button class="btn btn-primary"><i class="fas fa-upload"></i> Carregar Foto</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ETAPA 3: Profissional / Cliente -->
+            <div id="step3" class="step-content hidden">
+                <!-- Profissional -->
+                <div id="professionalSkills" class="hidden">
+                    <div class="title-center">
+                        <h2>Suas Especialidades</h2>
+                        <p>Selecione suas áreas de expertise</p>
+                    </div>
+
+                    <div class="card">
+                        <div class="form-group">
+                            <h4 class="subtitle">Áreas Técnicas</h4>
+                            <div class="tags">
+                                <span class="skill-tag">Desenvolvimento Web</span>
+                                <span class="skill-tag">Desenvolvimento Mobile</span>
+                                <span class="skill-tag">DevOps</span>
+                                <span class="skill-tag">Segurança</span>
+                                <span class="skill-tag">Banco de Dados</span>
+                                <span class="skill-tag">Cloud Computing</span>
+                                <span class="skill-tag">BI & Analytics</span>
+                                <span class="skill-tag">UX/UI Design</span>
+                                <span class="skill-tag">Suporte Técnico</span>
+                                <span class="skill-tag">Infraestrutura</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <h4 class="subtitle">Tecnologias</h4>
+                            <div class="tags">
+                                <span class="skill-tag">React</span>
+                                <span class="skill-tag">Node.js</span>
+                                <span class="skill-tag">Python</span>
+                                <span class="skill-tag">JavaScript</span>
+                                <span class="skill-tag">PHP</span>
+                                <span class="skill-tag">Java</span>
+                                <span class="skill-tag">C#</span>
+                                <span class="skill-tag">AWS</span>
+                                <span class="skill-tag">Docker</span>
+                                <span class="skill-tag">MongoDB</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group inline">
+                            <label>Valor por Hora (R$)</label>
+                            <div class="inline-row">
+                                <input type="number" class="input input--sm" placeholder="0">
+                                <span class="muted">por hora</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cliente -->
+                <div id="clientNeeds" class="hidden">
+                    <div class="title-center">
+                        <h2>O que você precisa?</h2>
+                        <p>Conte-nos sobre seus projetos e necessidades</p>
+                    </div>
+
+                    <div class="card">
+                        <div class="form-group">
+                            <h4 class="subtitle">Tipos de Projeto</h4>
+                            <div class="tags">
+                                <span class="skill-tag">Website</span>
+                                <span class="skill-tag">E-commerce</span>
+                                <span class="skill-tag">App Mobile</span>
+                                <span class="skill-tag">Sistema Web</span>
+                                <span class="skill-tag">Automação</span>
+                                <span class="skill-tag">Consultoria</span>
+                                <span class="skill-tag">Suporte</span>
+                                <span class="skill-tag">Treinamento</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Orçamento Típico por Projeto</label>
+                            <select class="select">
+                                <option>Selecione a faixa de orçamento</option>
+                                <option>Até R$ 1.000</option>
+                                <option>R$ 1.000 - R$ 5.000</option>
+                                <option>R$ 5.000 - R$ 15.000</option>
+                                <option>R$ 15.000 - R$ 50.000</option>
+                                <option>Acima de R$ 50.000</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Sobre sua empresa/projeto</label>
+                            <textarea class="textarea" rows="4" placeholder="Conte-nos sobre sua empresa e o tipo de projetos que você costuma ter..."></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ETAPA 4: Verificação -->
+            <div id="step4" class="step-content hidden">
+                <div class="title-center">
+                    <h2>Verificação da Conta</h2>
+                    <p>Confirme seu email e configure sua segurança</p>
+                </div>
+
+                <div class="card">
+                    <div class="info-banner">
+                        <div class="info-banner__left">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <p class="bold">Verificação de Email</p>
+                                <p class="muted">Enviamos um código para seu email</p>
+                            </div>
+                        </div>
+                        <button class="btn btn-link">Reenviar</button>
+                    </div>
+
+                    <div class="form-group mt-10">
+                        <label>Código de Verificação</label>
+                        <input id="codeInput" type="text" class="input" placeholder="Digite o código de 6 dígitos" maxlength="6">
+                    </div>
+
+                    <div class="divider"></div>
+
+                    <div class="form-group">
+                        <h4 class="subtitle">Configurações de Segurança</h4>
+                        <label class="check">
+                            <input type="checkbox" class="checkbox-custom">
+                            <span>Ativar autenticação de dois fatores (recomendado)</span>
+                        </label>
+                        <label class="check">
+                            <input type="checkbox" class="checkbox-custom">
+                            <span>Receber notificações de segurança por email</span>
+                        </label>
+                    </div>
+
+                    <div class="divider"></div>
+
+                    <div class="form-group">
+                        <h4 class="subtitle">Termos e Condições</h4>
+                        <label class="check">
+                            <input id="termsCheck" type="checkbox" class="checkbox-custom">
+                            <span>Aceito os <a href="#" class="link">Termos de Uso</a> e <a href="#" class="link">Política de Privacidade</a></span>
+                        </label>
+                        <label class="check">
+                            <input type="checkbox" class="checkbox-custom">
+                            <span>Desejo receber emails sobre atualizações da plataforma e oportunidades relevantes</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ETAPA 5: Conclusão -->
+            <div id="step5" class="step-content hidden">
+                <div class="center">
+                    <div class="success-circle"><i class="fas fa-check"></i></div>
+                    <h2 class="mb-10">Parabéns!</h2>
+                    <p class="muted mb-24">Sua conta foi criada com sucesso. Agora você pode começar a usar o TechConnect.</p>
+
+                    <div class="card mb-24">
+                        <h3 class="mb-16">Próximos Passos</h3>
+                        <div class="grid-3">
+                            <div class="next-step">
+                                <div class="mini-icon"><i class="fas fa-search"></i></div>
+                                <h4>Explorar</h4>
+                                <p class="muted small">Descubra profissionais ou projetos disponíveis</p>
+                            </div>
+                            <div class="next-step">
+                                <div class="mini-icon"><i class="fas fa-edit"></i></div>
+                                <h4>Completar Perfil</h4>
+                                <p class="muted small">Adicione mais detalhes ao seu perfil</p>
+                            </div>
+                            <div class="next-step">
+                                <div class="mini-icon"><i class="fas fa-handshake"></i></div>
+                                <h4>Começar</h4>
+                                <p class="muted small">Inicie sua primeira conexão</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="actions">
+                        <button class="btn btn-primary">Ir para Dashboard</button>
+                        <button class="btn btn-outline">Explorar Plataforma</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navegação -->
+            <div class="nav-buttons">
+                <button id="prevBtn" class="btn" disabled><i class="fas fa-arrow-left"></i> Anterior</button>
+                <button id="nextBtn" class="btn btn-primary">Próximo <i class="fas fa-arrow-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- JS Externo -->
+        <script src="{% static 'accounts/js/script.js' %}"></script>
+</body>
+</html>

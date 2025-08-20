@@ -1,0 +1,132 @@
+/* Reset básico */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      display: flex;
+      background: #f9fafb;
+    }
+
+    /* Lado azul */
+    .left-side {
+      flex: 1;
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
+      display: none; /* escondido no mobile */
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 2rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    /* Lado branco (formulário) */
+    .right-side {
+      flex: 1;
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .form-container {
+      max-width: 400px;
+      width: 100%;
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+    }
+
+    .form-container h2 {
+      font-size: 1.6rem;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 0.4rem;
+      color: #111827;
+    }
+
+    .form-container p.subtitle {
+      text-align: center;
+      color: #6b7280;
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
+    }
+
+    .form-container p.helper {
+      color: #4b5563;
+      font-size: 0.85rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group input {
+      width: 100%;
+      border: none;
+      border-bottom: 2px solid #d1d5db;
+      padding: 0.6rem 0;
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .form-group input:focus {
+      border-color: #2563eb;
+      box-shadow: 0 2px 6px rgba(37,99,235,0.2);
+    }
+
+    .btn {
+      width: 100%;
+      background: #2563eb;
+      color: white;
+      padding: 0.8rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: bold;
+      /* cursor: pointer; */
+      /* transition: background 0.3s, transform 0.2s; */
+    }
+
+    .btn:hover {
+      /* background: #1e40af; */
+      transform: translateY(-2px);
+    }
+
+    .back-login {
+      text-align: center;
+      margin-top: 1.5rem;
+      font-size: 0.9rem;
+    }
+
+    .back-login a {
+      color: #2563eb;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .back-login a:hover {
+      text-decoration: underline;
+      color: #1e40af;
+    }
+
+    /* Responsividade */
+    @media (min-width: 768px) {
+      .left-side {
+        display: flex; /* aparece no desktop */
+      }
+      .right-side {
+        flex: 1;
+        padding: 3rem;
+      }
+    }

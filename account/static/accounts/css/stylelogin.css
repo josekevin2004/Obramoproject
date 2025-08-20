@@ -1,0 +1,136 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    background-color: #f8f9fa;
+}
+
+.header-right span{color:var(--gray-600); margin-right:10px}
+.header-right a{color:var(--blue-600); text-decoration:none; font-weight:500}
+.header-right a:hover{text-decoration:underline}
+
+
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+.left-panel {
+    flex: 1;
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+}
+
+.right-panel {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-card {
+    background: #fff;
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    width: 100%;
+    max-width: 380px;
+}
+
+h1 {
+    font-size: 1.8rem;
+    margin-bottom: 0.3rem;
+    color: #1e293b;
+}
+
+.subtitle {
+    font-size: 0.9rem;
+    color: #6b7280;
+    margin-bottom: 1.5rem;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+    background: #f1f5f9;
+    padding: 0.8rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    transition: 0.3s;
+}
+
+.input-group:focus-within {
+    border-color: #3b82f6;
+    background: #fff;
+}
+
+.icon {
+    margin-right: 0.6rem;
+}
+
+input {
+    border: none;
+    outline: none;
+    background: transparent;
+    width: 100%;
+    font-size: 0.95rem;
+}
+
+.forgot-password {
+    display: block;
+    font-size: 0.85rem;
+    color: #3b82f6;
+    text-align: right;
+    margin-bottom: 1.2rem;
+    text-decoration: none;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+}
+
+.btn-login {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    color: #fff;
+    border: none;
+    padding: 0.9rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    width: 100%;
+    transition: 0.3s;
+}
+
+.btn-login:hover {
+    opacity: 0.9;
+}
+
+.signup-text {
+    font-size: 0.85rem;
+    text-align: center;
+    margin-top: 1.2rem;
+}
+
+.signup-text a {
+    color: #3b82f6;
+    text-decoration: none;
+}
+
+.signup-text a:hover {
+    text-decoration: underline;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .left-panel {
+        display: none;
+    }
+    .right-panel {
+        flex: 1;
+        padding: 1rem;
+    }
+}
