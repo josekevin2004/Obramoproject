@@ -1,0 +1,384 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechConnect - Avaliações</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'projects/css/avaliacao.css' %}">
+
+</head>
+
+<body class="bg-gray-50">
+    {% include 'partials/nav.html' %}
+    <!-- Main Content -->
+    <div class="flex-1 p-8">
+        <!-- Header -->
+        <div class="flex justify-between items-center mb-8">
+            <div class="flex items-center space-x-4">
+                <button class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">
+                    <i class="fas fa-plus mr-2"></i>
+                    Nova Avaliação
+                </button>
+                <div class="flex items-center space-x-2">
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div class="bg-white p-6 rounded-xl card-shadow">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-800">Avaliação Média</h3>
+                        <div class="flex items-center mt-2">
+                            <span class="text-2xl font-bold text-gray-800">4.8</span>
+                            <div class="flex ml-2">
+                                <i class="fas fa-star star-rating"></i>
+                                <i class="fas fa-star star-rating"></i>
+                                <i class="fas fa-star star-rating"></i>
+                                <i class="fas fa-star star-rating"></i>
+                                <i class="fas fa-star star-rating"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-yellow-100 p-3 rounded-lg">
+                        <i class="fas fa-star text-yellow-500 text-xl"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl card-shadow">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-800">Total Recebidas</h3>
+                        <p class="text-2xl font-bold text-gray-800 mt-2">23</p>
+                    </div>
+                    <div class="bg-green-100 p-3 rounded-lg">
+                        <i class="fas fa-thumbs-up text-green-500 text-xl"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl card-shadow">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-800">Avaliações Dadas</h3>
+                        <p class="text-2xl font-bold text-gray-800 mt-2">18</p>
+                    </div>
+                    <div class="bg-blue-100 p-3 rounded-lg">
+                        <i class="fas fa-comment text-blue-500 text-xl"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl card-shadow">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-800">Pendentes</h3>
+                        <p class="text-2xl font-bold text-gray-800 mt-2">3</p>
+                    </div>
+                    <div class="bg-orange-100 p-3 rounded-lg">
+                        <i class="fas fa-clock text-orange-500 text-xl"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="bg-white p-6 rounded-xl card-shadow mb-8">
+            <div class="flex flex-wrap items-center gap-4">
+                <div class="flex items-center space-x-2">
+                    <label class="text-sm font-medium text-gray-700">Filtrar por:</label>
+                    <select class="border border-gray-300 rounded-lg px-3 py-2 text-sm">
+                        <option>Todas as avaliações</option>
+                        <option>Recebidas</option>
+                        <option>Dadas</option>
+                        <option>Pendentes</option>
+                    </select>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <label class="text-sm font-medium text-gray-700">Período:</label>
+                    <select class="border border-gray-300 rounded-lg px-3 py-2 text-sm">
+                        <option>Últimos 30 dias</option>
+                        <option>Últimos 3 meses</option>
+                        <option>Último ano</option>
+                        <option>Todos os períodos</option>
+                    </select>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <label class="text-sm font-medium text-gray-700">Avaliação:</label>
+                    <select class="border border-gray-300 rounded-lg px-3 py-2 text-sm">
+                        <option>Todas</option>
+                        <option>5 estrelas</option>
+                        <option>4 estrelas</option>
+                        <option>3 estrelas</option>
+                        <option>2 estrelas</option>
+                        <option>1 estrela</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Reviews -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Received Reviews -->
+            <div class="bg-white rounded-xl card-shadow">
+                <div class="p-6 border-b">
+                    <h2 class="text-lg font-semibold text-gray-800">Avaliações Recebidas</h2>
+                </div>
+                <div class="p-6 space-y-6">
+                    <div class="flex space-x-4">
+                        <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center">
+                            <span class="text-white font-medium">R</span>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex items-center justify-between">
+                                <h3 class="font-medium text-gray-800">Ricardo Silva</h3>
+                                <span class="text-sm text-gray-500">2 dias atrás</span>
+                            </div>
+                            <div class="flex items-center mt-1">
+                                <div class="flex">
+                                    <i class="fas fa-star star-rating text-sm"></i>
+                                    <i class="fas fa-star star-rating text-sm"></i>
+                                    <i class="fas fa-star star-rating text-sm"></i>
+                                    <i class="fas fa-star star-rating text-sm"></i>
+                                    <i class="fas fa-star star-rating text-sm"></i>
+                                </div>
+                                <span class="ml-2 text-sm font-medium text-gray-700">5.0</span>
+                            </div>
+                            <p class="text-gray-600 mt-2">Excelente trabalho no desenvolvimento do e-commerce. Entregou
+                                antes do prazo e com qualidade excepcional.</p>
+                            <div class="flex items-center mt-3 text-sm text-gray-500">
+                                <i class="fas fa-project-diagram mr-1"></i>
+                                E-commerce App
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex space-x-4">
+                        <div class="w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center">
+                            <span class="text-white font-medium">J</span>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex items-center justify-between">
+                                <h3 class="font-medium text-gray-800">Juliana Costa</h3>
+                                <span class="text-sm text-gray-500">1 semana atrás</span>
+                            </div>
+                            <div class="flex items-center mt-1">
+                                <div class="flex">
+                                    <i class="fas fa-star star-rating text-sm"></i>
+                                    <i class="fas fa-star star-rating text-sm"></i>
+                                    <i class="fas fa-star star-rating text-sm"></i>
+                                    <i class="fas fa-star star-rating text-sm"></i>
+                                    <i class="fas fa-star text-gray-300 text-sm"></i>
+                                </div>
+                                <span class="ml-2 text-sm font-medium text-gray-700">4.0</span>
+                            </div>
+                            <p class="text-gray-600 mt-2">Ótimo design para o website corporativo. Algumas pequenas
+                                revisões foram necessárias, mas o resultado final ficou muito bom.</p>
+                            <div class="flex items-center mt-3 text-sm text-gray-500">
+                                <i class="fas fa-globe mr-1"></i>
+                                Website Corporativo
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex space-x-4">
+                        <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center">
+                            <span class="text-white font-medium">C</span>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex items-center justify-between">
+                                <h3 class="font-medium text-gray-800">Carlos Santos</h3>
+                                <span class="text-sm text-gray-500">2 semanas atrás</span>
+                            </div>
+                            <div class="flex items-center mt-1">
+                                <div class="flex">
+                                    <i class="fas fa-star star-rating text-sm"></i>
+                                    <i class="fas fa-star star-rating text-sm"></i>
+                                    <i class="fas fa-star star-rating text-sm"></i>
+                                    <i class="fas fa-star star-rating text-sm"></i>
+                                    <i class="fas fa-star star-rating text-sm"></i>
+                                </div>
+                                <span class="ml-2 text-sm font-medium text-gray-700">5.0</span>
+                            </div>
+                            <p class="text-gray-600 mt-2">Aplicativo mobile perfeito! Interface intuitiva e performance
+                                excelente. Recomendo totalmente.</p>
+                            <div class="flex items-center mt-3 text-sm text-gray-500">
+                                <i class="fas fa-mobile-alt mr-1"></i>
+                                App Mobile
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6 border-t">
+                    <button class="text-blue-500 hover:text-blue-600 text-sm font-medium">
+                        Ver todas as avaliações recebidas
+                    </button>
+                </div>
+            </div>
+
+            <!-- Given Reviews -->
+            <div class="bg-white rounded-xl card-shadow">
+                <div class="p-6 border-b">
+                    <h2 class="text-lg font-semibold text-gray-800">Avaliações Dadas</h2>
+                </div>
+                <div class="p-6 space-y-6">
+                    <div class="flex space-x-4">
+                        <div class="w-10 h-10 bg-indigo-500 rounded-full flex items-center justify-center">
+                            <span class="text-white font-medium">M</span>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex items-center justify-between">
+                                <h3 class="font-medium text-gray-800">Marina Oliveira</h3>
+                                <span class="text-sm text-gray-500">3 dias atrás</span>
+                            </div>
+                            <div class="flex items-center mt-1">
+                                <div class="flex">
+                                    <i class="fas fa-star star-rating text-sm"></i>
+                                    <i class="fas fa-star star-rating text-sm"></i>
+                                    <i class="fas fa-star star-rating text-sm"></i>
+                                    <i class="fas fa-star star-rating text-sm"></i>
+                                    <i class="fas fa-star star-rating text-sm"></i>
+                                </div>
+                                <span class="ml-2 text-sm font-medium text-gray-700">5.0</span>
+                            </div>
+                            <p class="text-gray-600 mt-2">Profissional excepcional! Comunicação clara, prazo cumprido e
+                                resultado além das expectativas.</p>
+                            <div class="flex items-center mt-3 text-sm text-gray-500">
+                                <i class="fas fa-paint-brush mr-1"></i>
+                                Design UI/UX
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex space-x-4">
+                        <div class="w-10 h-10 bg-red-500 rounded-full flex items-center justify-center">
+                            <span class="text-white font-medium">F</span>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex items-center justify-between">
+                                <h3 class="font-medium text-gray-800">Felipe Rocha</h3>
+                                <span class="text-sm text-gray-500">1 semana atrás</span>
+                            </div>
+                            <div class="flex items-center mt-1">
+                                <div class="flex">
+                                    <i class="fas fa-star star-rating text-sm"></i>
+                                    <i class="fas fa-star star-rating text-sm"></i>
+                                    <i class="fas fa-star star-rating text-sm"></i>
+                                    <i class="fas fa-star star-rating text-sm"></i>
+                                    <i class="fas fa-star text-gray-300 text-sm"></i>
+                                </div>
+                                <span class="ml-2 text-sm font-medium text-gray-700">4.0</span>
+                            </div>
+                            <p class="text-gray-600 mt-2">Bom trabalho na consultoria de SEO. Algumas sugestões foram
+                                muito valiosas para o projeto.</p>
+                            <div class="flex items-center mt-3 text-sm text-gray-500">
+                                <i class="fas fa-chart-line mr-1"></i>
+                                Consultoria SEO
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex space-x-4">
+                        <div class="w-10 h-10 bg-teal-500 rounded-full flex items-center justify-center">
+                            <span class="text-white font-medium">L</span>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex items-center justify-between">
+                                <h3 class="font-medium text-gray-800">Lucas Mendes</h3>
+                                <span class="text-sm text-gray-500">2 semanas atrás</span>
+                            </div>
+                            <div class="flex items-center mt-1">
+                                <div class="flex">
+                                    <i class="fas fa-star star-rating text-sm"></i>
+                                    <i class="fas fa-star star-rating text-sm"></i>
+                                    <i class="fas fa-star star-rating text-sm"></i>
+                                    <i class="fas fa-star star-rating text-sm"></i>
+                                    <i class="fas fa-star star-rating text-sm"></i>
+                                </div>
+                                <span class="ml-2 text-sm font-medium text-gray-700">5.0</span>
+                            </div>
+                            <p class="text-gray-600 mt-2">Desenvolvedor muito competente. Sistema desenvolvido com
+                                qualidade e documentação completa.</p>
+                            <div class="flex items-center mt-3 text-sm text-gray-500">
+                                <i class="fas fa-code mr-1"></i>
+                                Desenvolvimento Backend
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6 border-t">
+                    <button class="text-blue-500 hover:text-blue-600 text-sm font-medium">
+                        Ver todas as avaliações dadas
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pending Reviews -->
+        <div class="mt-8 bg-white rounded-xl card-shadow">
+            <div class="p-6 border-b">
+                <h2 class="text-lg font-semibold text-gray-800">Avaliações Pendentes</h2>
+                <p class="text-sm text-gray-600 mt-1">Projetos concluídos aguardando sua avaliação</p>
+            </div>
+            <div class="p-6">
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between p-4 bg-yellow-50 rounded-lg border border-yellow-200">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-10 h-10 bg-yellow-500 rounded-full flex items-center justify-center">
+                                <span class="text-white font-medium">A</span>
+                            </div>
+                            <div>
+                                <h3 class="font-medium text-gray-800">André Silva</h3>
+                                <p class="text-sm text-gray-600">Sistema de Gestão - Concluído há 2 dias</p>
+                            </div>
+                        </div>
+                        <button class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 text-sm">
+                            Avaliar Agora
+                        </button>
+                    </div>
+
+                    <div class="flex items-center justify-between p-4 bg-yellow-50 rounded-lg border border-yellow-200">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center">
+                                <span class="text-white font-medium">B</span>
+                            </div>
+                            <div>
+                                <h3 class="font-medium text-gray-800">Beatriz Santos</h3>
+                                <p class="text-sm text-gray-600">Design de Interface - Concluído há 5 dias</p>
+                            </div>
+                        </div>
+                        <button class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 text-sm">
+                            Avaliar Agora
+                        </button>
+                    </div>
+
+                    <div class="flex items-center justify-between p-4 bg-yellow-50 rounded-lg border border-yellow-200">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center">
+                                <span class="text-white font-medium">T</span>
+                            </div>
+                            <div>
+                                <h3 class="font-medium text-gray-800">Thiago Costa</h3>
+                                <p class="text-sm text-gray-600">Consultoria em Marketing Digital - Concluído há 1
+                                    semana</p>
+                            </div>
+                        </div>
+                        <button class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 text-sm">
+                            Avaliar Agora
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+
+</html>

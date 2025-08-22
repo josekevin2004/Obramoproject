@@ -1,0 +1,313 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Obramo - Mensagens</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'projects/css/mensagens.css' %}">
+
+</head>
+
+<body class="bg-gray-50 font-sans">
+    {% include 'partials/nav.html' %}
+
+    <!-- Main Content -->
+    <div class="flex-1 flex flex-col">
+        <!-- Header -->
+        <header>
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="flex items-center space-x-2"></div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Stats Cards -->
+        <div class="p-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
+                <!-- Total Mensagens -->
+                <div class="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                    <div class="flex items-center">
+                        <div class="p-2 bg-blue-100 rounded-lg">
+                            <i class="fas fa-envelope text-blue-600 text-xl"></i>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-2xl font-bold text-gray-900">127</p>
+                            <p class="text-gray-600 text-sm">Total de mensagens</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Não Lidas -->
+                <div class="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                    <div class="flex items-center">
+                        <div class="p-2 bg-red-100 rounded-lg">
+                            <i class="fas fa-envelope-open-text text-red-600 text-xl"></i>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-2xl font-bold text-gray-900">3</p>
+                            <p class="text-gray-600 text-sm">Não lidas</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Conversas Ativas -->
+                <div class="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                    <div class="flex items-center">
+                        <div class="p-2 bg-green-100 rounded-lg">
+                            <i class="fas fa-comments text-green-600 text-xl"></i>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-2xl font-bold text-gray-900">8</p>
+                            <p class="text-gray-600 text-sm">Conversas ativas</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tempo de Resposta -->
+                <div class="bg-white rounded-lg p-6 shadow-sm border border-gray-200">
+                    <div class="flex items-center">
+                        <div class="p-2 bg-purple-100 rounded-lg">
+                            <i class="fas fa-clock text-purple-600 text-xl"></i>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-2xl font-bold text-gray-900">2.3h</p>
+                            <p class="text-gray-600 text-sm">Tempo médio</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Messaging Interface -->
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200 h-96">
+                <div class="flex h-full">
+                    <!-- Conversations List -->
+                    <div class="w-1/3 border-r border-gray-200 flex flex-col">
+                        <!-- Search -->
+                        <div class="p-4 border-b border-gray-200">
+                            <div class="relative">
+                                <input type="text" placeholder="Buscar conversas..."
+                                    class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                            </div>
+                        </div>
+
+                        <!-- Conversations -->
+                        <div class="flex-1 overflow-y-auto">
+                            <!-- Active Conversation -->
+                            <div class="conversation-item active p-4 cursor-pointer">
+                                <div class="flex items-start space-x-3">
+                                    <div class="relative">
+                                        <div
+                                            class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center">
+                                            <span class="text-white font-medium">RS</span>
+                                        </div>
+                                        <div class="online-indicator"></div>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <div class="flex items-center justify-between">
+                                            <p class="text-sm font-medium text-gray-900 truncate">Ricardo Silva</p>
+                                            <p class="text-xs text-gray-500">10:30</p>
+                                        </div>
+                                        <p class="text-sm text-gray-600 truncate">Enviou uma atualização do projeto
+                                            E-commerce...</p>
+                                        <span class="inline-block w-2 h-2 bg-blue-500 rounded-full mt-1"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Other Conversations -->
+                            <div class="conversation-item p-4 cursor-pointer">
+                                <div class="flex items-start space-x-3">
+                                    <div class="relative">
+                                        <div
+                                            class="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center">
+                                            <span class="text-white font-medium">JC</span>
+                                        </div>
+                                        <div class="online-indicator"></div>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <div class="flex items-center justify-between">
+                                            <p class="text-sm font-medium text-gray-900 truncate">Juliana Costa</p>
+                                            <p class="text-xs text-gray-500">09:15</p>
+                                        </div>
+                                        <p class="text-sm text-gray-600 truncate">Os wireframes estão prontos para
+                                            revisão</p>
+                                        <span class="inline-block w-2 h-2 bg-red-500 rounded-full mt-1"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="conversation-item p-4 cursor-pointer">
+                                <div class="flex items-start space-x-3">
+                                    <div class="relative">
+                                        <div
+                                            class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
+                                            <span class="text-white font-medium">CS</span>
+                                        </div>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <div class="flex items-center justify-between">
+                                            <p class="text-sm font-medium text-gray-900 truncate">Carlos Santos</p>
+                                            <p class="text-xs text-gray-500">Ontem</p>
+                                        </div>
+                                        <p class="text-sm text-gray-600 truncate">App Mobile concluído com sucesso!
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="conversation-item p-4 cursor-pointer">
+                                <div class="flex items-start space-x-3">
+                                    <div class="relative">
+                                        <div
+                                            class="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center">
+                                            <span class="text-white font-medium">MO</span>
+                                        </div>
+                                        <div class="online-indicator"></div>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <div class="flex items-center justify-between">
+                                            <p class="text-sm font-medium text-gray-900 truncate">Marina Oliveira
+                                            </p>
+                                            <p class="text-xs text-gray-500">2 dias</p>
+                                        </div>
+                                        <p class="text-sm text-gray-600 truncate">Relatório de dados enviado</p>
+                                        <span class="inline-block w-2 h-2 bg-red-500 rounded-full mt-1"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Chat Area -->
+                    <div class="flex-1 flex flex-col">
+                        <!-- Chat Header -->
+                        <div class="p-4 border-b border-gray-200 bg-gray-50">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-3">
+                                    <div class="relative">
+                                        <div
+                                            class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center">
+                                            <span class="text-white font-medium">RS</span>
+                                        </div>
+                                        <div class="online-indicator"></div>
+                                    </div>
+                                    <div>
+                                        <p class="font-medium text-gray-900">Ricardo Silva</p>
+                                        <p class="text-sm text-green-600">Online</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <button class="p-2 text-gray-400 hover:text-blue-500">
+                                        <i class="fas fa-phone"></i>
+                                    </button>
+                                    <button class="p-2 text-gray-400 hover:text-blue-500">
+                                        <i class="fas fa-video"></i>
+                                    </button>
+                                    <button class="p-2 text-gray-400 hover:text-blue-500">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Messages -->
+                        <div class="flex-1 p-4 overflow-y-auto space-y-4">
+                            <!-- Received Message -->
+                            <div class="flex items-start space-x-2">
+                                <div
+                                    class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <span class="text-white text-xs font-medium">RS</span>
+                                </div>
+                                <div class="message-bubble message-received p-3">
+                                    <p class="text-sm">Olá Ana! Espero que esteja bem. Enviei uma atualização do
+                                        projeto E-commerce App para sua revisão.</p>
+                                    <p class="text-xs text-gray-500 mt-1">10:28</p>
+                                </div>
+                            </div>
+
+                            <!-- Sent Message -->
+                            <div class="flex items-start space-x-2 justify-end">
+                                <div class="message-bubble message-sent p-3">
+                                    <p class="text-sm">Perfeito! Vou analisar e te dou um retorno ainda hoje.</p>
+                                    <p class="text-xs text-blue-200 mt-1">10:29</p>
+                                </div>
+                            </div>
+
+                            <!-- Received Message -->
+                            <div class="flex items-start space-x-2">
+                                <div
+                                    class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <span class="text-white text-xs font-medium">RS</span>
+                                </div>
+                                <div class="message-bubble message-received p-3">
+                                    <p class="text-sm">Excelente! O progresso está em 45% conforme mostrado no
+                                        dashboard. Precisa de algum ajuste?</p>
+                                    <p class="text-xs text-gray-500 mt-1">10:30</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Message Input -->
+                        <div class="p-4 border-t border-gray-200">
+                            <div class="flex items-center space-x-2">
+                                <button class="p-2 text-gray-400 hover:text-blue-500">
+                                    <i class="fas fa-paperclip"></i>
+                                </button>
+                                <div class="flex-1 relative">
+                                    <input type="text" placeholder="Digite sua mensagem..."
+                                        class="w-full pl-4 pr-12 py-3 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    <button
+                                        class="absolute right-2 top-1/2 transform -translate-y-1/2 p-2 text-gray-400 hover:text-blue-500">
+                                        <i class="fas fa-smile"></i>
+                                    </button>
+                                </div>
+                                <button
+                                    class="p-3 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition-colors">
+                                    <i class="fas fa-paper-plane"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Actions Section -->
+            <div class="mt-6 flex items-center justify-between">
+                <div class="flex space-x-4">
+                    <button
+                        class="flex items-center space-x-2 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors">
+                        <i class="fas fa-plus"></i>
+                        <span>Nova Conversa</span>
+                    </button>
+                    <button
+                        class="flex items-center space-x-2 bg-white border border-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-50 transition-colors">
+                        <i class="fas fa-filter"></i>
+                        <span>Filtros</span>
+                    </button>
+                </div>
+
+                <div class="flex space-x-2">
+                    <button
+                        class="flex items-center space-x-2 bg-white border border-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-50 transition-colors">
+                        <i class="fas fa-download"></i>
+                        <span>Exportar</span>
+                    </button>
+                    <button
+                        class="flex items-center space-x-2 bg-white border border-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-50 transition-colors">
+                        <i class="fas fa-cog"></i>
+                        <span>Configurações</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+
+</html>

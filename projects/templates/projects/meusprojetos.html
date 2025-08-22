@@ -1,0 +1,603 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechConnect - Meus Projetos</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'projects/css/meusprojetos.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+</head>
+
+<body class="bg-gray-50 font-sans">
+    {% include 'partials/nav.html' %}
+
+    <!-- Main Content -->
+    <main class="flex-1 p-6">
+        <!-- Header Section -->
+        <div class="mb-8">
+            <div class="flex items-center justify-between mb-4">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-900">Meus Projetos</h1>
+                    <p class="text-gray-600">Gerencie todos os seus projetos em um só lugar</p>
+                </div>
+                <button
+                    class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg flex items-center space-x-2 transition-colors">
+                    <i class="fas fa-plus"></i>
+                    <span>Novo Projeto</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 card-hover">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-600">Total</p>
+                        <p class="text-3xl font-bold text-gray-900">12</p>
+                    </div>
+                    <div class="p-3 bg-gray-500 bg-opacity-10 rounded-lg">
+                        <i class="fas fa-folder text-gray-600 text-xl"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 card-hover">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-600">Em Andamento</p>
+                        <p class="text-3xl font-bold text-blue-600">4</p>
+                    </div>
+                    <div class="p-3 bg-blue-500 bg-opacity-10 rounded-lg">
+                        <i class="fas fa-spinner text-blue-600 text-xl"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 card-hover">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-600">Aguardando</p>
+                        <p class="text-3xl font-bold text-yellow-600">2</p>
+                    </div>
+                    <div class="p-3 bg-yellow-500 bg-opacity-10 rounded-lg">
+                        <i class="fas fa-clock text-yellow-600 text-xl"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 card-hover">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-600">Concluídos</p>
+                        <p class="text-3xl font-bold text-green-600">5</p>
+                    </div>
+                    <div class="p-3 bg-green-500 bg-opacity-10 rounded-lg">
+                        <i class="fas fa-check-circle text-green-600 text-xl"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 card-hover">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-600">Cancelados</p>
+                        <p class="text-3xl font-bold text-red-600">1</p>
+                    </div>
+                    <div class="p-3 bg-red-500 bg-opacity-10 rounded-lg">
+                        <i class="fas fa-times-circle text-red-600 text-xl"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filters and Search -->
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8">
+            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+                <!-- Search -->
+                <div class="flex-1 max-w-md">
+                    <div class="relative">
+                        <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                        <input type="text" placeholder="Buscar projetos..."
+                            class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    </div>
+                </div>
+
+                <!-- Filters -->
+                <div class="flex items-center space-x-4">
+                    <div class="flex items-center space-x-2">
+                        <span class="text-sm text-gray-600">Filtrar por:</span>
+                        <div class="flex space-x-1">
+                            <button
+                                class="filter-btn px-3 py-2 text-sm rounded-lg border border-gray-300 hover:bg-gray-50 filter-active"
+                                data-filter="todos">
+                                Todos
+                            </button>
+                            <button
+                                class="filter-btn px-3 py-2 text-sm rounded-lg border border-gray-300 hover:bg-gray-50"
+                                data-filter="andamento">
+                                Em Andamento
+                            </button>
+                            <button
+                                class="filter-btn px-3 py-2 text-sm rounded-lg border border-gray-300 hover:bg-gray-50"
+                                data-filter="aguardando">
+                                Aguardando
+                            </button>
+                            <button
+                                class="filter-btn px-3 py-2 text-sm rounded-lg border border-gray-300 hover:bg-gray-50"
+                                data-filter="concluido">
+                                Concluídos
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- View Toggle -->
+                    <div class="flex items-center space-x-2 ml-4 border-l pl-4">
+                        <span class="text-sm text-gray-600">Visualizar:</span>
+                        <div class="flex space-x-1">
+                            <button
+                                class="view-toggle px-3 py-2 text-sm rounded-lg border border-gray-300 bg-blue-600 text-white"
+                                data-view="cards">
+                                <i class="fas fa-th"></i>
+                            </button>
+                            <button
+                                class="view-toggle px-3 py-2 text-sm rounded-lg border border-gray-300 hover:bg-gray-50"
+                                data-view="list">
+                                <i class="fas fa-list"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Projects Grid -->
+        <div id="projectsContainer" class="projects-grid">
+            <!-- Project Cards View -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 mb-8">
+                <!-- Project 1 -->
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 project-card" data-status="andamento">
+                    <div class="p-6">
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="flex-1">
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">E-commerce App</h3>
+                                <p class="text-sm text-gray-600 mb-3">Plataforma completa de e-commerce com integração
+                                    de pagamentos e sistema de gestão de produtos</p>
+                            </div>
+                            <div class="ml-4">
+                                <span class="status-badge bg-blue-100 text-blue-800">Em Andamento</span>
+                            </div>
+                        </div>
+
+                        <div class="space-y-3 mb-4">
+                            <div class="flex items-center justify-between text-sm">
+                                <div class="flex items-center space-x-2">
+                                    <div
+                                        class="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center text-white text-xs font-semibold">
+                                        R</div>
+                                    <span class="text-gray-700">Ricardo Silva</span>
+                                </div>
+                                <span class="font-semibold text-gray-900">R$ 8.200</span>
+                            </div>
+
+                            <div class="flex items-center justify-between text-sm text-gray-600">
+                                <span>Iniciado em: 10/01/2024</span>
+                                <span>Prazo: 15 dias</span>
+                            </div>
+
+                            <div>
+                                <div class="flex justify-between text-sm text-gray-600 mb-1">
+                                    <span>Progresso</span>
+                                    <span>45%</span>
+                                </div>
+                                <div class="project-progress">
+                                    <div class="progress-fill bg-blue-500" style="width: 45%"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between pt-4 border-t border-gray-200">
+                            <div class="flex space-x-2">
+                                <button
+                                    class="px-3 py-1 text-xs bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200">
+                                    <i class="fas fa-eye mr-1"></i>Visualizar
+                                </button>
+                                <button
+                                    class="px-3 py-1 text-xs bg-blue-100 text-blue-700 rounded-md hover:bg-blue-200">
+                                    <i class="fas fa-comment mr-1"></i>Mensagens
+                                </button>
+                            </div>
+                            <div class="relative">
+                                <button class="p-2 text-gray-500 hover:text-gray-700">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 project-card" data-status="aguardando">
+                    <div class="p-6">
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="flex-1">
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Website Corporativo</h3>
+                                <p class="text-sm text-gray-600 mb-3">Site institucional responsivo com sistema de
+                                    gestão de conteúdo e SEO otimizado</p>
+                            </div>
+                            <div class="ml-4">
+                                <span class="status-badge bg-yellow-100 text-yellow-800">Aguardando</span>
+                            </div>
+                        </div>
+
+                        <div class="space-y-3 mb-4">
+                            <div class="flex items-center justify-between text-sm">
+                                <div class="flex items-center space-x-2">
+                                    <div
+                                        class="w-6 h-6 bg-purple-500 rounded-full flex items-center justify-center text-white text-xs font-semibold">
+                                        J</div>
+                                    <span class="text-gray-700">Juliana Costa</span>
+                                </div>
+                                <span class="font-semibold text-gray-900">R$ 4.500</span>
+                            </div>
+
+                            <div class="flex items-center justify-between text-sm text-gray-600">
+                                <span>Iniciado em: 20/01/2024</span>
+                                <span>Prazo: 10 dias</span>
+                            </div>
+
+                            <div>
+                                <div class="flex justify-between text-sm text-gray-600 mb-1">
+                                    <span>Progresso</span>
+                                    <span>30%</span>
+                                </div>
+                                <div class="project-progress">
+                                    <div class="progress-fill bg-yellow-500" style="width: 30%"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between pt-4 border-t border-gray-200">
+                            <div class="flex space-x-2">
+                                <button
+                                    class="px-3 py-1 text-xs bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200">
+                                    <i class="fas fa-eye mr-1"></i>Visualizar
+                                </button>
+                                <button
+                                    class="px-3 py-1 text-xs bg-blue-100 text-blue-700 rounded-md hover:bg-blue-200">
+                                    <i class="fas fa-comment mr-1"></i>Mensagens
+                                </button>
+                            </div>
+                            <div class="relative">
+                                <button class="p-2 text-gray-500 hover:text-gray-700">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 project-card" data-status="concluido">
+                    <div class="p-6">
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="flex-1">
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">App Mobile</h3>
+                                <p class="text-sm text-gray-600 mb-3">Aplicativo móvel para iOS e Android com
+                                    sincronização na nuvem</p>
+                            </div>
+                            <div class="ml-4">
+                                <span class="status-badge bg-green-100 text-green-800">Concluído</span>
+                            </div>
+                        </div>
+
+                        <div class="space-y-3 mb-4">
+                            <div class="flex items-center justify-between text-sm">
+                                <div class="flex items-center space-x-2">
+                                    <div
+                                        class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center text-white text-xs font-semibold">
+                                        C</div>
+                                    <span class="text-gray-700">Carlos Santos</span>
+                                </div>
+                                <span class="font-semibold text-gray-900">R$ 12.000</span>
+                            </div>
+
+                            <div class="flex items-center justify-between text-sm text-gray-600">
+                                <span>Concluído em: 25/01/2024</span>
+                                <span class="text-green-600 font-medium">No prazo</span>
+                            </div>
+
+                            <div>
+                                <div class="flex justify-between text-sm text-gray-600 mb-1">
+                                    <span>Progresso</span>
+                                    <span>100%</span>
+                                </div>
+                                <div class="project-progress">
+                                    <div class="progress-fill bg-green-500" style="width: 100%"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between pt-4 border-t border-gray-200">
+                            <div class="flex space-x-2">
+                                <button
+                                    class="px-3 py-1 text-xs bg-green-100 text-green-700 rounded-md hover:bg-green-200">
+                                    <i class="fas fa-star mr-1"></i>Avaliar
+                                </button>
+                                <button
+                                    class="px-3 py-1 text-xs bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200">
+                                    <i class="fas fa-download mr-1"></i>Download
+                                </button>
+                            </div>
+                            <div class="relative">
+                                <button class="p-2 text-gray-500 hover:text-gray-700">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 project-card" data-status="andamento">
+                    <div class="p-6">
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="flex-1">
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Sistema de Gestão</h3>
+                                <p class="text-sm text-gray-600 mb-3">ERP personalizado para gestão de estoque, vendas e
+                                    finanças</p>
+                            </div>
+                            <div class="ml-4">
+                                <span class="status-badge bg-blue-100 text-blue-800">Em Andamento</span>
+                            </div>
+                        </div>
+
+                        <div class="space-y-3 mb-4">
+                            <div class="flex items-center justify-between text-sm">
+                                <div class="flex items-center space-x-2">
+                                    <div
+                                        class="w-6 h-6 bg-indigo-500 rounded-full flex items-center justify-center text-white text-xs font-semibold">
+                                        M</div>
+                                    <span class="text-gray-700">Marina Oliveira</span>
+                                </div>
+                                <span class="font-semibold text-gray-900">R$ 15.500</span>
+                            </div>
+
+                            <div class="flex items-center justify-between text-sm text-gray-600">
+                                <span>Iniciado em: 05/01/2024</span>
+                                <span>Prazo: 25 dias</span>
+                            </div>
+
+                            <div>
+                                <div class="flex justify-between text-sm text-gray-600 mb-1">
+                                    <span>Progresso</span>
+                                    <span>65%</span>
+                                </div>
+                                <div class="project-progress">
+                                    <div class="progress-fill bg-indigo-500" style="width: 65%"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between pt-4 border-t border-gray-200">
+                            <div class="flex space-x-2">
+                                <button
+                                    class="px-3 py-1 text-xs bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200">
+                                    <i class="fas fa-eye mr-1"></i>Visualizar
+                                </button>
+                                <button
+                                    class="px-3 py-1 text-xs bg-blue-100 text-blue-700 rounded-md hover:bg-blue-200">
+                                    <i class="fas fa-comment mr-1"></i>Mensagens
+                                </button>
+                            </div>
+                            <div class="relative">
+                                <button class="p-2 text-gray-500 hover:text-gray-700">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 5 -->
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 project-card" data-status="aguardando">
+                    <div class="p-6">
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="flex-1">
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Dashboard Analytics</h3>
+                                <p class="text-sm text-gray-600 mb-3">Painel de controle com métricas em tempo real e
+                                    relatórios customizados</p>
+                            </div>
+                            <div class="ml-4">
+                                <span class="status-badge bg-yellow-100 text-yellow-800">Aguardando</span>
+                            </div>
+                        </div>
+
+                        <div class="space-y-3 mb-4">
+                            <div class="flex items-center justify-between text-sm">
+                                <div class="flex items-center space-x-2">
+                                    <div
+                                        class="w-6 h-6 bg-teal-500 rounded-full flex items-center justify-center text-white text-xs font-semibold">
+                                        L</div>
+                                    <span class="text-gray-700">Lucas Ferreira</span>
+                                </div>
+                                <span class="font-semibold text-gray-900">R$ 6.800</span>
+                            </div>
+
+                            <div class="flex items-center justify-between text-sm text-gray-600">
+                                <span>Iniciado em: 22/01/2024</span>
+                                <span>Prazo: 12 dias</span>
+                            </div>
+
+                            <div>
+                                <div class="flex justify-between text-sm text-gray-600 mb-1">
+                                    <span>Progresso</span>
+                                    <span>20%</span>
+                                </div>
+                                <div class="project-progress">
+                                    <div class="progress-fill bg-yellow-500" style="width: 20%"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between pt-4 border-t border-gray-200">
+                            <div class="flex space-x-2">
+                                <button
+                                    class="px-3 py-1 text-xs bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200">
+                                    <i class="fas fa-eye mr-1"></i>Visualizar
+                                </button>
+                                <button
+                                    class="px-3 py-1 text-xs bg-blue-100 text-blue-700 rounded-md hover:bg-blue-200">
+                                    <i class="fas fa-comment mr-1"></i>Mensagens
+                                </button>
+                            </div>
+                            <div class="relative">
+                                <button class="p-2 text-gray-500 hover:text-gray-700">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 6 -->
+                <div class="bg-white rounded-lg shadow-sm border border-gray-200 project-card" data-status="concluido">
+                    <div class="p-6">
+                        <div class="flex items-start justify-between mb-4">
+                            <div class="flex-1">
+                                <h3 class="text-lg font-semibold text-gray-900 mb-2">Landing Page</h3>
+                                <p class="text-sm text-gray-600 mb-3">Página de conversão otimizada para campanhas de
+                                    marketing digital</p>
+                            </div>
+                            <div class="ml-4">
+                                <span class="status-badge bg-green-100 text-green-800">Concluído</span>
+                            </div>
+                        </div>
+
+                        <div class="space-y-3 mb-4">
+                            <div class="flex items-center justify-between text-sm">
+                                <div class="flex items-center space-x-2">
+                                    <div
+                                        class="w-6 h-6 bg-pink-500 rounded-full flex items-center justify-center text-white text-xs font-semibold">
+                                        S</div>
+                                    <span class="text-gray-700">Sofia Martins</span>
+                                </div>
+                                <span class="font-semibold text-gray-900">R$ 2.800</span>
+                            </div>
+
+                            <div class="flex items-center justify-between text-sm text-gray-600">
+                                <span>Concluído em: 18/01/2024</span>
+                                <span class="text-green-600 font-medium">No prazo</span>
+                            </div>
+
+                            <div>
+                                <div class="flex justify-between text-sm text-gray-600 mb-1">
+                                    <span>Progresso</span>
+                                    <span>100%</span>
+                                </div>
+                                <div class="project-progress">
+                                    <div class="progress-fill bg-green-500" style="width: 100%"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between pt-4 border-t border-gray-200">
+                            <div class="flex space-x-2">
+                                <button
+                                    class="px-3 py-1 text-xs bg-green-100 text-green-700 rounded-md hover:bg-green-200">
+                                    <i class="fas fa-star mr-1"></i>Avaliar
+                                </button>
+                                <button
+                                    class="px-3 py-1 text-xs bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200">
+                                    <i class="fas fa-external-link-alt mr-1"></i>Ver Site
+                                </button>
+                            </div>
+                            <div class="relative">
+                                <button class="p-2 text-gray-500 hover:text-gray-700">
+                                    <i class="fas fa-ellipsis-v"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200">
+            <div class="p-6 border-b border-gray-200">
+                <h2 class="text-xl font-semibold text-gray-900">Atividades Recentes</h2>
+            </div>
+
+            <div class="p-6">
+                <div class="space-y-4">
+                    <div class="flex items-start space-x-4">
+                        <div class="w-2 h-2 bg-blue-500 rounded-full mt-2"></div>
+                        <div class="flex-1">
+                            <p class="text-sm text-gray-900">
+                                <span class="font-medium">Ricardo Silva</span> enviou uma atualização do projeto
+                                <span class="font-medium">E-commerce App</span>
+                            </p>
+                            <p class="text-xs text-gray-500">Hoje às 15:30</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start space-x-4">
+                        <div class="w-2 h-2 bg-green-500 rounded-full mt-2"></div>
+                        <div class="flex-1">
+                            <p class="text-sm text-gray-900">
+                                Projeto <span class="font-medium">App Mobile</span> foi marcado como concluído
+                            </p>
+                            <p class="text-xs text-gray-500">Ontem às 14:22</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start space-x-4">
+                        <div class="w-2 h-2 bg-yellow-500 rounded-full mt-2"></div>
+                        <div class="flex-1">
+                            <p class="text-sm text-gray-900">
+                                <span class="font-medium">Juliana Costa</span> solicitou revisão do projeto
+                                <span class="font-medium">Website Corporativo</span>
+                            </p>
+                            <p class="text-xs text-gray-500">29/01/2024 às 09:15</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start space-x-4">
+                        <div class="w-2 h-2 bg-purple-500 rounded-full mt-2"></div>
+                        <div class="flex-1">
+                            <p class="text-sm text-gray-900">
+                                Novo projeto <span class="font-medium">Dashboard Analytics</span> foi iniciado
+                            </p>
+                            <p class="text-xs text-gray-500">28/01/2024 às 16:45</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start space-x-4">
+                        <div class="w-2 h-2 bg-pink-500 rounded-full mt-2"></div>
+                        <div class="flex-1">
+                            <p class="text-sm text-gray-900">
+                                Pagamento do projeto <span class="font-medium">Landing Page</span> foi processado
+                            </p>
+                            <p class="text-xs text-gray-500">27/01/2024 às 11:30</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    </div>
+    <script src="{% static 'css/js/meusprojetos.js' %}"></script>
+
+
+
+
+</body>
+
+</html>

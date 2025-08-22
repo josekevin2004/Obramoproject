@@ -1,0 +1,307 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TechConnect - Configurações</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="{% static 'projects/css/perfil.css' %}">
+</head>
+
+<body class="bg-gray-50">
+  {# A partial já rende o <header> e abre <div class="flex"> com a <aside> #}
+  {% include 'partials/nav.html' %}
+
+  <!-- Conteúdo principal (irmão da sidebar aberta na partial) -->
+  <main class="flex-1 bg-gray-50 px-6 mt-1">
+
+    <!-- Content -->
+    <div class="content">
+      <!-- Perfil -->
+      <div class="config-section">
+        <div class="config-header">
+          <h3><i class="fas fa-user"></i> Informações do Perfil</h3>
+          <p>Gerencie suas informações pessoais e dados de contato</p>
+        </div>
+        <div class="config-body">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="nome">Nome Completo</label>
+              <input type="text" id="nome" class="form-control" value="Ana Ferreira" placeholder="Digite seu nome completo">
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" class="form-control" value="ana.ferreira@email.com" placeholder="Digite seu email">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="telefone">Telefone</label>
+              <input type="tel" id="telefone" class="form-control" value="(11) 99999-9999" placeholder="Digite seu telefone">
+            </div>
+            <div class="form-group">
+              <label for="empresa">Empresa</label>
+              <input type="text" id="empresa" class="form-control" value="Obramo" placeholder="Nome da empresa">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="bio">Biografia</label>
+            <textarea id="bio" class="form-control" rows="4" placeholder="Conte um pouco sobre você e sua empresa...">Empreendedora na área de tecnologia, sempre em busca de profissionais qualificados para projetos inovadores.</textarea>
+          </div>
+
+          <div class="btn-group">
+            <button class="btn btn-primary">Salvar Alterações</button>
+            <button class="btn btn-secondary">Cancelar</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Notificações -->
+      <div class="config-section">
+        <div class="config-header">
+          <h3><i class="fas fa-bell"></i> Notificações</h3>
+          <p>Configure como e quando você deseja receber notificações</p>
+        </div>
+        <div class="config-body">
+          <div class="setting-item">
+            <div class="setting-info">
+              <h4>Novos projetos disponíveis</h4>
+              <p>Receba notificações quando profissionais se candidatarem aos seus projetos</p>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" checked>
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+
+          <div class="setting-item">
+            <div class="setting-info">
+              <h4>Mensagens recebidas</h4>
+              <p>Seja notificado quando receber novas mensagens</p>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" checked>
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+
+          <div class="setting-item">
+            <div class="setting-info">
+              <h4>Atualizações de projeto</h4>
+              <p>Receba notificações sobre o progresso dos seus projetos</p>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" checked>
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+
+          <div class="setting-item">
+            <div class="setting-info">
+              <h4>Lembretes de pagamento</h4>
+              <p>Seja lembrado sobre pagamentos pendentes ou vencimentos</p>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" checked>
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+
+          <div class="setting-item">
+            <div class="setting-info">
+              <h4>Newsletter e promoções</h4>
+              <p>Receba novidades sobre a plataforma e ofertas especiais</p>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox">
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Segurança -->
+      <div class="config-section">
+        <div class="config-header">
+          <h3><i class="fas fa-shield-alt"></i> Segurança</h3>
+          <p>Mantenha sua conta segura com essas configurações</p>
+        </div>
+        <div class="config-body">
+          <div class="security-item">
+            <div class="security-icon success">
+              <i class="fas fa-lock"></i>
+            </div>
+            <div class="security-item-info">
+              <h4>Senha forte ativa</h4>
+              <p>Sua senha atende aos critérios de segurança</p>
+            </div>
+            <button class="btn btn-secondary">Alterar Senha</button>
+          </div>
+
+          <div class="security-item">
+            <div class="security-icon warning">
+              <i class="fas fa-mobile-alt"></i>
+            </div>
+            <div class="security-item-info">
+              <h4>Autenticação de dois fatores</h4>
+              <p>Adicione uma camada extra de segurança à sua conta</p>
+            </div>
+            <button class="btn btn-primary">Ativar 2FA</button>
+          </div>
+
+          <div class="security-item">
+            <div class="security-icon success">
+              <i class="fas fa-history"></i>
+            </div>
+            <div class="security-item-info">
+              <h4>Histórico de login</h4>
+              <p>Último acesso: Hoje às 14:30 de São Paulo, SP</p>
+            </div>
+            <button class="btn btn-secondary">Ver Histórico</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pagamentos -->
+      <div class="config-section">
+        <div class="config-header">
+          <h3><i class="fas fa-credit-card"></i> Métodos de Pagamento</h3>
+          <p>Gerencie suas formas de pagamento e preferências</p>
+        </div>
+        <div class="config-body">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="metodo-preferido">Método Preferido</label>
+              <select id="metodo-preferido" class="form-control">
+                <option value="cartao">Cartão de Crédito</option>
+                <option value="pix">PIX</option>
+                <option value="boleto">Boleto Bancário</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="moeda">Moeda Padrão</label>
+              <select id="moeda" class="form-control">
+                <option value="BRL" selected>Real (R$)</option>
+                <option value="USD">Dólar (US$)</option>
+                <option value="EUR">Euro (€)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="setting-item">
+            <div class="setting-info">
+              <h4>Pagamento automático</h4>
+              <p>Ative o pagamento automático para projetos recorrentes</p>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox">
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+
+          <div class="setting-item">
+            <div class="setting-info">
+              <h4>Recibos por email</h4>
+              <p>Receba automaticamente os recibos de pagamento por email</p>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" checked>
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+
+          <div class="btn-group">
+            <button class="btn btn-primary">Adicionar Cartão</button>
+            <button class="btn btn-secondary">Ver Histórico</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Preferências do Sistema -->
+      <div class="config-section">
+        <div class="config-header">
+          <h3><i class="fas fa-cogs"></i> Preferências do Sistema</h3>
+          <p>Personalize sua experiência na plataforma</p>
+        </div>
+        <div class="config-body">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="idioma">Idioma</label>
+              <select id="idioma" class="form-control">
+                <option value="pt-BR" selected>Português (Brasil)</option>
+                <option value="en-US">English (US)</option>
+                <option value="es-ES">Español</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="timezone">Fuso Horário</label>
+              <select id="timezone" class="form-control">
+                <option value="America/Sao_Paulo" selected>Brasília (GMT-3)</option>
+                <option value="America/New_York">Nova York (GMT-5)</option>
+                <option value="Europe/London">Londres (GMT+0)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="setting-item">
+            <div class="setting-info">
+              <h4>Modo escuro</h4>
+              <p>Use uma interface mais escura para reduzir o cansaço visual</p>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox">
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+
+          <div class="setting-item">
+            <div class="setting-info">
+              <h4>Animações da interface</h4>
+              <p>Ative ou desative as animações da interface</p>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" checked>
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Zona de Perigo -->
+      <div class="config-section">
+        <div class="config-header">
+          <h3><i class="fas fa-exclamation-triangle"></i> Zona de Perigo</h3>
+          <p>Ações irreversíveis que afetam permanentemente sua conta</p>
+        </div>
+        <div class="config-body">
+          <div class="security-item">
+            <div class="security-item-info">
+              <h4>Desativar conta temporariamente</h4>
+              <p>Sua conta ficará invisível até você reativá-la</p>
+            </div>
+            <button class="btn btn-secondary">Desativar</button>
+          </div>
+
+          <div class="security-item">
+            <div class="security-item-info">
+              <h4>Excluir conta permanentemente</h4>
+              <p>Esta ação não pode ser desfeita. Todos os seus dados serão removidos</p>
+            </div>
+            <button class="btn btn-danger">Excluir Conta</button>
+          </div>
+        </div>
+      </div>
+    </div><!-- /.content -->
+
+  </main>
+
+  <!-- Fecha o .flex que foi ABERTO na partial nav.html -->
+  </div>
+
+  <script src="{% static 'css/js/perfil.js' %}"></script>
+</body>
+</html>

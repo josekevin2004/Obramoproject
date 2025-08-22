@@ -1,0 +1,39 @@
+.sidebar-item:hover {
+            background-color: #3B82F6;
+            color: white;
+        }
+        .sidebar-item.active {
+            background-color: #3B82F6;
+            color: white;
+        }
+        .card-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        .transaction-item:hover {
+            background-color: #F8FAFC;
+        }
+        .payment-method:hover {
+            border-color: #3B82F6;
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+        }
+        .btn-primary {
+            background-color: #3B82F6;
+            color: white;
+        }
+        .btn-primary:hover {
+            background-color: #2563EB;
+        }
+        .status-pending { color: #F59E0B; }
+        .status-completed { color: #10B981; }
+        .status-failed { color: #EF4444; }
+        .notification-badge {
+            background-color: #EF4444;
+            color: white;
+            font-size: 0.75rem;
+            padding: 2px 6px;
+            border-radius: 50%;
+            position: absolute;
+            top: -5px;
+            right: -5px;
+        }

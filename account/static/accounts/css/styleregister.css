@@ -1,4 +1,4 @@
-/* ===== Base ===== */
+/* /* ===== Base ===== */
 :root{
   --blue-700:#1E40AF;
   --blue-600:#3B82F6;
@@ -23,7 +23,7 @@ body{
   margin:0;
   font-family:'Poppins',sans-serif;
   color:var(--gray-900);
-  background:var(--gray-100);
+  background:var(--white);
 }
 
 /* Utils */
@@ -223,4 +223,4 @@ label{display:block; font-size:14px; color:var(--gray-800); margin-bottom:6px}
 
 /* Step spacing */
 .step-content{margin-top:12px}
-.subtitle{margin:0 0 10px; font-size:16px; font-weight:600; color:var(--gray-800)}
+.subtitle{margin:0 0 10px; font-size:16px; font-weight:600; color:var(--gray-800)} 

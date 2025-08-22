@@ -10,6 +10,7 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'accounts/css/stylelogin.css' %}">
     <link rel="stylesheet" href="{% static 'accounts/css/styleregister.css' %}">
+    <!-- <link rel="stylesheet" href="{% static 'accounts/css/style.css' %}"> -->
 </head>
 
 <body>
@@ -20,22 +21,34 @@
             <div class="login-card">
                 <h1>Bem-vindo(a)</h1>
                 <p class="subtitle">Entre com suas credenciais para continuar</p>
-
-                <form>
-                    <div class="input-group">
-                        <input type="email" placeholder="E-mail" required>
+                <div>
+                <form action="{% url 'login' %}" method="post">
+                    {% include 'partials/_form-fields.html' %}
+                    {% if messages %}
+                    <div class="row">
+                        {% for message in messages %}
+                        {% if message.tags == 'error' %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ message }}
+                        </div>
+                        {% else %}
+                        <div class="alert alert-{{message.tags}}" role="alert">
+                            {{ message }}
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                        </div>
                     </div>
-                    <div class="input-group">
-                        <input type="password" placeholder="Senha" required>
-                    </div>
-
+                    {% endif %}
+                    
                     <a href="{% url 'redefinir_senha' %}" class="forgot-password">Esqueci minha senha</a>
 
-                    <button type="submit" class="btn-login">Entrar</button>
-
-                    <p class="signup-text">
+                    <div class="col-12 text-center pt-3">
+                        <button class="btn-login" type="submit">Entrar</button>
+                        <p class="signup-text">
                         Não tem conta? <a href="{% url 'register' %}">Criar agora</a>
-                    </p>
+
+                    </div>
                 </form>
             </div>
         </div>

@@ -1,0 +1,13 @@
+body {
+            background-color: #f8fafc;
+        }
+        .sidebar-active {
+            background-color: #3b82f6;
+            color: white;
+        }
+        .star-rating {
+            color: #fbbf24;
+        }
+        .card-shadow {
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+        }

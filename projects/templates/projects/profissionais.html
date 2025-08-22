@@ -1,0 +1,462 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Obramo - Profissionais</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="{% static 'projects/css/profissionais.css' %}">
+
+
+</head>
+
+<body class="bg-gray-50 font-sans">
+    {% include 'partials/nav.html' %}
+
+
+    <!-- Main Content -->
+    <div class="flex-1 p-8">
+        <!-- Header -->
+
+
+        <!-- Statistics Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-500 text-sm">Profissionais Ativos</p>
+                        <p class="text-3xl font-bold text-gray-800 mt-2">12</p>
+                        <p class="text-green-600 text-sm mt-1">+3 este mês</p>
+                    </div>
+                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-user-tie text-blue-600 text-xl"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-500 text-sm">Taxa Média</p>
+                        <p class="text-3xl font-bold text-gray-800 mt-2">R$ 85/h</p>
+                        <p class="text-blue-600 text-sm mt-1">Média do mercado</p>
+                    </div>
+                    <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-dollar-sign text-green-600 text-xl"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-500 text-sm">Projetos em Andamento</p>
+                        <p class="text-3xl font-bold text-gray-800 mt-2">8</p>
+                        <p class="text-yellow-600 text-sm mt-1">4 próximos à entrega</p>
+                    </div>
+                    <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-tasks text-purple-600 text-xl"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-500 text-sm">Avaliação Média</p>
+                        <p class="text-3xl font-bold text-gray-800 mt-2">4.8</p>
+                        <div class="flex mt-1">
+                            <i class="fas fa-star rating-stars text-sm"></i>
+                            <i class="fas fa-star rating-stars text-sm"></i>
+                            <i class="fas fa-star rating-stars text-sm"></i>
+                            <i class="fas fa-star rating-stars text-sm"></i>
+                            <i class="fas fa-star rating-stars text-sm"></i>
+                        </div>
+                    </div>
+                    <div class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-star text-yellow-600 text-xl"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Search and Filters -->
+        <div class="bg-white p-6 rounded-lg shadow-md mb-8">
+            <div class="flex flex-wrap gap-4 items-center">
+                <div class="flex-1 min-w-72">
+                    <div class="relative">
+                        <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                        <input type="text" placeholder="Buscar profissionais..."
+                            class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    </div>
+                </div>
+                <select class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                    <option>Todas as Especialidades</option>
+                    <option>Desenvolvimento Web</option>
+                    <option>Design UX/UI</option>
+                    <option>Mobile</option>
+                    <option>DevOps</option>
+                </select>
+                <select class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                    <option>Todos os Status</option>
+                    <option>Disponível</option>
+                    <option>Em Projeto</option>
+                    <option>Ocupado</option>
+                </select>
+                <button class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                    <i class="fas fa-plus mr-2"></i>Novo Projeto
+                </button>
+            </div>
+        </div>
+
+        <!-- Professionals Grid and Sidebar -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Professionals List -->
+            <div class="lg:col-span-2">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-xl font-semibold text-gray-800">Profissionais Disponíveis</h2>
+                    <span class="text-gray-500">24 profissionais encontrados</span>
+                </div>
+
+                <div class="space-y-6">
+                    <!-- Professional Card 1 -->
+                    <div class="professional-card bg-white p-6 rounded-lg shadow-md">
+                        <div class="flex items-start space-x-4">
+                            <div
+                                class="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center text-white text-xl font-semibold">
+                                R
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex justify-between items-start mb-2">
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-gray-800">Ricardo Silva</h3>
+                                        <p class="text-gray-600">Desenvolvedor Full Stack</p>
+                                    </div>
+                                    <span
+                                        class="px-3 py-1 bg-green-100 text-green-800 text-sm rounded-full">Disponível</span>
+                                </div>
+                                <div class="flex items-center space-x-4 mb-3">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-star rating-stars mr-1"></i>
+                                        <span class="text-gray-700 font-medium">4.9</span>
+                                        <span class="text-gray-500 ml-1">(23 avaliações)</span>
+                                    </div>
+                                    <span class="text-gray-600">R$ 90/hora</span>
+                                </div>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded">React</span>
+                                    <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded">Node.js</span>
+                                    <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded">TypeScript</span>
+                                    <span class="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded">MongoDB</span>
+                                </div>
+                                <div class="flex space-x-3">
+                                    <button
+                                        class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                                        <i class="fas fa-envelope mr-2"></i>Enviar Mensagem
+                                    </button>
+                                    <button
+                                        class="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
+                                        <i class="fas fa-eye mr-2"></i>Ver Perfil
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Professional Card 2 -->
+                    <div class="professional-card bg-white p-6 rounded-lg shadow-md">
+                        <div class="flex items-start space-x-4">
+                            <div
+                                class="w-16 h-16 bg-purple-600 rounded-full flex items-center justify-center text-white text-xl font-semibold">
+                                J
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex justify-between items-start mb-2">
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-gray-800">Juliana Costa</h3>
+                                        <p class="text-gray-600">Designer UX/UI</p>
+                                    </div>
+                                    <span class="px-3 py-1 bg-yellow-100 text-yellow-800 text-sm rounded-full">Em
+                                        Projeto</span>
+                                </div>
+                                <div class="flex items-center space-x-4 mb-3">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-star rating-stars mr-1"></i>
+                                        <span class="text-gray-700 font-medium">4.8</span>
+                                        <span class="text-gray-500 ml-1">(19 avaliações)</span>
+                                    </div>
+                                    <span class="text-gray-600">R$ 75/hora</span>
+                                </div>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded">Figma</span>
+                                    <span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded">Adobe
+                                        XD</span>
+                                    <span
+                                        class="px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded">Prototyping</span>
+                                    <span class="px-2 py-1 bg-purple-100 text-purple-800 text-xs rounded">User
+                                        Research</span>
+                                </div>
+                                <div class="flex space-x-3">
+                                    <button
+                                        class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                                        <i class="fas fa-envelope mr-2"></i>Enviar Mensagem
+                                    </button>
+                                    <button
+                                        class="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
+                                        <i class="fas fa-eye mr-2"></i>Ver Perfil
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Professional Card 3 -->
+                    <div class="professional-card bg-white p-6 rounded-lg shadow-md">
+                        <div class="flex items-start space-x-4">
+                            <div
+                                class="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center text-white text-xl font-semibold">
+                                C
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex justify-between items-start mb-2">
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-gray-800">Carlos Santos</h3>
+                                        <p class="text-gray-600">Desenvolvedor Mobile</p>
+                                    </div>
+                                    <span
+                                        class="px-3 py-1 bg-green-100 text-green-800 text-sm rounded-full">Disponível</span>
+                                </div>
+                                <div class="flex items-center space-x-4 mb-3">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-star rating-stars mr-1"></i>
+                                        <span class="text-gray-700 font-medium">4.7</span>
+                                        <span class="text-gray-500 ml-1">(31 avaliações)</span>
+                                    </div>
+                                    <span class="text-gray-600">R$ 85/hora</span>
+                                </div>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded">React
+                                        Native</span>
+                                    <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded">Flutter</span>
+                                    <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded">iOS</span>
+                                    <span class="px-2 py-1 bg-green-100 text-green-800 text-xs rounded">Android</span>
+                                </div>
+                                <div class="flex space-x-3">
+                                    <button
+                                        class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                                        <i class="fas fa-envelope mr-2"></i>Enviar Mensagem
+                                    </button>
+                                    <button
+                                        class="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
+                                        <i class="fas fa-eye mr-2"></i>Ver Perfil
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Professional Card 4 -->
+                    <div class="professional-card bg-white p-6 rounded-lg shadow-md">
+                        <div class="flex items-start space-x-4">
+                            <div
+                                class="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center text-white text-xl font-semibold">
+                                M
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex justify-between items-start mb-2">
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-gray-800">Mariana Oliveira</h3>
+                                        <p class="text-gray-600">DevOps Engineer</p>
+                                    </div>
+                                    <span class="px-3 py-1 bg-red-100 text-red-800 text-sm rounded-full">Ocupada</span>
+                                </div>
+                                <div class="flex items-center space-x-4 mb-3">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-star rating-stars mr-1"></i>
+                                        <span class="text-gray-700 font-medium">4.9</span>
+                                        <span class="text-gray-500 ml-1">(15 avaliações)</span>
+                                    </div>
+                                    <span class="text-gray-600">R$ 100/hora</span>
+                                </div>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="px-2 py-1 bg-red-100 text-red-800 text-xs rounded">AWS</span>
+                                    <span class="px-2 py-1 bg-red-100 text-red-800 text-xs rounded">Docker</span>
+                                    <span class="px-2 py-1 bg-red-100 text-red-800 text-xs rounded">Kubernetes</span>
+                                    <span class="px-2 py-1 bg-red-100 text-red-800 text-xs rounded">CI/CD</span>
+                                </div>
+                                <div class="flex space-x-3">
+                                    <button class="px-4 py-2 bg-gray-300 text-gray-500 rounded-lg cursor-not-allowed"
+                                        disabled>
+                                        <i class="fas fa-envelope mr-2"></i>Indisponível
+                                    </button>
+                                    <button
+                                        class="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
+                                        <i class="fas fa-eye mr-2"></i>Ver Perfil
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pagination -->
+                <div class="flex justify-center mt-8">
+                    <nav class="flex space-x-2">
+                        <button class="px-3 py-2 text-gray-500 border border-gray-300 rounded-lg hover:bg-gray-50">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="px-3 py-2 bg-blue-600 text-white rounded-lg">1</button>
+                        <button
+                            class="px-3 py-2 text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50">2</button>
+                        <button
+                            class="px-3 py-2 text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50">3</button>
+                        <button class="px-3 py-2 text-gray-500 border border-gray-300 rounded-lg hover:bg-gray-50">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Right Sidebar -->
+            <div class="space-y-6">
+                <!-- Especialidades Chart -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Distribuição por Especialidade</h3>
+                    <div style="height: 250px;">
+                        <canvas id="specialtyChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800">Atividades Recentes</h3>
+                        <button class="text-blue-600 hover:text-blue-700 text-sm">Ver todas</button>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex items-center space-x-3">
+                            <div
+                                class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white text-sm">
+                                R
+                            </div>
+                            <div class="flex-1">
+                                <p class="text-sm text-gray-800">Ricardo Silva enviou uma proposta</p>
+                                <p class="text-xs text-gray-500">há 2 horas</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div
+                                class="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center text-white text-sm">
+                                J
+                            </div>
+                            <div class="flex-1">
+                                <p class="text-sm text-gray-800">Juliana Costa concluiu o projeto</p>
+                                <p class="text-xs text-gray-500">há 5 horas</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div
+                                class="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center text-white text-sm">
+                                C
+                            </div>
+                            <div class="flex-1">
+                                <p class="text-sm text-gray-800">Carlos Santos atualizou o perfil</p>
+                                <p class="text-xs text-gray-500">há 1 dia</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Ações Rápidas</h3>
+                    <div class="space-y-3">
+                        <button
+                            class="w-full flex items-center justify-center px-4 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                            <i class="fas fa-plus mr-2"></i>
+                            Novo Projeto
+                        </button>
+                        <button
+                            class="w-full flex items-center justify-center px-4 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
+                            <i class="fas fa-search mr-2"></i>
+                            Buscar Profissionais
+                        </button>
+                        <button
+                            class="w-full flex items-center justify-center px-4 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
+                            <i class="fas fa-file-alt mr-2"></i>
+                            Ver Relatórios
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Top Professionals -->
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-semibold text-gray-800">Top Profissionais</h3>
+                        <button class="text-blue-600 hover:text-blue-700 text-sm">Ver ranking</button>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <div
+                                    class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white text-sm">
+                                    R
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium text-gray-800">Ricardo Silva</p>
+                                    <div class="flex items-center">
+                                        <i class="fas fa-star rating-stars text-xs mr-1"></i>
+                                        <span class="text-xs text-gray-600">4.9</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="text-blue-600 hover:text-blue-700 text-sm">Ver Perfil</button>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <div
+                                    class="w-8 h-8 bg-red-600 rounded-full flex items-center justify-center text-white text-sm">
+                                    M
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium text-gray-800">Mariana Oliveira</p>
+                                    <div class="flex items-center">
+                                        <i class="fas fa-star rating-stars text-xs mr-1"></i>
+                                        <span class="text-xs text-gray-600">4.9</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="text-blue-600 hover:text-blue-700 text-sm">Ver Perfil</button>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <div
+                                    class="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center text-white text-sm">
+                                    J
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium text-gray-800">Juliana Costa</p>
+                                    <div class="flex items-center">
+                                        <i class="fas fa-star rating-stars text-xs mr-1"></i>
+                                        <span class="text-xs text-gray-600">4.8</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="text-blue-600 hover:text-blue-700 text-sm">Ver Perfil</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <script src="{% static 'projects/js/profissionais.js' %}"></script>
+
+
+</body>
+
+</html>

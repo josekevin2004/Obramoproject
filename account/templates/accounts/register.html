@@ -81,52 +81,20 @@
                     <h2>Informações Básicas</h2>
                     <p>Conte-nos um pouco sobre você</p>
                 </div>
-
+                <!-- se der errado colocar aq em baixo -->
                 <div class="card">
-                    <div class="grid-2 gap-24">
-                        <div class="form-group">
-                            <label>Nome Completo *</label>
-                            <input id="nameInput" type="text" class="input" placeholder="Seu nome completo">
+                    <form action="{% url 'register' %}" method="post">
+                        {% include 'partials/_form-fields.html' %}
+                        {% if message in messages %}
+                        <div class="alert alert-{{message.tag}}">
+                            {{ message }}
                         </div>
-                        <div class="form-group">
-                            <label>Email *</label>
-                            <input id="emailInput" type="email" class="input" placeholder="seu@email.com">
+                        {% endif %}
+                        <div class="col-12 text-center pt-3">
+                            <button class="btn btn-success col-12" type="submit">Cadastrar</button>
                         </div>
-                        <div class="form-group">
-                            <label>Telefone</label>
-                            <input type="tel" class="input" placeholder="(11) 99999-9999">
-                        </div>
-                        <div class="form-group">
-                            <label>Localização</label>
-                            <select class="select">
-                                <option>Selecione sua cidade</option>
-                                <option>São Paulo, SP</option>
-                                <option>Rio de Janeiro, RJ</option>
-                                <option>Belo Horizonte, MG</option>
-                                <option>Brasília, DF</option>
-                                <option>Salvador, BA</option>
-                                <option>Outro</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Senha *</label>
-                            <input type="password" class="input" placeholder="Digite sua senha">
-                        </div>
-                        <!-- Confirmar senha -->
-                        <div class="form-group">
-                            <label>Confirmar Senha *</label>
-                            <input type="password" class="input" placeholder="Confirme sua senha">
-                        </div>
-                    </div>
-
-                    <div class="form-group mt-20">
-                        <label>Foto de Perfil</label>
-                        <div class="avatar-row">
-                            <div class="avatar"><i class="fas fa-user"></i></div>
-                            <button class="btn btn-primary"><i class="fas fa-upload"></i> Carregar Foto</button>
-                        </div>
-                    </div>
                 </div>
+                </form>
             </div>
 
             <!-- ETAPA 3: Profissional / Cliente -->
@@ -282,7 +250,7 @@
                 <div class="center">
                     <div class="success-circle"><i class="fas fa-check"></i></div>
                     <h2 class="mb-10">Parabéns!</h2>
-                    <p class="muted mb-24">Sua conta foi criada com sucesso. Agora você pode começar a usar o TechConnect.</p>
+                    <p class="muted mb-24">Sua conta foi criada com sucesso. Agora você pode começar a usar o Obramo.</p>
 
                     <div class="card mb-24">
                         <h3 class="mb-16">Próximos Passos</h3>
@@ -306,7 +274,7 @@
                     </div>
 
                     <div class="actions">
-                        <button class="btn btn-primary">Ir para Dashboard</button>
+                        <!-- <button class="btn btn-primary">Ir para Dashboard</button> -->
                         <button class="btn btn-outline">Explorar Plataforma</button>
                     </div>
                 </div>

@@ -1,0 +1,46 @@
+.sidebar-item:hover {
+    background-color: #EBF4FF;
+    border-radius: 8px;
+}
+
+.sidebar-item.active {
+    background-color: #3B82F6;
+    color: white;
+    border-radius: 8px;
+}
+
+.message-bubble {
+    max-width: 70%;
+}
+
+.message-sent {
+    background-color: #3B82F6;
+    color: white;
+    border-radius: 18px 18px 4px 18px;
+}
+
+.message-received {
+    background-color: #F3F4F6;
+    color: #374151;
+    border-radius: 18px 18px 18px 4px;
+}
+
+.conversation-item:hover {
+    background-color: #F9FAFB;
+}
+
+.conversation-item.active {
+    background-color: #EBF4FF;
+    border-left: 4px solid #3B82F6;
+}
+
+.online-indicator {
+    width: 12px;
+    height: 12px;
+    background-color: #10B981;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    border: 2px solid white;
+}
