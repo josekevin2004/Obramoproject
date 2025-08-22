@@ -7,6 +7,7 @@
     <title>Obramo - Bem-vindo à Plataforma</title>
 
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    
     <!-- Ícones e Fonte -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -90,6 +91,19 @@
                             {{ message }}
                         </div>
                         {% endif %}
+                        <div class="form-group">
+                            <label>Localização</label>
+                            <select class="select">
+                                <option>Selecione sua cidade</option>
+                                <option>São Paulo, SP</option>
+                                <option>Rio de Janeiro, RJ</option>
+                                <option>Belo Horizonte, MG</option>
+                                <option>Brasília, DF</option>
+                                <option>Salvador, BA</option>
+                                <option>Outro</option>
+                            </select>
+                        </div>
+
                         <div class="col-12 text-center pt-3">
                             <button class="btn btn-success col-12" type="submit">Cadastrar</button>
                         </div>

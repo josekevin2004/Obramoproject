@@ -79,7 +79,7 @@ def register(request):
         'accounts/register.html',
         {'form': form, 'mensagens': messages.get_messages(request)}
     )
-def redefinir_senha(request):
+def recover_password(request):
     return render(request, 'recover_password.html')    
 
 def logout(request):
