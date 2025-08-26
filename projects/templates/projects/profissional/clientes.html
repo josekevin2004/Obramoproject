@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Obramo - Clientes</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .card-shadow {
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+        }
+        .hover-lift:hover {
+            transform: translateY(-2px);
+            transition: transform 0.2s ease-in-out;
+        }
+        .progress-bar {
+            background: linear-gradient(90deg, #3b82f6 0%, #10b981 100%);
+        }
+        .client-card:hover {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+        }
+        .status-badge {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 9999px;
+            font-weight: 500;
+        }
+        .filter-btn.active {
+            background-color: #3b82f6;
+            color: white;
+        }
+        .search-input {
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            padding: 0.75rem 1rem;
+            font-size: 0.875rem;
+        }
+        .search-input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+    <header class="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
+    <div class="px-6 py-4">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-4">
+                <div class="text-2xl font-bold text-blue-600">Obramo</div>
+
+            </div>
+            <a href="{% url 'mensagens' %}" class="block">
+            <div class="flex items-center space-x-6">
+                <div class="relative">
+                    <i class="fas fa-bell text-gray-500 text-lg"></i>
+                    <span
+                        class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">3</span>
+                </div>
+                </a>
+                <a href="{% url 'perfil' %}" class="block">
+                <div class="flex items-center space-x-3">
+                    <div
+                        class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white font-semibold">
+                        A
+                    </div>
+                    <div class="text-sm">
+                        <div class="font-medium text-gray-900">Ricardo</div>
+                        <div class="text-gray-500">Profissional</div>
+                    </div>
+                </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="flex">
+    <!-- Sidebar -->
+    <aside class="w-64 bg-white shadow-sm min-h-screen">
+        <nav class="p-6">
+            <ul class="space-y-2">
+                <li>
+                    <a href="{% url 'dashboard' %}" class="flex items-center space-x-3 px-4 py-3 rounded-lg
+                   {% if request.resolver_match.url_name == 'dashboard' %}
+                        
+                   {% else %}
+                        text-gray-700 hover:bg-gray-50
+                   {% endif %}">
+                        <i class="fas fa-home"></i>
+                        <span class="font-medium">Inicio</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{% url 'meusprojetos' %}" class="flex items-center space-x-3 px-4 py-3 rounded-lg
+                   {% if request.resolver_match.url_name == 'meusprojetos' %}
+                        text-blue-600 bg-blue-50
+                   {% else %}
+                        text-gray-700 hover:bg-gray-50
+                   {% endif %}">
+                        <i class="fas fa-project-diagram"></i>
+                        <span>Meus Projetos</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{% url 'perfil' %}" class="flex items-center space-x-3 px-4 py-3 rounded-lg
+                   {% if request.resolver_match.url_name == 'perfil' %}
+                        text-blue-600 bg-blue-50
+                   {% else %}
+                        text-gray-700 hover:bg-gray-50
+                   {% endif %}">
+                        <i class="fas fa-search mr-3"></i>
+                        <span>Procurar Projetos </span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{% url 'profissionais' %}" class="flex items-center space-x-3 px-4 py-3 rounded-lg
+                   {% if request.resolver_match.url_name == 'profissionais' %}
+                        text-blue-600 bg-blue-50
+                   {% else %}
+                        text-gray-700 hover:bg-gray-50
+                   {% endif %}">
+                        <i class="fas fa-users mr-3"></i>
+                        <span>Clientes</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{% url 'mensagens' %}" class="flex items-center space-x-3 px-4 py-3 rounded-lg
+                   {% if request.resolver_match.url_name == 'mensagens' %}
+                        text-blue-600 bg-blue-50
+                   {% else %}
+                        text-gray-700 hover:bg-gray-50
+                   {% endif %}">
+                        <i class="fas fa-comments"></i>
+                        <span>Mensagens</span>
+                        <span class="ml-auto bg-red-500 text-white text-xs rounded-full px-2 py-1">3</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{% url 'pagamento' %}" class="flex items-center space-x-3 px-4 py-3 rounded-lg
+                   {% if request.resolver_match.url_name == 'pagamento' %}
+                        text-blue-600 bg-blue-50
+                   {% else %}
+                        text-gray-700 hover:bg-gray-50
+                   {% endif %}">
+                        <i class="fas fa-credit-card"></i>
+                        <span>Pagamentos</span>
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="{% url 'perfil' %}" class="flex items-center space-x-3 px-4 py-3 rounded-lg
+                   {% if request.resolver_match.url_name == 'perfil' %}
+                        text-blue-600 bg-blue-50
+                   {% else %}
+                        text-gray-700 hover:bg-gray-50
+                   {% endif %}">
+                        <i class="fas fa-cog"></i>
+                        <span>Configurações</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+    
+
+        <div class="flex-1 p-8">
+            <!-- Header -->
+            <div class="mb-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-2">Meus Clientes</h2>
+                <p class="text-gray-600">Gerencie seus relacionamentos e histórico com clientes.</p>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <div class="bg-white p-6 rounded-lg card-shadow hover-lift">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-500 text-sm">Total de Clientes</p>
+                            <p class="text-2xl font-bold text-gray-800">24</p>
+                            <p class="text-green-500 text-sm">+3 este mês</p>
+                        </div>
+                        <div class="bg-blue-100 p-3 rounded-full">
+                            <i class="fas fa-users text-blue-500 text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg card-shadow hover-lift">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-500 text-sm">Clientes Ativos</p>
+                            <p class="text-2xl font-bold text-gray-800">18</p>
+                            <p class="text-blue-500 text-sm">75% do total</p>
+                        </div>
+                        <div class="bg-green-100 p-3 rounded-full">
+                            <i class="fas fa-user-check text-green-500 text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg card-shadow hover-lift">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-500 text-sm">Avaliação Média</p>
+                            <p class="text-2xl font-bold text-gray-800">4.8</p>
+                            <div class="flex">
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                            </div>
+                        </div>
+                        <div class="bg-yellow-100 p-3 rounded-full">
+                            <i class="fas fa-star text-yellow-500 text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg card-shadow hover-lift">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-500 text-sm">Projetos Concluídos</p>
+                            <p class="text-2xl font-bold text-gray-800">156</p>
+                            <p class="text-green-500 text-sm">+12 este mês</p>
+                        </div>
+                        <div class="bg-purple-100 p-3 rounded-full">
+                            <i class="fas fa-check-circle text-purple-500 text-xl"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Search and Filters -->
+            <div class="bg-white p-6 rounded-lg card-shadow mb-8">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                    <div class="flex-1">
+                        <div class="relative">
+                            <input type="text" placeholder="Pesquisar clientes..." class="search-input w-full pl-10">
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        <button class="filter-btn active px-4 py-2 rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors">Todos</button>
+                        <button class="filter-btn px-4 py-2 rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors">Ativos</button>
+                        <button class="filter-btn px-4 py-2 rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors">Inativos</button>
+                        <button class="filter-btn px-4 py-2 rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors">Novos</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Left Column - Cliente List -->
+                <div class="lg:col-span-2 space-y-6">
+                    <!-- Clientes Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Cliente Card 1 -->
+                        <div class="bg-white p-6 rounded-lg card-shadow client-card">
+                            <div class="flex items-start justify-between mb-4">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center text-white font-semibold text-lg">A</div>
+                                    <div>
+                                        <h3 class="font-semibold text-gray-800">Ana Ferreira</h3>
+                                        <p class="text-sm text-gray-600">E-commerce</p>
+                                        <div class="flex mt-1">
+                                            <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                            <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                            <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                            <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                            <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <span class="status-badge bg-green-100 text-green-800">Ativo</span>
+                            </div>
+                            <div class="space-y-2 mb-4">
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-gray-500">Projetos:</span>
+                                    <span class="font-medium">3 ativos</span>
+                                </div>
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-gray-500">Total gasto:</span>
+                                    <span class="font-medium text-green-600">R$ 18.400</span>
+                                </div>
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-gray-500">Último contato:</span>
+                                    <span class="font-medium">Hoje</span>
+                                </div>
+                            </div>
+                            <div class="flex space-x-2">
+                                <button class="flex-1 bg-blue-500 hover:bg-blue-600 text-white py-2 px-3 rounded-lg text-sm transition-colors">
+                                    <i class="fas fa-eye mr-1"></i>Ver Perfil
+                                </button>
+                                <button class="bg-gray-100 hover:bg-gray-200 text-gray-700 py-2 px-3 rounded-lg text-sm transition-colors">
+                                    <i class="fas fa-comment"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Cliente Card 2 -->
+                        <div class="bg-white p-6 rounded-lg card-shadow client-card">
+                            <div class="flex items-start justify-between mb-4">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center text-white font-semibold text-lg">M</div>
+                                    <div>
+                                        <h3 class="font-semibold text-gray-800">Marcos Silva</h3>
+                                        <p class="text-sm text-gray-600">Corporativo</p>
+                                        <div class="flex mt-1">
+                                            <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                            <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                            <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                            <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                            <i class="fas fa-star text-gray-300 text-xs"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <span class="status-badge bg-yellow-100 text-yellow-800">Pausado</span>
+                            </div>
+                            <div class="space-y-2 mb-4">
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-gray-500">Projetos:</span>
+                                    <span class="font-medium">1 pausado</span>
+                                </div>
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-gray-500">Total gasto:</span>
+                                    <span class="font-medium text-green-600">R$ 8.200</span>
+                                </div>
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-gray-500">Último contato:</span>
+                                    <span class="font-medium">Ontem</span>
+                                </div>
+                            </div>
+                            <div class="flex space-x-2">
+                                <button class="flex-1 bg-blue-500 hover:bg-blue-600 text-white py-2 px-3 rounded-lg text-sm transition-colors">
+                                    <i class="fas fa-eye mr-1"></i>Ver Perfil
+                                </button>
+                                <button class="bg-gray-100 hover:bg-gray-200 text-gray-700 py-2 px-3 rounded-lg text-sm transition-colors">
+                                    <i class="fas fa-comment"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Cliente Card 3 -->
+                        <div class="bg-white p-6 rounded-lg card-shadow client-card">
+                            <div class="flex items-start justify-between mb-4">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center text-white font-semibold text-lg">L</div>
+                                    <div>
+                                        <h3 class="font-semibold text-gray-800">Lucia Santos</h3>
+                                        <p class="text-sm text-gray-600">Startup</p>
+                                        <div class="flex mt-1">
+                                            <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                            <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                            <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                            <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                            <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <span class="status-badge bg-blue-100 text-blue-800">Novo</span>
+                            </div>
+                            <div class="space-y-2 mb-4">
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-gray-500">Projetos:</span>
+                                    <span class="font-medium">2 ativos</span>
+                                </div>
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-gray-500">Total gasto:</span>
+                                    <span class="font-medium text-green-600">R$ 12.600</span>
+                                </div>
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-gray-500">Último contato:</span>
+                                    <span class="font-medium">2 horas</span>
+                                </div>
+                            </div>
+                            <div class="flex space-x-2">
+                                <button class="flex-1 bg-blue-500 hover:bg-blue-600 text-white py-2 px-3 rounded-lg text-sm transition-colors">
+                                    <i class="fas fa-eye mr-1"></i>Ver Perfil
+                                </button>
+                                <button class="bg-gray-100 hover:bg-gray-200 text-gray-700 py-2 px-3 rounded-lg text-sm transition-colors">
+                                    <i class="fas fa-comment"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Cliente Card 4 -->
+                        <div class="bg-white p-6 rounded-lg card-shadow client-card">
+                            <div class="flex items-start justify-between mb-4">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-12 h-12 bg-indigo-500 rounded-full flex items-center justify-center text-white font-semibold text-lg">C</div>
+                                    <div>
+                                        <h3 class="font-semibold text-gray-800">Carlos Mendes</h3>
+                                        <p class="text-sm text-gray-600">Consultoria</p>
+                                        <div class="flex mt-1">
+                                            <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                            <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                            <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                            <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                            <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <span class="status-badge bg-green-100 text-green-800">Ativo</span>
+                            </div>
+                            <div class="space-y-2 mb-4">
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-gray-500">Projetos:</span>
+                                    <span class="font-medium">1 ativo</span>
+                                </div>
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-gray-500">Total gasto:</span>
+                                    <span class="font-medium text-green-600">R$ 5.400</span>
+                                </div>
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-gray-500">Último contato:</span>
+                                    <span class="font-medium">3 dias</span>
+                                </div>
+                            </div>
+                            <div class="flex space-x-2">
+                                <button class="flex-1 bg-blue-500 hover:bg-blue-600 text-white py-2 px-3 rounded-lg text-sm transition-colors">
+                                    <i class="fas fa-eye mr-1"></i>Ver Perfil
+                                </button>
+                                <button class="bg-gray-100 hover:bg-gray-200 text-gray-700 py-2 px-3 rounded-lg text-sm transition-colors">
+                                    <i class="fas fa-comment"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Cliente Card 5 -->
+                        <div class="bg-white p-6 rounded-lg card-shadow client-card">
+                            <div class="flex items-start justify-between mb-4">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-12 h-12 bg-pink-500 rounded-full flex items-center justify-center text-white font-semibold text-lg">R</div>
+                                    <div>
+                                        <h3 class="font-semibold text-gray-800">Roberta Lima</h3>
+                                        <p class="text-sm text-gray-600">Design</p>
+                                        <div class="flex mt-1">
+                                            <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                            <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                            <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                            <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                            <i class="fas fa-star text-gray-300 text-xs"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <span class="status-badge bg-gray-100 text-gray-800">Inativo</span>
+                            </div>
+                            <div class="space-y-2 mb-4">
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-gray-500">Projetos:</span>
+                                    <span class="font-medium">0 ativos</span>
+                                </div>
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-gray-500">Total gasto:</span>
+                                    <span class="font-medium text-green-600">R$ 3.200</span>
+                                </div>
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-gray-500">Último contato:</span>
+                                    <span class="font-medium">2 semanas</span>
+                                </div>
+                            </div>
+                            <div class="flex space-x-2">
+                                <button class="flex-1 bg-blue-500 hover:bg-blue-600 text-white py-2 px-3 rounded-lg text-sm transition-colors">
+                                    <i class="fas fa-eye mr-1"></i>Ver Perfil
+                                </button>
+                                <button class="bg-gray-100 hover:bg-gray-200 text-gray-700 py-2 px-3 rounded-lg text-sm transition-colors">
+                                    <i class="fas fa-comment"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Cliente Card 6 -->
+                        <div class="bg-white p-6 rounded-lg card-shadow client-card">
+                            <div class="flex items-start justify-between mb-4">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-12 h-12 bg-teal-500 rounded-full flex items-center justify-center text-white font-semibold text-lg">F</div>
+                                    <div>
+                                        <h3 class="font-semibold text-gray-800">Fernando Costa</h3>
+                                        <p class="text-sm text-gray-600">E-commerce</p>
+                                        <div class="flex mt-1">
+                                            <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                            <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                            <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                            <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                            <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <span class="status-badge bg-green-100 text-green-800">Ativo</span>
+                            </div>
+                            <div class="space-y-2 mb-4">
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-gray-500">Projetos:</span>
+                                    <span class="font-medium">2 ativos</span>
+                                </div>
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-gray-500">Total gasto:</span>
+                                    <span class="font-medium text-green-600">R$ 15.800</span>
+                                </div>
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-gray-500">Último contato:</span>
+                                    <span class="font-medium">1 dia</span>
+                                </div>
+                            </div>
+                            <div class="flex space-x-2">
+                                <button class="flex-1 bg-blue-500 hover:bg-blue-600 text-white py-2 px-3 rounded-lg text-sm transition-colors">
+                                    <i class="fas fa-eye mr-1"></i>Ver Perfil
+                                </button>
+                                <button class="bg-gray-100 hover:bg-gray-200 text-gray-700 py-2 px-3 rounded-lg text-sm transition-colors">
+                                    <i class="fas fa-comment"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="bg-white p-4 rounded-lg card-shadow">
+                        <div class="flex items-center justify-between">
+                            <div class="text-sm text-gray-500">
+                                Mostrando <span class="font-medium">6</span> de <span class="font-medium">24</span> clientes
+                            </div>
+                            <div class="flex space-x-2">
+                                <button class="px-3 py-2 border border-gray-300 rounded-lg text-sm text-gray-500 hover:bg-gray-50">Anterior</button>
+                                <button class="px-3 py-2 bg-blue-500 text-white rounded-lg text-sm">1</button>
+                                <button class="px-3 py-2 border border-gray-300 rounded-lg text-sm text-gray-700 hover:bg-gray-50">2</button>
+                                <button class="px-3 py-2 border border-gray-300 rounded-lg text-sm text-gray-700 hover:bg-gray-50">3</button>
+                                <button class="px-3 py-2 border border-gray-300 rounded-lg text-sm text-gray-700 hover:bg-gray-50">Próximo</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column -->
+                <div class="space-y-6">
+                    <!-- Atividade Recente -->
+                    <div class="bg-white p-6 rounded-lg card-shadow">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Atividade Recente</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-start space-x-3 p-3 hover:bg-gray-50 rounded-lg cursor-pointer">
+                                <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm">A</div>
+                                <div class="flex-1">
+                                    <p class="font-medium text-gray-800">Ana Ferreira</p>
+                                    <p class="text-sm text-gray-600">Enviou nova mensagem sobre o projeto</p>
+                                    <p class="text-xs text-gray-500">Hoje, 14:30</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-3 p-3 hover:bg-gray-50 rounded-lg cursor-pointer">
+                                <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white text-sm">L</div>
+                                <div class="flex-1">
+                                    <p class="font-medium text-gray-800">Lucia Santos</p>
+                                    <p class="text-sm text-gray-600">Aprovou proposta de projeto</p>
+                                    <p class="text-xs text-gray-500">Hoje, 10:15</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-3 p-3 hover:bg-gray-50 rounded-lg cursor-pointer">
+                                <div class="w-8 h-8 bg-indigo-500 rounded-full flex items-center justify-center text-white text-sm">C</div>
+                                <div class="flex-1">
+                                    <p class="font-medium text-gray-800">Carlos Mendes</p>
+                                    <p class="text-sm text-gray-600">Realizou pagamento de R$ 2.500</p>
+                                    <p class="text-xs text-gray-500">Ontem, 16:45</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Estatísticas de Clientes -->
+                    <div class="bg-white p-6 rounded-lg card-shadow">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Distribuição por Categoria</h3>
+                        <div style="width:100%;max-width:400px;height:250px;margin:auto;position:relative;">
+                            <canvas id="clientsChart" style="width:100%!important;height:100%!important;display:block;"></canvas>
+                        </div>         </div>
+
+                    <!-- Top Clientes -->
+                    <div class="bg-white p-6 rounded-lg card-shadow">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Melhores Clientes</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between p-3 border border-gray-200 rounded-lg">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm">A</div>
+                                    <div>
+                                        <p class="font-medium text-gray-800">Ana Ferreira</p>
+                                        <p class="text-sm text-gray-600">R$ 18.400 total</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="flex">
+                                        <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                        <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                        <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                        <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                        <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center justify-between p-3 border border-gray-200 rounded-lg">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-8 h-8 bg-teal-500 rounded-full flex items-center justify-center text-white text-sm">F</div>
+                                    <div>
+                                        <p class="font-medium text-gray-800">Fernando Costa</p>
+                                        <p class="text-sm text-gray-600">R$ 15.800 total</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="flex">
+                                        <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                        <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                        <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                        <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                        <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center justify-between p-3 border border-gray-200 rounded-lg">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white text-sm">L</div>
+                                    <div>
+                                        <p class="font-medium text-gray-800">Lucia Santos</p>
+                                        <p class="text-sm text-gray-600">R$ 12.600 total</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="flex">
+                                        <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                        <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                        <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                        <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                        <i class="fas fa-star text-yellow-400 text-xs"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ações Rápidas -->
+                    <div class="bg-white p-6 rounded-lg card-shadow">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Ações Rápidas</h3>
+                        <div class="space-y-3">
+                            <button class="w-full bg-blue-500 hover:bg-blue-600 text-white px-4 py-3 rounded-lg flex items-center justify-center transition-colors">
+                                <i class="fas fa-user-plus mr-2"></i>
+                                Adicionar Cliente
+                            </button>
+                            <button class="w-full bg-green-500 hover:bg-green-600 text-white px-4 py-3 rounded-lg flex items-center justify-center transition-colors">
+                                <i class="fas fa-envelope mr-2"></i>
+                                Enviar Newsletter
+                            </button>
+                            <button class="w-full bg-purple-500 hover:bg-purple-600 text-white px-4 py-3 rounded-lg flex items-center justify-center transition-colors">
+                                <i class="fas fa-chart-bar mr-2"></i>
+                                Relatório Completo
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="mt-12 text-center">
+                <p class="text-gray-500 text-sm">
+                    <i class="fas fa-headset mr-1"></i> Suporte
+                </p>
+                <p class="text-gray-400 text-xs mt-2">Feito com Genspark</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Chart configuration for clients distribution
+        const ctx = document.getElementById('clientsChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['E-commerce', 'Corporativo', 'Startup', 'Design', 'Consultoria'],
+                datasets: [{
+                    data: [8, 6, 4, 3, 3],
+                    backgroundColor: [
+                        '#3b82f6',
+                        '#8b5cf6',
+                        '#10b981',
+                        '#f59e0b',
+                        '#ef4444'
+                    ],
+                    borderWidth: 2,
+                    borderColor: '#ffffff'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            padding: 15,
+                            usePointStyle: true,
+                            font: {
+                                size: 12
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Filter functionality
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.filter-btn').forEach(b => {
+                    b.classList.remove('active');
+                    b.classList.add('bg-gray-100', 'text-gray-700');
+                    b.classList.remove('bg-blue-500', 'text-white');
+                });
+                this.classList.add('active');
+                this.classList.remove('bg-gray-100', 'text-gray-700');
+                this.classList.add('bg-blue-500', 'text-white');
+            });
+        });
+
+        // Search functionality
+        document.querySelector('.search-input').addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const clientCards = document.querySelectorAll('.client-card');
+            
+            clientCards.forEach(card => {
+                const clientName = card.querySelector('h3').textContent.toLowerCase();
+                if (clientName.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

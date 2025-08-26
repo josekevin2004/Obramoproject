@@ -10,7 +10,7 @@
     <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap"
         rel="stylesheet" />
-    <link rel="stylesheet" href="{% static 'projects/css/inicio.css' %}">
+    <link rel="stylesheet" href="{% static 'css/inicio.css' %}">
 
 
 
@@ -23,12 +23,11 @@
             <div class="flex justify-between items-center">
                 <div class="flex items-center">
                     <div class="text-2xl font-bold text-blue-600">
-                        <a href="{% url 'inicio' %}">Obramo</a>
-                        
+                        Obramo
                     </div>
                 </div>
                 <nav class="hidden md:flex space-x-6">
-                    <a class="font-medium text-gray-700 hover:text-blue-600" href="#home">
+                    <a class="font-medium text-gray-700 hover:text-blue-600 nav-active" href="#home">
                         Início
                     </a>
                     <a class="font-medium text-gray-700 hover:text-blue-600" href="#search">
@@ -40,15 +39,15 @@
                     <a class="font-medium text-gray-700 hover:text-blue-600" href="#">
                         Profissionais
                     </a>
-                    <a class="font-medium text-gray-700 hover:text-blue-600" href="#contact">
+                    <a class="font-medium text-gray-700 hover:text-blue-600" href="#">
                         Contato
                     </a>
                 </nav>
                 <div class="flex items-center space-x-4">
-                    <a class="font-medium text-gray-700 hover:text-blue-600" href="{% url 'login' %}">
+                    <a class="font-medium text-gray-700 hover:text-blue-600" href="#login">
                         Entrar
                     </a>
-                    <a class="bg-blue-600 text-white px-4 py-2 rounded-md font-medium hover:bg-blue-700" href="{% url 'register' %}">
+                    <a class="bg-blue-600 text-white px-4 py-2 rounded-md font-medium hover:bg-blue-700" href="#signup">
                         Cadastrar
                     </a>
                 </div>
@@ -1884,162 +1883,159 @@
         </div>
     </section>
     <!-- Footer -->
-    <section id="contact">
-        <footer class="bg-gray-800 text-white py-12">
-            <div class="container mx-auto px-4">
-                <div class="grid md:grid-cols-4 gap-8">
-                    <div>
-                        <h3 class="text-xl font-bold mb-4">
-                            Obramo
-                        </h3>
-                        <p class="text-gray-400 mb-4">
-                            Conectando clientes a profissionais de TI de forma simples, segura e eficiente.
-                        </p>
-                        <div class="flex space-x-4">
-                            <a class="text-gray-400 hover:text-white" href="#">
-                                <i class="fab fa-facebook-f">
-                                </i>
-                            </a>
-                            <a class="text-gray-400 hover:text-white" href="#">
-                                <i class="fab fa-twitter">
-                                </i>
-                            </a>
-                            <a class="text-gray-400 hover:text-white" href="#">
-                                <i class="fab fa-instagram">
-                                </i>
-                            </a>
-                            <a class="text-gray-400 hover:text-white" href="#">
-                                <i class="fab fa-linkedin-in">
-                                </i>
-                            </a>
-                        </div>
-                    </div>
-                    <div>
-                        <h4 class="font-semibold mb-4">
-                            Para Clientes
-                        </h4>
-                        <ul class="space-y-2">
-                            <li>
-                                <a class="text-gray-400 hover:text-white" href="#">
-                                    Como Funciona
-                                </a>
-                            </li>
-                            <li>
-                                <a class="text-gray-400 hover:text-white" href="#">
-                                    Buscar Profissionais
-                                </a>
-                            </li>
-                            <li>
-                                <a class="text-gray-400 hover:text-white" href="#">
-                                    Contratar
-                                </a>
-                            </li>
-                            <li>
-                                <a class="text-gray-400 hover:text-white" href="#">
-                                    Pagamentos
-                                </a>
-                            </li>
-                            <li>
-                                <a class="text-gray-400 hover:text-white" href="#">
-                                    Avaliações
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 class="font-semibold mb-4">
-                            Para Profissionais
-                        </h4>
-                        <ul class="space-y-2">
-                            <li>
-                                <a class="text-gray-400 hover:text-white" href="#how-it-works">
-                                    Como Funciona
-                                </a>
-                            </li>
-                            <li>
-                                <a class="text-gray-400 hover:text-white" href="#">
-                                    Encontrar Projetos
-                                </a>
-                            </li>
-                            <li>
-                                <a class="text-gray-400 hover:text-white" href="#">
-                                    Receber Pagamentos
-                                </a>
-                            </li>
-                            <li>
-                                <a class="text-gray-400 hover:text-white" href="{% url 'register'  %}">
-                                    Criar Perfil
-                                </a>
-                            </li>
-                            <li>
-                                <a class="text-gray-400 hover:text-white" href="#">
-                                    Comunidade
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h4 class="font-semibold mb-4">
-                            Sobre
-                        </h4>
-                        <ul class="space-y-2">
-                            <li>
-                                <a class="text-gray-400 hover:text-white" href="#">
-                                    Sobre Nós
-                                </a>
-                            </li>
-                            <li>
-                                <a class="text-gray-400 hover:text-white" href="#">
-                                    Careers
-                                </a>
-                            </li>
-                            <li>
-                                <a class="text-gray-400 hover:text-white" href="#">
-                                    Blog
-                                </a>
-                            </li>
-                            <li>
-                                <a class="text-gray-400 hover:text-white" href="#">
-                                    Termos de Serviço
-                                </a>
-                            </li>
-                            <li>
-                                <a class="text-gray-400 hover:text-white" href="#">
-                                    Política de Privacidade
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="border-t border-gray-700 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
-                    <p class="text-gray-400">
-                        © 2025 Obramo Todos os direitos reservados.
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">
+                        Ob
+                    </h3>
+                    <p class="text-gray-400 mb-4">
+                        Conectando clientes a profissionais de TI de forma simples, segura e eficiente.
                     </p>
-                    <div class="flex space-x-4 mt-4 md:mt-0">
-
-                        <a href="#">
-                            <div class="flex items-center justify-center gap-2 bg-black text-white p-2 rounded-md w-40">
-                                <img src="{% static 'projects/img/apple.png' %}" width="27.9px" alt="Ícone da App store " />
-                                <p>App Store</p>
-                            </div>
+                    <div class="flex space-x-4">
+                        <a class="text-gray-400 hover:text-white" href="#">
+                            <i class="fab fa-facebook-f">
+                            </i>
                         </a>
-
-                        <a href="#">
-                            <div class="flex items-center justify-center gap-2 bg-white text-gray-800 p-2 rounded-md w-40">
-                                <img src="{% static 'projects/img/imagem1.png' %}" width="25px" alt="Ícone da Play Store" />
-                                <p>Google Play</p>
-                            </div>
+                        <a class="text-gray-400 hover:text-white" href="#">
+                            <i class="fab fa-twitter">
+                            </i>
                         </a>
-
+                        <a class="text-gray-400 hover:text-white" href="#">
+                            <i class="fab fa-instagram">
+                            </i>
+                        </a>
+                        <a class="text-gray-400 hover:text-white" href="#">
+                            <i class="fab fa-linkedin-in">
+                            </i>
+                        </a>
                     </div>
-                    </a>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">
+                        Para Clientes
+                    </h4>
+                    <ul class="space-y-2">
+                        <li>
+                            <a class="text-gray-400 hover:text-white" href="#">
+                                Como Funciona
+                            </a>
+                        </li>
+                        <li>
+                            <a class="text-gray-400 hover:text-white" href="#">
+                                Buscar Profissionais
+                            </a>
+                        </li>
+                        <li>
+                            <a class="text-gray-400 hover:text-white" href="#">
+                                Contratar
+                            </a>
+                        </li>
+                        <li>
+                            <a class="text-gray-400 hover:text-white" href="#">
+                                Pagamentos
+                            </a>
+                        </li>
+                        <li>
+                            <a class="text-gray-400 hover:text-white" href="#">
+                                Avaliações
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">
+                        Para Profissionais
+                    </h4>
+                    <ul class="space-y-2">
+                        <li>
+                            <a class="text-gray-400 hover:text-white" href="#">
+                                Como Funciona
+                            </a>
+                        </li>
+                        <li>
+                            <a class="text-gray-400 hover:text-white" href="#">
+                                Encontrar Projetos
+                            </a>
+                        </li>
+                        <li>
+                            <a class="text-gray-400 hover:text-white" href="#">
+                                Receber Pagamentos
+                            </a>
+                        </li>
+                        <li>
+                            <a class="text-gray-400 hover:text-white" href="#">
+                                Criar Perfil
+                            </a>
+                        </li>
+                        <li>
+                            <a class="text-gray-400 hover:text-white" href="#">
+                                Comunidade
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">
+                        Sobre
+                    </h4>
+                    <ul class="space-y-2">
+                        <li>
+                            <a class="text-gray-400 hover:text-white" href="#">
+                                Sobre Nós
+                            </a>
+                        </li>
+                        <li>
+                            <a class="text-gray-400 hover:text-white" href="#">
+                                Careers
+                            </a>
+                        </li>
+                        <li>
+                            <a class="text-gray-400 hover:text-white" href="#">
+                                Blog
+                            </a>
+                        </li>
+                        <li>
+                            <a class="text-gray-400 hover:text-white" href="#">
+                                Termos de Serviço
+                            </a>
+                        </li>
+                        <li>
+                            <a class="text-gray-400 hover:text-white" href="#">
+                                Política de Privacidade
+                            </a>
+                        </li>
+                    </ul>
                 </div>
             </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400">
+                    © 2025 Obramo Todos os direitos reservados.
+                </p>
+                <div class="flex space-x-4 mt-4 md:mt-0">
+
+                    <a href="#">
+                        <div class="flex items-center justify-center gap-2 bg-black text-white p-2 rounded-md w-40">
+                            <img src="{% static 'css/img/apple.png' %}" width="27.9px" alt="Ícone da App store " />
+                            <p>App Store</p>
+                        </div>
+                    </a>
+
+                    <a href="#">
+                        <div class="flex items-center justify-center gap-2 bg-white text-gray-800 p-2 rounded-md w-40">
+                            <img src="{% static 'css/img/imagem1.png' %}" width="25px" alt="Ícone da Play Store" />
+                            <p>Google Play</p>
+                        </div>
+                    </a>
+
+                </div>
+                </a>
             </div>
-        </footer>
-    </section>
-    <script src="{% static 'projects/js/inicio.js' %}"></script>
-    <script src="{% static 'projects/js/nav-bar.js' %}"></script>
+        </div>
+        </div>
+    </footer>
+    <script src="{% static 'css/js/inicio.js' %}"></script>
 
 </body>
 

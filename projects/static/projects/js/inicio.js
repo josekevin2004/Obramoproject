@@ -1,5 +1,6 @@
-document.addEventListener('DOMContentLoaded', function () {
 
+document.addEventListener('DOMContentLoaded', function () {
+    // Dashboard Tabs
     const tabs = document.querySelectorAll('.dashboard-tab');
     tabs.forEach(tab => {
         tab.addEventListener('click', function () {
@@ -8,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-
+    // Star Rating
     const stars = document.querySelectorAll('.fa-star.cursor-pointer');
     stars.forEach((star, index) => {
         star.addEventListener('click', function () {

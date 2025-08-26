@@ -17,12 +17,31 @@
 </head>
 
 <body class="bg-gray-50">
+        <script>
+            window.userName = "{{ request.user.first_name|default:request.user.username }}";
+            window.userGender = "{{ request.user.genero|default:'M' }}";
+        </script>
     {% include 'partials/nav.html' %}
 
     <main class="flex-1 p-6">
 
         <div class="mb-8">
-            <h1 class="text-3xl font-bold text-gray-900 mb-2">Bem-vinda, Ana!</h1>
+            <h1 id="welcome-user" class="text-3xl font-bold text-gray-900 mb-2"></h1>
+        <script>
+            function showWelcome() {
+                if (window.userName) {
+                    let welcome = 'Bem-vindo';
+                    if (window.userGender && window.userGender.toUpperCase() === 'F') {
+                        welcome = 'Bem-vinda';
+                    }
+                    const welcomeEl = document.getElementById('welcome-user');
+                    if (welcomeEl) {
+                        welcomeEl.textContent = `${welcome}, ${window.userName}!`;
+                    }
+                }
+            }
+            document.addEventListener('DOMContentLoaded', showWelcome);
+        </script>
             <p class="text-gray-600">Aqui está o resumo dos seus projetos e atividades recentes.</p>
         </div>
 

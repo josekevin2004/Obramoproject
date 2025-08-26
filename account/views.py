@@ -3,6 +3,8 @@ from account.forms import LoginForm, RegisterForm
 from django.contrib.auth.models import User
 from django.contrib import auth
 from django.contrib import messages
+from django.contrib.auth import logout as auth_logout
+from django.shortcuts import redirect
 
 # Create your views here.
 def login(request):
@@ -79,8 +81,18 @@ def register(request):
         'accounts/register.html',
         {'form': form, 'mensagens': messages.get_messages(request)}
     )
+from django.contrib import messages
+
 def recover_password(request):
-    return render(request, 'recover_password.html')    
+    if request.method == 'POST':
+        email = request.POST.get('email', '').strip()
+        if email:
+            # Aqui você pode implementar o envio de e-mail real
+            messages.success(request, 'Se o e-mail estiver cadastrado, você receberá instruções para redefinir a senha.')
+        else:
+            messages.error(request, 'Informe um e-mail válido.')
+    return render(request, 'accounts/recover_password.html')
 
 def logout(request):
-    return render(request, 'logout.html')
+    auth_logout(request)
+    return redirect('inicio')

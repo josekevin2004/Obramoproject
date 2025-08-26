@@ -411,3 +411,52 @@
             font-size: 1.5rem;
             font-weight: 700;
         }
+
+
+
+
+   /* Header principal */
+.header {
+  background-color: #ffffff;
+  padding: 1rem 2rem;
+  /* border-bottom: 1px solid #e5e7eb;  <-- REMOVIDO */
+}
+
+/* Container interno */
+.header__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Logo */
+.logo a {
+  font-size: 1.5rem;       /* equivalente ao text-2xl */
+  font-weight: bold;
+  color: #2563eb;          /* equivalente ao text-blue-600 */
+  text-decoration: none;   /* garante que não fique com sublinhado */
+}
+
+.logo a:hover {
+  color: #1d4ed8;          /* azul mais escuro no hover */
+}
+
+/* Parte direita do header */
+.header-right {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  font-size: 0.95rem;
+  color: #374151;          /* gray-700 */
+}
+
+/* Link de suporte */
+.header-right a {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.header-right a:hover {
+  text-decoration: none;
+}

@@ -40,6 +40,31 @@ body {
     max-width: 380px;
 }
 
+.form-control {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 1px solid #d1d5db;       /* cinza claro */
+  border-radius: 8px;              /* cantos arredondados */
+  font-size: 0.95rem;
+  color: #111827;                  /* cinza escuro para o texto */
+  background: #fff;
+  outline: none;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.form-control::placeholder {
+  color: #9ca3af;                  /* cinza claro para placeholder */
+}
+
+.form-control:focus {
+  border-color: #2563eb;           /* azul */
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2); /* sombra azul suave */
+}
+
+/* .subtitle{margin:0 0 10px; font-size:16px; font-weight:600; color:var(--gray-800)}  */
+
+
 h1 {
     font-size: 1.8rem;
     margin-bottom: 0.3rem;
