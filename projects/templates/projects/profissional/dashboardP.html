@@ -1,4 +1,4 @@
-
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -15,6 +15,7 @@
 
 
 </head>
+
 
 <body class="bg-gray-50">
     <header class="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
@@ -55,7 +56,7 @@
         <nav class="p-6">
             <ul class="space-y-2">
                 <li>
-                    <a href="{% url 'dashboard' %}" class="flex items-center space-x-3 px-4 py-3 rounded-lg
+                    <a href="{% url 'dashboardP' %}" class="flex items-center space-x-3 px-4 py-3 rounded-lg
                    {% if request.resolver_match.url_name == 'dashboard' %}
                         text-blue-600 bg-blue-50
                    {% else %}
@@ -67,7 +68,7 @@
                 </li>
 
                 <li>
-                    <a href="{% url 'meusprojetos' %}" class="flex items-center space-x-3 px-4 py-3 rounded-lg
+                    <a href="{% url 'meusprojetosP' %}" class="flex items-center space-x-3 px-4 py-3 rounded-lg
                    {% if request.resolver_match.url_name == 'meusprojetos' %}
                         text-blue-600 bg-blue-50
                    {% else %}
@@ -79,7 +80,7 @@
                 </li>
 
                 <li>
-                    <a href="{% url 'perfil' %}" class="flex items-center space-x-3 px-4 py-3 rounded-lg
+                    <a href="{% url 'perfilP' %}" class="flex items-center space-x-3 px-4 py-3 rounded-lg
                    {% if request.resolver_match.url_name == 'perfil' %}
                         text-blue-600 bg-blue-50
                    {% else %}
@@ -91,7 +92,7 @@
                 </li>
 
                 <li>
-                    <a href="{% url 'profissionais' %}" class="flex items-center space-x-3 px-4 py-3 rounded-lg
+                    <a href="{% url 'profissionaisP' %}" class="flex items-center space-x-3 px-4 py-3 rounded-lg
                    {% if request.resolver_match.url_name == 'profissionais' %}
                         text-blue-600 bg-blue-50
                    {% else %}
@@ -103,7 +104,7 @@
                 </li>
 
                 <li>
-                    <a href="{% url 'mensagens' %}" class="flex items-center space-x-3 px-4 py-3 rounded-lg
+                    <a href="{% url 'mensagensP' %}" class="flex items-center space-x-3 px-4 py-3 rounded-lg
                    {% if request.resolver_match.url_name == 'mensagens' %}
                         text-blue-600 bg-blue-50
                    {% else %}
@@ -116,7 +117,7 @@
                 </li>
 
                 <li>
-                    <a href="{% url 'pagamento' %}" class="flex items-center space-x-3 px-4 py-3 rounded-lg
+                    <a href="{% url 'pagamentoP' %}" class="flex items-center space-x-3 px-4 py-3 rounded-lg
                    {% if request.resolver_match.url_name == 'pagamento' %}
                         text-blue-600 bg-blue-50
                    {% else %}
@@ -129,7 +130,7 @@
 
 
                 <li>
-                    <a href="{% url 'perfil' %}" class="flex items-center space-x-3 px-4 py-3 rounded-lg
+                    <a href="{% url 'perfilP' %}" class="flex items-center space-x-3 px-4 py-3 rounded-lg
                    {% if request.resolver_match.url_name == 'perfil' %}
                         text-blue-600 bg-blue-50
                    {% else %}
@@ -312,7 +313,9 @@
                     <!-- Ganhos por Categoria -->
                     <div class="bg-white p-6 rounded-lg card-shadow">
                         <h3 class="text-lg font-semibold text-gray-800 mb-4">Ganhos por Categoria</h3>
-                        <canvas id="earningsChart" style="height: 300px;"></canvas>
+                        <div class="w-full" style="height:300px;">
+                            <canvas id="earningsChart" class="w-full h-full"></canvas>
+                        </div>
                     </div>
                 </div>
 

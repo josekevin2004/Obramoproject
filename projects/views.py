@@ -23,6 +23,30 @@ def perfil(request):
 
 def meusprojetos(request):
 	return render(request, 'projects/cliente/meusprojetos.html')
+
+def inicioP(request):
+	return render(request, 'projects/profissional/inicioP.html')
+
+def clientesP(request):
+    return render(request, 'projects/profissional/clientesP.html')
+
+def dashboardP(request):
+    return render(request, 'projects/profissional/dashboardP.html')
+
+def mensagensP(request):
+    return render(request, 'projects/profissional/mensagensP.html')
+
+def meusprojetosP(request):
+    return render(request, 'projects/profissional/meusprojetosP.html')
+
+def pagamentoP(request):
+    return render(request, 'projects/profissional/pagamentoP.html')
+
+def perfilP(request):
+    return render(request, 'projects/profissional/perfilP.html')
+
+def procurarprojetosP(request):
+    return render(request, 'projects/profissional/procurarprojetosP.html')
 	
 
 
