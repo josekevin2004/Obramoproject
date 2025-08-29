@@ -1,5 +1,7 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,691 +14,618 @@
         body {
             font-family: 'Inter', sans-serif;
         }
+
         .card-shadow {
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
         }
+
         .hover-lift {
             transition: transform 0.2s, box-shadow 0.2s;
         }
+
         .hover-lift:hover {
             transform: translateY(-2px);
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
         }
+
         .progress-bar {
             background: linear-gradient(90deg, #3b82f6 0%, #1d4ed8 100%);
         }
+
         .progress-bar-yellow {
             background: linear-gradient(90deg, #f59e0b 0%, #d97706 100%);
         }
+
         .progress-bar-green {
             background: linear-gradient(90deg, #10b981 0%, #059669 100%);
         }
     </style>
 </head>
 
-<body class="bg-gray-50">
-    <header class="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
-    <div class="px-6 py-4">
+{% include 'partials/_navP.html' %}
+
+
+<div class="flex-1 p-8">
+    <!-- Header -->
+    <div class="mb-8">
         <div class="flex items-center justify-between">
+            <div>
+                <h2 class="text-3xl font-bold text-gray-800 mb-2">Meus Projetos</h2>
+                <p class="text-gray-600">Gerencie e acompanhe todos os seus projetos em andamento</p>
+            </div>
+            <div class="flex space-x-3">
+                <button
+                    class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center transition-colors">
+                    <i class="fas fa-plus mr-2"></i>
+                    Novo Projeto
+                </button>
+                <button
+                    class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg flex items-center transition-colors">
+                    <i class="fas fa-search mr-2"></i>
+                    Procurar Projetos
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
+        <div class="bg-white p-6 rounded-lg card-shadow hover-lift">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-gray-500 text-sm">Total de Projetos</p>
+                    <p class="text-2xl font-bold text-gray-800">12</p>
+                    <p class="text-blue-500 text-sm">+3 este mês</p>
+                </div>
+                <div class="bg-blue-100 p-3 rounded-full">
+                    <i class="fas fa-project-diagram text-blue-500 text-xl"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg card-shadow hover-lift">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-gray-500 text-sm">Em Andamento</p>
+                    <p class="text-2xl font-bold text-gray-800">5</p>
+                    <p class="text-green-500 text-sm">Ativos</p>
+                </div>
+                <div class="bg-green-100 p-3 rounded-full">
+                    <i class="fas fa-play text-green-500 text-xl"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg card-shadow hover-lift">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-gray-500 text-sm">Concluídos</p>
+                    <p class="text-2xl font-bold text-gray-800">6</p>
+                    <p class="text-blue-500 text-sm">Este mês: 2</p>
+                </div>
+                <div class="bg-purple-100 p-3 rounded-full">
+                    <i class="fas fa-check text-purple-500 text-xl"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg card-shadow hover-lift">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-gray-500 text-sm">Aguardando</p>
+                    <p class="text-2xl font-bold text-gray-800">1</p>
+                    <p class="text-yellow-500 text-sm">Aprovação</p>
+                </div>
+                <div class="bg-yellow-100 p-3 rounded-full">
+                    <i class="fas fa-clock text-yellow-500 text-xl"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg card-shadow hover-lift">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-gray-500 text-sm">Valor Total</p>
+                    <p class="text-2xl font-bold text-gray-800">R$ 42.8K</p>
+                    <p class="text-green-500 text-sm">+15% este mês</p>
+                </div>
+                <div class="bg-green-100 p-3 rounded-full">
+                    <i class="fas fa-dollar-sign text-green-500 text-xl"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filters and Search -->
+    <div class="bg-white p-6 rounded-lg card-shadow mb-8">
+        <div class="flex flex-wrap items-center justify-between gap-4">
             <div class="flex items-center space-x-4">
-                <div class="text-2xl font-bold text-blue-600">Obramo</div>
-
-            </div>
-            <a href="{% url 'mensagens' %}" class="block">
-            <div class="flex items-center space-x-6">
                 <div class="relative">
-                    <i class="fas fa-bell text-gray-500 text-lg"></i>
-                    <span
-                        class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">3</span>
+                    <input type="text" placeholder="Buscar projetos..."
+                        class="w-64 pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
                 </div>
-                </a>
-                <a href="{% url 'perfil' %}" class="block">
-                <div class="flex items-center space-x-3">
-                    <div
-                        class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white font-semibold">
-                        A
-                    </div>
-                    <div class="text-sm">
-                        <div class="font-medium text-gray-900">Ricardo</div>
-                        <div class="text-gray-500">Profissional</div>
-                    </div>
-                </div>
-                </a>
+                <select
+                    class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    <option>Todos os Status</option>
+                    <option>Em Andamento</option>
+                    <option>Concluído</option>
+                    <option>Aguardando</option>
+                    <option>Cancelado</option>
+                </select>
+                <select
+                    class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    <option>Todas as Categorias</option>
+                    <option>Desenvolvimento Web</option>
+                    <option>App Mobile</option>
+                    <option>Design UI/UX</option>
+                    <option>Consultoria</option>
+                </select>
             </div>
-        </div>
-    </div>
-</header>
-
-<div class="flex">
-    <!-- Sidebar -->
-    <aside class="w-64 bg-white shadow-sm min-h-screen">
-        <nav class="p-6">
-            <ul class="space-y-2">
-                <li>
-                    <a href="{% url 'dashboard' %}" class="flex items-center space-x-3 px-4 py-3 rounded-lg
-                   {% if request.resolver_match.url_name == 'dashboard' %}
-                        text-blue-600 bg-blue-50
-                   {% else %}
-                        text-gray-700 hover:bg-gray-50
-                   {% endif %}">
-                        <i class="fas fa-home"></i>
-                        <span class="font-medium">Inicio</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="{% url 'meusprojetos' %}" class="flex items-center space-x-3 px-4 py-3 rounded-lg
-                   {% if request.resolver_match.url_name == 'meusprojetos' %}
-                        text-blue-600 bg-blue-50
-                   {% else %}
-                        text-gray-700 hover:bg-gray-50
-                   {% endif %}">
-                        <i class="fas fa-project-diagram"></i>
-                        <span>Meus Projetos</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="{% url 'perfil' %}" class="flex items-center space-x-3 px-4 py-3 rounded-lg
-                   {% if request.resolver_match.url_name == 'perfil' %}
-                        text-blue-600 bg-blue-50
-                   {% else %}
-                        text-gray-700 hover:bg-gray-50
-                   {% endif %}">
-                        <i class="fas fa-search mr-3"></i>
-                        <span>Procurar Projetos </span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="{% url 'profissionais' %}" class="flex items-center space-x-3 px-4 py-3 rounded-lg
-                   {% if request.resolver_match.url_name == 'profissionais' %}
-                        text-blue-600 bg-blue-50
-                   {% else %}
-                        text-gray-700 hover:bg-gray-50
-                   {% endif %}">
-                        <i class="fas fa-users mr-3"></i>
-                        <span>Clientes</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="{% url 'mensagens' %}" class="flex items-center space-x-3 px-4 py-3 rounded-lg
-                   {% if request.resolver_match.url_name == 'mensagens' %}
-                        text-blue-600 bg-blue-50
-                   {% else %}
-                        text-gray-700 hover:bg-gray-50
-                   {% endif %}">
-                        <i class="fas fa-comments"></i>
-                        <span>Mensagens</span>
-                        <span class="ml-auto bg-red-500 text-white text-xs rounded-full px-2 py-1">3</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="{% url 'pagamento' %}" class="flex items-center space-x-3 px-4 py-3 rounded-lg
-                   {% if request.resolver_match.url_name == 'pagamento' %}
-                        text-blue-600 bg-blue-50
-                   {% else %}
-                        text-gray-700 hover:bg-gray-50
-                   {% endif %}">
-                        <i class="fas fa-credit-card"></i>
-                        <span>Pagamentos</span>
-                    </a>
-                </li>
-
-
-                <li>
-                    <a href="{% url 'perfil' %}" class="flex items-center space-x-3 px-4 py-3 rounded-lg
-                   {% if request.resolver_match.url_name == 'perfil' %}
-                        text-blue-600 bg-blue-50
-                   {% else %}
-                        text-gray-700 hover:bg-gray-50
-                   {% endif %}">
-                        <i class="fas fa-cog"></i>
-                        <span>Configurações</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </aside>
-    
-
-        <div class="flex-1 p-8">
-            <!-- Header -->
-            <div class="mb-8">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <h2 class="text-3xl font-bold text-gray-800 mb-2">Meus Projetos</h2>
-                        <p class="text-gray-600">Gerencie e acompanhe todos os seus projetos em andamento</p>
-                    </div>
-                    <div class="flex space-x-3">
-                        <button class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center transition-colors">
-                            <i class="fas fa-plus mr-2"></i>
-                            Novo Projeto
-                        </button>
-                        <button class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg flex items-center transition-colors">
-                            <i class="fas fa-search mr-2"></i>
-                            Procurar Projetos
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Stats Cards -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
-                <div class="bg-white p-6 rounded-lg card-shadow hover-lift">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-gray-500 text-sm">Total de Projetos</p>
-                            <p class="text-2xl font-bold text-gray-800">12</p>
-                            <p class="text-blue-500 text-sm">+3 este mês</p>
-                        </div>
-                        <div class="bg-blue-100 p-3 rounded-full">
-                            <i class="fas fa-project-diagram text-blue-500 text-xl"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-white p-6 rounded-lg card-shadow hover-lift">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-gray-500 text-sm">Em Andamento</p>
-                            <p class="text-2xl font-bold text-gray-800">5</p>
-                            <p class="text-green-500 text-sm">Ativos</p>
-                        </div>
-                        <div class="bg-green-100 p-3 rounded-full">
-                            <i class="fas fa-play text-green-500 text-xl"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-white p-6 rounded-lg card-shadow hover-lift">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-gray-500 text-sm">Concluídos</p>
-                            <p class="text-2xl font-bold text-gray-800">6</p>
-                            <p class="text-blue-500 text-sm">Este mês: 2</p>
-                        </div>
-                        <div class="bg-purple-100 p-3 rounded-full">
-                            <i class="fas fa-check text-purple-500 text-xl"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-white p-6 rounded-lg card-shadow hover-lift">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-gray-500 text-sm">Aguardando</p>
-                            <p class="text-2xl font-bold text-gray-800">1</p>
-                            <p class="text-yellow-500 text-sm">Aprovação</p>
-                        </div>
-                        <div class="bg-yellow-100 p-3 rounded-full">
-                            <i class="fas fa-clock text-yellow-500 text-xl"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-white p-6 rounded-lg card-shadow hover-lift">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-gray-500 text-sm">Valor Total</p>
-                            <p class="text-2xl font-bold text-gray-800">R$ 42.8K</p>
-                            <p class="text-green-500 text-sm">+15% este mês</p>
-                        </div>
-                        <div class="bg-green-100 p-3 rounded-full">
-                            <i class="fas fa-dollar-sign text-green-500 text-xl"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Filters and Search -->
-            <div class="bg-white p-6 rounded-lg card-shadow mb-8">
-                <div class="flex flex-wrap items-center justify-between gap-4">
-                    <div class="flex items-center space-x-4">
-                        <div class="relative">
-                            <input type="text" placeholder="Buscar projetos..." class="w-64 pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                            <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
-                        </div>
-                        <select class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                            <option>Todos os Status</option>
-                            <option>Em Andamento</option>
-                            <option>Concluído</option>
-                            <option>Aguardando</option>
-                            <option>Cancelado</option>
-                        </select>
-                        <select class="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                            <option>Todas as Categorias</option>
-                            <option>Desenvolvimento Web</option>
-                            <option>App Mobile</option>
-                            <option>Design UI/UX</option>
-                            <option>Consultoria</option>
-                        </select>
-                    </div>
-                    <div class="flex items-center space-x-2">
-                        <button class="p-2 text-gray-500 hover:text-gray-700">
-                            <i class="fas fa-th-large"></i>
-                        </button>
-                        <button class="p-2 text-blue-500">
-                            <i class="fas fa-list"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Main Content Grid -->
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <!-- Left Column - Projects List -->
-                <div class="lg:col-span-2 space-y-6">
-                    <!-- Projetos em Andamento -->
-                    <div class="bg-white p-6 rounded-lg card-shadow">
-                        <div class="flex items-center justify-between mb-6">
-                            <h3 class="text-lg font-semibold text-gray-800">Projetos em Andamento</h3>
-                            <span class="text-sm text-gray-500">5 projetos</span>
-                        </div>
-                        
-                        <div class="space-y-4">
-                            <div class="border border-gray-200 rounded-lg p-4 hover-lift">
-                                <div class="flex justify-between items-start mb-3">
-                                    <div class="flex-1">
-                                        <h4 class="font-semibold text-gray-800 mb-1">E-commerce App</h4>
-                                        <p class="text-gray-600 text-sm mb-2">Plataforma completa de e-commerce com integração de pagamentos</p>
-                                        <div class="flex items-center space-x-4 text-sm text-gray-500">
-                                            <span><i class="fas fa-calendar mr-1"></i>Iniciado: 15/01/2024</span>
-                                            <span><i class="fas fa-clock mr-1"></i>Prazo: 12 dias</span>
-                                        </div>
-                                    </div>
-                                    <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Em andamento</span>
-                                </div>
-                                <div class="flex justify-between items-center mb-3">
-                                    <div class="flex items-center">
-                                        <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm mr-3">A</div>
-                                        <span class="text-sm text-gray-600">Ana Ferreira</span>
-                                    </div>
-                                    <div class="text-right">
-                                        <p class="font-semibold text-gray-800">R$ 8.200</p>
-                                    </div>
-                                </div>
-                                <div class="mb-2">
-                                    <div class="flex justify-between text-sm mb-1">
-                                        <span class="text-gray-600">Progresso</span>
-                                        <span class="text-gray-800 font-medium">65%</span>
-                                    </div>
-                                    <div class="w-full bg-gray-200 rounded-full h-2">
-                                        <div class="progress-bar h-2 rounded-full" style="width: 65%"></div>
-                                    </div>
-                                </div>
-                                <div class="flex justify-between items-center pt-3 border-t border-gray-100">
-                                    <div class="flex space-x-2">
-                                        <button class="text-blue-500 hover:text-blue-700 text-sm"><i class="fas fa-eye mr-1"></i>Ver</button>
-                                        <button class="text-green-500 hover:text-green-700 text-sm"><i class="fas fa-edit mr-1"></i>Editar</button>
-                                        <button class="text-purple-500 hover:text-purple-700 text-sm"><i class="fas fa-comments mr-1"></i>Mensagem</button>
-                                    </div>
-                                    <div class="flex items-center text-xs text-gray-500">
-                                        <i class="fas fa-clock mr-1"></i>
-                                        Atualizado há 2h
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="border border-gray-200 rounded-lg p-4 hover-lift">
-                                <div class="flex justify-between items-start mb-3">
-                                    <div class="flex-1">
-                                        <h4 class="font-semibold text-gray-800 mb-1">Website Corporativo</h4>
-                                        <p class="text-gray-600 text-sm mb-2">Site institucional com design responsivo e CMS</p>
-                                        <div class="flex items-center space-x-4 text-sm text-gray-500">
-                                            <span><i class="fas fa-calendar mr-1"></i>Iniciado: 20/01/2024</span>
-                                            <span><i class="fas fa-clock mr-1"></i>Prazo: 8 dias</span>
-                                        </div>
-                                    </div>
-                                    <span class="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded-full">Aguardando</span>
-                                </div>
-                                <div class="flex justify-between items-center mb-3">
-                                    <div class="flex items-center">
-                                        <div class="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center text-white text-sm mr-3">M</div>
-                                        <span class="text-sm text-gray-600">Marcos Silva</span>
-                                    </div>
-                                    <div class="text-right">
-                                        <p class="font-semibold text-gray-800">R$ 4.500</p>
-                                    </div>
-                                </div>
-                                <div class="mb-2">
-                                    <div class="flex justify-between text-sm mb-1">
-                                        <span class="text-gray-600">Progresso</span>
-                                        <span class="text-gray-800 font-medium">30%</span>
-                                    </div>
-                                    <div class="w-full bg-gray-200 rounded-full h-2">
-                                        <div class="progress-bar-yellow h-2 rounded-full" style="width: 30%"></div>
-                                    </div>
-                                </div>
-                                <div class="flex justify-between items-center pt-3 border-t border-gray-100">
-                                    <div class="flex space-x-2">
-                                        <button class="text-blue-500 hover:text-blue-700 text-sm"><i class="fas fa-eye mr-1"></i>Ver</button>
-                                        <button class="text-green-500 hover:text-green-700 text-sm"><i class="fas fa-edit mr-1"></i>Editar</button>
-                                        <button class="text-purple-500 hover:text-purple-700 text-sm"><i class="fas fa-comments mr-1"></i>Mensagem</button>
-                                    </div>
-                                    <div class="flex items-center text-xs text-gray-500">
-                                        <i class="fas fa-clock mr-1"></i>
-                                        Atualizado há 5h
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="border border-gray-200 rounded-lg p-4 hover-lift">
-                                <div class="flex justify-between items-start mb-3">
-                                    <div class="flex-1">
-                                        <h4 class="font-semibold text-gray-800 mb-1">App Mobile - Delivery</h4>
-                                        <p class="text-gray-600 text-sm mb-2">Aplicativo mobile para delivery com GPS e pagamentos</p>
-                                        <div class="flex items-center space-x-4 text-sm text-gray-500">
-                                            <span><i class="fas fa-calendar mr-1"></i>Iniciado: 25/01/2024</span>
-                                            <span><i class="fas fa-clock mr-1"></i>Prazo: 20 dias</span>
-                                        </div>
-                                    </div>
-                                    <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">Iniciando</span>
-                                </div>
-                                <div class="flex justify-between items-center mb-3">
-                                    <div class="flex items-center">
-                                        <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white text-sm mr-3">L</div>
-                                        <span class="text-sm text-gray-600">Lucia Santos</span>
-                                    </div>
-                                    <div class="text-right">
-                                        <p class="font-semibold text-gray-800">R$ 12.400</p>
-                                    </div>
-                                </div>
-                                <div class="mb-2">
-                                    <div class="flex justify-between text-sm mb-1">
-                                        <span class="text-gray-600">Progresso</span>
-                                        <span class="text-gray-800 font-medium">10%</span>
-                                    </div>
-                                    <div class="w-full bg-gray-200 rounded-full h-2">
-                                        <div class="progress-bar h-2 rounded-full" style="width: 10%"></div>
-                                    </div>
-                                </div>
-                                <div class="flex justify-between items-center pt-3 border-t border-gray-100">
-                                    <div class="flex space-x-2">
-                                        <button class="text-blue-500 hover:text-blue-700 text-sm"><i class="fas fa-eye mr-1"></i>Ver</button>
-                                        <button class="text-green-500 hover:text-green-700 text-sm"><i class="fas fa-edit mr-1"></i>Editar</button>
-                                        <button class="text-purple-500 hover:text-purple-700 text-sm"><i class="fas fa-comments mr-1"></i>Mensagem</button>
-                                    </div>
-                                    <div class="flex items-center text-xs text-gray-500">
-                                        <i class="fas fa-clock mr-1"></i>
-                                        Atualizado há 1 dia
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Projetos Concluídos Recentes -->
-                    <div class="bg-white p-6 rounded-lg card-shadow">
-                        <div class="flex items-center justify-between mb-6">
-                            <h3 class="text-lg font-semibold text-gray-800">Projetos Concluídos Recentes</h3>
-                            <button class="text-blue-500 hover:text-blue-700 text-sm">Ver todos</button>
-                        </div>
-                        
-                        <div class="space-y-4">
-                            <div class="border border-gray-200 rounded-lg p-4 hover-lift">
-                                <div class="flex justify-between items-start mb-3">
-                                    <div class="flex-1">
-                                        <h4 class="font-semibold text-gray-800 mb-1">Sistema de Gestão</h4>
-                                        <p class="text-gray-600 text-sm mb-2">ERP completo para pequenas empresas</p>
-                                        <div class="flex items-center space-x-4 text-sm text-gray-500">
-                                            <span><i class="fas fa-calendar-check mr-1"></i>Concluído: 28/01/2024</span>
-                                            <span><i class="fas fa-star text-yellow-400 mr-1"></i>5.0</span>
-                                        </div>
-                                    </div>
-                                    <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Concluído</span>
-                                </div>
-                                <div class="flex justify-between items-center mb-3">
-                                    <div class="flex items-center">
-                                        <div class="w-8 h-8 bg-indigo-500 rounded-full flex items-center justify-center text-white text-sm mr-3">C</div>
-                                        <span class="text-sm text-gray-600">Carlos Oliveira</span>
-                                    </div>
-                                    <div class="text-right">
-                                        <p class="font-semibold text-gray-800">R$ 15.800</p>
-                                        <p class="text-green-500 text-sm">Pago</p>
-                                    </div>
-                                </div>
-                                <div class="flex justify-between items-center pt-3 border-t border-gray-100">
-                                    <div class="flex space-x-2">
-                                        <button class="text-blue-500 hover:text-blue-700 text-sm"><i class="fas fa-eye mr-1"></i>Ver</button>
-                                        <button class="text-green-500 hover:text-green-700 text-sm"><i class="fas fa-download mr-1"></i>Download</button>
-                                        <button class="text-purple-500 hover:text-purple-700 text-sm"><i class="fas fa-star mr-1"></i>Avaliar</button>
-                                    </div>
-                                    <div class="flex items-center text-xs text-gray-500">
-                                        <i class="fas fa-check-circle mr-1"></i>
-                                        Finalizado
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="border border-gray-200 rounded-lg p-4 hover-lift">
-                                <div class="flex justify-between items-start mb-3">
-                                    <div class="flex-1">
-                                        <h4 class="font-semibold text-gray-800 mb-1">Landing Page</h4>
-                                        <p class="text-gray-600 text-sm mb-2">Landing page para campanha de marketing digital</p>
-                                        <div class="flex items-center space-x-4 text-sm text-gray-500">
-                                            <span><i class="fas fa-calendar-check mr-1"></i>Concluído: 26/01/2024</span>
-                                            <span><i class="fas fa-star text-yellow-400 mr-1"></i>4.8</span>
-                                        </div>
-                                    </div>
-                                    <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Concluído</span>
-                                </div>
-                                <div class="flex justify-between items-center mb-3">
-                                    <div class="flex items-center">
-                                        <div class="w-8 h-8 bg-pink-500 rounded-full flex items-center justify-center text-white text-sm mr-3">J</div>
-                                        <span class="text-sm text-gray-600">Julia Martins</span>
-                                    </div>
-                                    <div class="text-right">
-                                        <p class="font-semibold text-gray-800">R$ 2.200</p>
-                                        <p class="text-green-500 text-sm">Pago</p>
-                                    </div>
-                                </div>
-                                <div class="flex justify-between items-center pt-3 border-t border-gray-100">
-                                    <div class="flex space-x-2">
-                                        <button class="text-blue-500 hover:text-blue-700 text-sm"><i class="fas fa-eye mr-1"></i>Ver</button>
-                                        <button class="text-green-500 hover:text-green-700 text-sm"><i class="fas fa-download mr-1"></i>Download</button>
-                                        <button class="text-purple-500 hover:text-purple-700 text-sm"><i class="fas fa-star mr-1"></i>Avaliar</button>
-                                    </div>
-                                    <div class="flex items-center text-xs text-gray-500">
-                                        <i class="fas fa-check-circle mr-1"></i>
-                                        Finalizado
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Right Column -->
-                <div class="space-y-6">
-                    <!-- Status Overview -->
-                    <div class="bg-white p-6 rounded-lg card-shadow">
-                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Status dos Projetos</h3>
-                        <canvas id="statusChart" style="height: 300px;"></canvas>
-                    </div>
-
-                    <!-- Próximos Prazos -->
-                    <div class="bg-white p-6 rounded-lg card-shadow">
-                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Próximos Prazos</h3>
-                        <div class="space-y-3">
-                            <div class="flex items-center justify-between p-3 border border-red-200 bg-red-50 rounded-lg">
-                                <div>
-                                    <p class="font-medium text-gray-800">E-commerce App</p>
-                                    <p class="text-sm text-gray-600">Ana Ferreira</p>
-                                </div>
-                                <div class="text-right">
-                                    <p class="text-sm font-medium text-red-600">12 dias</p>
-                                    <p class="text-xs text-gray-500">15/02/2024</p>
-                                </div>
-                            </div>
-
-                            <div class="flex items-center justify-between p-3 border border-yellow-200 bg-yellow-50 rounded-lg">
-                                <div>
-                                    <p class="font-medium text-gray-800">Website Corp.</p>
-                                    <p class="text-sm text-gray-600">Marcos Silva</p>
-                                </div>
-                                <div class="text-right">
-                                    <p class="text-sm font-medium text-yellow-600">8 dias</p>
-                                    <p class="text-xs text-gray-500">11/02/2024</p>
-                                </div>
-                            </div>
-
-                            <div class="flex items-center justify-between p-3 border border-green-200 bg-green-50 rounded-lg">
-                                <div>
-                                    <p class="font-medium text-gray-800">App Mobile</p>
-                                    <p class="text-sm text-gray-600">Lucia Santos</p>
-                                </div>
-                                <div class="text-right">
-                                    <p class="text-sm font-medium text-green-600">20 dias</p>
-                                    <p class="text-xs text-gray-500">23/02/2024</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Ganhos por Projeto -->
-                    <div class="bg-white p-6 rounded-lg card-shadow">
-                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Ganhos por Categoria</h3>
-                        <div class="space-y-4">
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center">
-                                    <div class="w-4 h-4 bg-blue-500 rounded mr-3"></div>
-                                    <span class="text-sm text-gray-700">Desenvolvimento Web</span>
-                                </div>
-                                <span class="text-sm font-medium text-gray-800">R$ 18.400</span>
-                            </div>
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center">
-                                    <div class="w-4 h-4 bg-green-500 rounded mr-3"></div>
-                                    <span class="text-sm text-gray-700">Apps Mobile</span>
-                                </div>
-                                <span class="text-sm font-medium text-gray-800">R$ 12.400</span>
-                            </div>
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center">
-                                    <div class="w-4 h-4 bg-purple-500 rounded mr-3"></div>
-                                    <span class="text-sm text-gray-700">Design UI/UX</span>
-                                </div>
-                                <span class="text-sm font-medium text-gray-800">R$ 8.600</span>
-                            </div>
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center">
-                                    <div class="w-4 h-4 bg-yellow-500 rounded mr-3"></div>
-                                    <span class="text-sm text-gray-700">Consultoria</span>
-                                </div>
-                                <span class="text-sm font-medium text-gray-800">R$ 3.400</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Ações Rápidas -->
-                    <div class="bg-white p-6 rounded-lg card-shadow">
-                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Ações Rápidas</h3>
-                        <div class="space-y-3">
-                            <button class="w-full bg-blue-500 hover:bg-blue-600 text-white px-4 py-3 rounded-lg flex items-center justify-center transition-colors">
-                                <i class="fas fa-plus mr-2"></i>
-                                Criar Novo Projeto
-                            </button>
-                            <button class="w-full bg-green-500 hover:bg-green-600 text-white px-4 py-3 rounded-lg flex items-center justify-center transition-colors">
-                                <i class="fas fa-search mr-2"></i>
-                                Procurar Oportunidades
-                            </button>
-                            <button class="w-full bg-purple-500 hover:bg-purple-600 text-white px-4 py-3 rounded-lg flex items-center justify-center transition-colors">
-                                <i class="fas fa-chart-bar mr-2"></i>
-                                Relatórios
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Clientes Ativos -->
-                    <div class="bg-white p-6 rounded-lg card-shadow">
-                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Clientes Ativos</h3>
-                        <div class="space-y-3">
-                            <div class="flex items-center justify-between p-3 border border-gray-200 rounded-lg">
-                                <div class="flex items-center space-x-3">
-                                    <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm">A</div>
-                                    <div>
-                                        <p class="font-medium text-gray-800">Ana Ferreira</p>
-                                        <p class="text-xs text-gray-500">1 projeto ativo</p>
-                                    </div>
-                                </div>
-                                <button class="text-blue-500 hover:text-blue-700 text-sm">Mensagem</button>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-3 border border-gray-200 rounded-lg">
-                                <div class="flex items-center space-x-3">
-                                    <div class="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center text-white text-sm">M</div>
-                                    <div>
-                                        <p class="font-medium text-gray-800">Marcos Silva</p>
-                                        <p class="text-xs text-gray-500">1 projeto ativo</p>
-                                    </div>
-                                </div>
-                                <button class="text-blue-500 hover:text-blue-700 text-sm">Mensagem</button>
-                            </div>
-                            
-                            <div class="flex items-center justify-between p-3 border border-gray-200 rounded-lg">
-                                <div class="flex items-center space-x-3">
-                                    <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white text-sm">L</div>
-                                    <div>
-                                        <p class="font-medium text-gray-800">Lucia Santos</p>
-                                        <p class="text-xs text-gray-500">1 projeto ativo</p>
-                                    </div>
-                                </div>
-                                <button class="text-blue-500 hover:text-blue-700 text-sm">Mensagem</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Footer -->
-            <div class="mt-12 text-center">
-                <p class="text-gray-500 text-sm">
-                    <i class="fas fa-headset mr-1"></i> Suporte
-                </p>
-                <p class="text-gray-400 text-xs mt-2">Feito com Genspark</p>
+            <div class="flex items-center space-x-2">
+                <button class="p-2 text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-th-large"></i>
+                </button>
+                <button class="p-2 text-blue-500">
+                    <i class="fas fa-list"></i>
+                </button>
             </div>
         </div>
     </div>
 
-    <script>
-        // Status Chart
-        const statusCtx = document.getElementById('statusChart').getContext('2d');
-        new Chart(statusCtx, {
-            type: 'doughnut',
-            data: {
-                labels: ['Em Andamento', 'Concluídos', 'Aguardando', 'Cancelados'],
-                datasets: [{
-                    data: [5, 6, 1, 0],
-                    backgroundColor: [
-                        '#10b981',
-                        '#3b82f6',
-                        '#f59e0b',
-                        '#ef4444'
-                    ],
-                    borderWidth: 2,
-                    borderColor: '#ffffff'
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        position: 'bottom',
-                        labels: {
-                            padding: 15,
-                            usePointStyle: true,
-                            font: {
-                                size: 12
-                            }
+    <!-- Main Content Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <!-- Left Column - Projects List -->
+        <div class="lg:col-span-2 space-y-6">
+            <!-- Projetos em Andamento -->
+            <div class="bg-white p-6 rounded-lg card-shadow">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="text-lg font-semibold text-gray-800">Projetos em Andamento</h3>
+                    <span class="text-sm text-gray-500">5 projetos</span>
+                </div>
+
+                <div class="space-y-4">
+                    <div class="border border-gray-200 rounded-lg p-4 hover-lift">
+                        <div class="flex justify-between items-start mb-3">
+                            <div class="flex-1">
+                                <h4 class="font-semibold text-gray-800 mb-1">E-commerce App</h4>
+                                <p class="text-gray-600 text-sm mb-2">Plataforma completa de e-commerce com integração
+                                    de pagamentos</p>
+                                <div class="flex items-center space-x-4 text-sm text-gray-500">
+                                    <span><i class="fas fa-calendar mr-1"></i>Iniciado: 15/01/2024</span>
+                                    <span><i class="fas fa-clock mr-1"></i>Prazo: 12 dias</span>
+                                </div>
+                            </div>
+                            <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Em andamento</span>
+                        </div>
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="flex items-center">
+                                <div
+                                    class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm mr-3">
+                                    A</div>
+                                <span class="text-sm text-gray-600">Ana Ferreira</span>
+                            </div>
+                            <div class="text-right">
+                                <p class="font-semibold text-gray-800">R$ 8.200</p>
+                            </div>
+                        </div>
+                        <div class="mb-2">
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="text-gray-600">Progresso</span>
+                                <span class="text-gray-800 font-medium">65%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="progress-bar h-2 rounded-full" style="width: 65%"></div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center pt-3 border-t border-gray-100">
+                            <div class="flex space-x-2">
+                                <button class="text-blue-500 hover:text-blue-700 text-sm"><i
+                                        class="fas fa-eye mr-1"></i>Ver</button>
+                                <button class="text-green-500 hover:text-green-700 text-sm"><i
+                                        class="fas fa-edit mr-1"></i>Editar</button>
+                                <button class="text-purple-500 hover:text-purple-700 text-sm"><i
+                                        class="fas fa-comments mr-1"></i>Mensagem</button>
+                            </div>
+                            <div class="flex items-center text-xs text-gray-500">
+                                <i class="fas fa-clock mr-1"></i>
+                                Atualizado há 2h
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border border-gray-200 rounded-lg p-4 hover-lift">
+                        <div class="flex justify-between items-start mb-3">
+                            <div class="flex-1">
+                                <h4 class="font-semibold text-gray-800 mb-1">Website Corporativo</h4>
+                                <p class="text-gray-600 text-sm mb-2">Site institucional com design responsivo e CMS</p>
+                                <div class="flex items-center space-x-4 text-sm text-gray-500">
+                                    <span><i class="fas fa-calendar mr-1"></i>Iniciado: 20/01/2024</span>
+                                    <span><i class="fas fa-clock mr-1"></i>Prazo: 8 dias</span>
+                                </div>
+                            </div>
+                            <span class="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded-full">Aguardando</span>
+                        </div>
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="flex items-center">
+                                <div
+                                    class="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center text-white text-sm mr-3">
+                                    M</div>
+                                <span class="text-sm text-gray-600">Marcos Silva</span>
+                            </div>
+                            <div class="text-right">
+                                <p class="font-semibold text-gray-800">R$ 4.500</p>
+                            </div>
+                        </div>
+                        <div class="mb-2">
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="text-gray-600">Progresso</span>
+                                <span class="text-gray-800 font-medium">30%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="progress-bar-yellow h-2 rounded-full" style="width: 30%"></div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center pt-3 border-t border-gray-100">
+                            <div class="flex space-x-2">
+                                <button class="text-blue-500 hover:text-blue-700 text-sm"><i
+                                        class="fas fa-eye mr-1"></i>Ver</button>
+                                <button class="text-green-500 hover:text-green-700 text-sm"><i
+                                        class="fas fa-edit mr-1"></i>Editar</button>
+                                <button class="text-purple-500 hover:text-purple-700 text-sm"><i
+                                        class="fas fa-comments mr-1"></i>Mensagem</button>
+                            </div>
+                            <div class="flex items-center text-xs text-gray-500">
+                                <i class="fas fa-clock mr-1"></i>
+                                Atualizado há 5h
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border border-gray-200 rounded-lg p-4 hover-lift">
+                        <div class="flex justify-between items-start mb-3">
+                            <div class="flex-1">
+                                <h4 class="font-semibold text-gray-800 mb-1">App Mobile - Delivery</h4>
+                                <p class="text-gray-600 text-sm mb-2">Aplicativo mobile para delivery com GPS e
+                                    pagamentos</p>
+                                <div class="flex items-center space-x-4 text-sm text-gray-500">
+                                    <span><i class="fas fa-calendar mr-1"></i>Iniciado: 25/01/2024</span>
+                                    <span><i class="fas fa-clock mr-1"></i>Prazo: 20 dias</span>
+                                </div>
+                            </div>
+                            <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">Iniciando</span>
+                        </div>
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="flex items-center">
+                                <div
+                                    class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white text-sm mr-3">
+                                    L</div>
+                                <span class="text-sm text-gray-600">Lucia Santos</span>
+                            </div>
+                            <div class="text-right">
+                                <p class="font-semibold text-gray-800">R$ 12.400</p>
+                            </div>
+                        </div>
+                        <div class="mb-2">
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="text-gray-600">Progresso</span>
+                                <span class="text-gray-800 font-medium">10%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="progress-bar h-2 rounded-full" style="width: 10%"></div>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center pt-3 border-t border-gray-100">
+                            <div class="flex space-x-2">
+                                <button class="text-blue-500 hover:text-blue-700 text-sm"><i
+                                        class="fas fa-eye mr-1"></i>Ver</button>
+                                <button class="text-green-500 hover:text-green-700 text-sm"><i
+                                        class="fas fa-edit mr-1"></i>Editar</button>
+                                <button class="text-purple-500 hover:text-purple-700 text-sm"><i
+                                        class="fas fa-comments mr-1"></i>Mensagem</button>
+                            </div>
+                            <div class="flex items-center text-xs text-gray-500">
+                                <i class="fas fa-clock mr-1"></i>
+                                Atualizado há 1 dia
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Projetos Concluídos Recentes -->
+            <div class="bg-white p-6 rounded-lg card-shadow">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="text-lg font-semibold text-gray-800">Projetos Concluídos Recentes</h3>
+                    <button class="text-blue-500 hover:text-blue-700 text-sm">Ver todos</button>
+                </div>
+
+                <div class="space-y-4">
+                    <div class="border border-gray-200 rounded-lg p-4 hover-lift">
+                        <div class="flex justify-between items-start mb-3">
+                            <div class="flex-1">
+                                <h4 class="font-semibold text-gray-800 mb-1">Sistema de Gestão</h4>
+                                <p class="text-gray-600 text-sm mb-2">ERP completo para pequenas empresas</p>
+                                <div class="flex items-center space-x-4 text-sm text-gray-500">
+                                    <span><i class="fas fa-calendar-check mr-1"></i>Concluído: 28/01/2024</span>
+                                    <span><i class="fas fa-star text-yellow-400 mr-1"></i>5.0</span>
+                                </div>
+                            </div>
+                            <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Concluído</span>
+                        </div>
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="flex items-center">
+                                <div
+                                    class="w-8 h-8 bg-indigo-500 rounded-full flex items-center justify-center text-white text-sm mr-3">
+                                    C</div>
+                                <span class="text-sm text-gray-600">Carlos Oliveira</span>
+                            </div>
+                            <div class="text-right">
+                                <p class="font-semibold text-gray-800">R$ 15.800</p>
+                                <p class="text-green-500 text-sm">Pago</p>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center pt-3 border-t border-gray-100">
+                            <div class="flex space-x-2">
+                                <button class="text-blue-500 hover:text-blue-700 text-sm"><i
+                                        class="fas fa-eye mr-1"></i>Ver</button>
+                                <button class="text-green-500 hover:text-green-700 text-sm"><i
+                                        class="fas fa-download mr-1"></i>Download</button>
+                                <button class="text-purple-500 hover:text-purple-700 text-sm"><i
+                                        class="fas fa-star mr-1"></i>Avaliar</button>
+                            </div>
+                            <div class="flex items-center text-xs text-gray-500">
+                                <i class="fas fa-check-circle mr-1"></i>
+                                Finalizado
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border border-gray-200 rounded-lg p-4 hover-lift">
+                        <div class="flex justify-between items-start mb-3">
+                            <div class="flex-1">
+                                <h4 class="font-semibold text-gray-800 mb-1">Landing Page</h4>
+                                <p class="text-gray-600 text-sm mb-2">Landing page para campanha de marketing digital
+                                </p>
+                                <div class="flex items-center space-x-4 text-sm text-gray-500">
+                                    <span><i class="fas fa-calendar-check mr-1"></i>Concluído: 26/01/2024</span>
+                                    <span><i class="fas fa-star text-yellow-400 mr-1"></i>4.8</span>
+                                </div>
+                            </div>
+                            <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Concluído</span>
+                        </div>
+                        <div class="flex justify-between items-center mb-3">
+                            <div class="flex items-center">
+                                <div
+                                    class="w-8 h-8 bg-pink-500 rounded-full flex items-center justify-center text-white text-sm mr-3">
+                                    J</div>
+                                <span class="text-sm text-gray-600">Julia Martins</span>
+                            </div>
+                            <div class="text-right">
+                                <p class="font-semibold text-gray-800">R$ 2.200</p>
+                                <p class="text-green-500 text-sm">Pago</p>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center pt-3 border-t border-gray-100">
+                            <div class="flex space-x-2">
+                                <button class="text-blue-500 hover:text-blue-700 text-sm"><i
+                                        class="fas fa-eye mr-1"></i>Ver</button>
+                                <button class="text-green-500 hover:text-green-700 text-sm"><i
+                                        class="fas fa-download mr-1"></i>Download</button>
+                                <button class="text-purple-500 hover:text-purple-700 text-sm"><i
+                                        class="fas fa-star mr-1"></i>Avaliar</button>
+                            </div>
+                            <div class="flex items-center text-xs text-gray-500">
+                                <i class="fas fa-check-circle mr-1"></i>
+                                Finalizado
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="space-y-6">
+            <!-- Status Overview -->
+            <div class="bg-white p-6 rounded-lg card-shadow">
+                <h3 class="text-lg font-semibold text-gray-800 mb-4">Status dos Projetos</h3>
+                <div style="height:300px;">
+                    <canvas id="statusChart" width="400" height="300"
+                        style="display:block;max-width:100%;height:100%;"></canvas>
+                </div>
+            </div>
+
+            <!-- Próximos Prazos -->
+            <div class="bg-white p-6 rounded-lg card-shadow">
+                <h3 class="text-lg font-semibold text-gray-800 mb-4">Próximos Prazos</h3>
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between p-3 border border-red-200 bg-red-50 rounded-lg">
+                        <div>
+                            <p class="font-medium text-gray-800">E-commerce App</p>
+                            <p class="text-sm text-gray-600">Ana Ferreira</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-sm font-medium text-red-600">12 dias</p>
+                            <p class="text-xs text-gray-500">15/02/2024</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between p-3 border border-yellow-200 bg-yellow-50 rounded-lg">
+                        <div>
+                            <p class="font-medium text-gray-800">Website Corp.</p>
+                            <p class="text-sm text-gray-600">Marcos Silva</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-sm font-medium text-yellow-600">8 dias</p>
+                            <p class="text-xs text-gray-500">11/02/2024</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between p-3 border border-green-200 bg-green-50 rounded-lg">
+                        <div>
+                            <p class="font-medium text-gray-800">App Mobile</p>
+                            <p class="text-sm text-gray-600">Lucia Santos</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-sm font-medium text-green-600">20 dias</p>
+                            <p class="text-xs text-gray-500">23/02/2024</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ganhos por Projeto -->
+            <div class="bg-white p-6 rounded-lg card-shadow">
+                <h3 class="text-lg font-semibold text-gray-800 mb-4">Ganhos por Categoria</h3>
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <div class="w-4 h-4 bg-blue-500 rounded mr-3"></div>
+                            <span class="text-sm text-gray-700">Desenvolvimento Web</span>
+                        </div>
+                        <span class="text-sm font-medium text-gray-800">R$ 18.400</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <div class="w-4 h-4 bg-green-500 rounded mr-3"></div>
+                            <span class="text-sm text-gray-700">Apps Mobile</span>
+                        </div>
+                        <span class="text-sm font-medium text-gray-800">R$ 12.400</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <div class="w-4 h-4 bg-purple-500 rounded mr-3"></div>
+                            <span class="text-sm text-gray-700">Design UI/UX</span>
+                        </div>
+                        <span class="text-sm font-medium text-gray-800">R$ 8.600</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <div class="w-4 h-4 bg-yellow-500 rounded mr-3"></div>
+                            <span class="text-sm text-gray-700">Consultoria</span>
+                        </div>
+                        <span class="text-sm font-medium text-gray-800">R$ 3.400</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ações Rápidas -->
+            <div class="bg-white p-6 rounded-lg card-shadow">
+                <h3 class="text-lg font-semibold text-gray-800 mb-4">Ações Rápidas</h3>
+                <div class="space-y-3">
+                    <button
+                        class="w-full bg-blue-500 hover:bg-blue-600 text-white px-4 py-3 rounded-lg flex items-center justify-center transition-colors">
+                        <i class="fas fa-plus mr-2"></i>
+                        Criar Novo Projeto
+                    </button>
+                    <button
+                        class="w-full bg-green-500 hover:bg-green-600 text-white px-4 py-3 rounded-lg flex items-center justify-center transition-colors">
+                        <i class="fas fa-search mr-2"></i>
+                        Procurar Oportunidades
+                    </button>
+                    <button
+                        class="w-full bg-purple-500 hover:bg-purple-600 text-white px-4 py-3 rounded-lg flex items-center justify-center transition-colors">
+                        <i class="fas fa-chart-bar mr-2"></i>
+                        Relatórios
+                    </button>
+                </div>
+            </div>
+
+            <!-- Clientes Ativos -->
+            <div class="bg-white p-6 rounded-lg card-shadow">
+                <h3 class="text-lg font-semibold text-gray-800 mb-4">Clientes Ativos</h3>
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between p-3 border border-gray-200 rounded-lg">
+                        <div class="flex items-center space-x-3">
+                            <div
+                                class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm">
+                                A</div>
+                            <div>
+                                <p class="font-medium text-gray-800">Ana Ferreira</p>
+                                <p class="text-xs text-gray-500">1 projeto ativo</p>
+                            </div>
+                        </div>
+                        <button class="text-blue-500 hover:text-blue-700 text-sm">Mensagem</button>
+                    </div>
+
+                    <div class="flex items-center justify-between p-3 border border-gray-200 rounded-lg">
+                        <div class="flex items-center space-x-3">
+                            <div
+                                class="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center text-white text-sm">
+                                M</div>
+                            <div>
+                                <p class="font-medium text-gray-800">Marcos Silva</p>
+                                <p class="text-xs text-gray-500">1 projeto ativo</p>
+                            </div>
+                        </div>
+                        <button class="text-blue-500 hover:text-blue-700 text-sm">Mensagem</button>
+                    </div>
+
+                    <div class="flex items-center justify-between p-3 border border-gray-200 rounded-lg">
+                        <div class="flex items-center space-x-3">
+                            <div
+                                class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white text-sm">
+                                L</div>
+                            <div>
+                                <p class="font-medium text-gray-800">Lucia Santos</p>
+                                <p class="text-xs text-gray-500">1 projeto ativo</p>
+                            </div>
+                        </div>
+                        <button class="text-blue-500 hover:text-blue-700 text-sm">Mensagem</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="mt-12 text-center">
+        <p class="text-gray-500 text-sm">
+            <i class="fas fa-headset mr-1"></i> Suporte
+        </p>
+        <p class="text-gray-400 text-xs mt-2">Feito com Genspark</p>
+    </div>
+</div>
+</div>
+
+<script>
+    // Status Chart
+    const statusCtx = document.getElementById('statusChart').getContext('2d');
+    new Chart(statusCtx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Em Andamento', 'Concluídos', 'Aguardando', 'Cancelados'],
+            datasets: [{
+                data: [5, 6, 1, 0],
+                backgroundColor: [
+                    '#10b981',
+                    '#3b82f6',
+                    '#f59e0b',
+                    '#ef4444'
+                ],
+                borderWidth: 2,
+                borderColor: '#ffffff'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        padding: 15,
+                        usePointStyle: true,
+                        font: {
+                            size: 12
                         }
                     }
                 }
             }
-        });
-    </script>
+        }
+    });
+</script>
 </body>
+
 </html>

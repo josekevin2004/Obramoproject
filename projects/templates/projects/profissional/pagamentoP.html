@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -13,36 +14,44 @@
         body {
             font-family: 'Inter', sans-serif;
         }
+
         .card-shadow {
             box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
         }
+
         .hover-lift:hover {
             transform: translateY(-2px);
             transition: transform 0.2s ease-in-out;
         }
+
         .progress-bar {
             background: linear-gradient(90deg, #3b82f6 0%, #10b981 100%);
         }
+
         .payment-card:hover {
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
             transition: all 0.3s ease;
         }
+
         .status-badge {
             font-size: 0.75rem;
             padding: 0.25rem 0.5rem;
             border-radius: 9999px;
             font-weight: 500;
         }
+
         .filter-btn.active {
             background-color: #3b82f6;
             color: white;
         }
+
         .search-input {
             border: 1px solid #d1d5db;
             border-radius: 0.5rem;
             padding: 0.75rem 1rem;
             font-size: 0.875rem;
         }
+
         .search-input:focus {
             outline: none;
             border-color: #3b82f6;
@@ -51,548 +60,455 @@
     </style>
 </head>
 
-<body class="bg-gray-50">
-    <header class="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
-    <div class="px-6 py-4">
-        <div class="flex items-center justify-between">
-            <div class="flex items-center space-x-4">
-                <div class="text-2xl font-bold text-blue-600">Obramo</div>
+{% include 'partials/_navP.html' %}
 
+
+<div class="flex-1 p-8">
+    <!-- Header -->
+    <div class="mb-8">
+        <h2 class="text-3xl font-bold text-gray-800 mb-2">Pagamentos</h2>
+        <p class="text-gray-600">Gerencie seus pagamentos, faturas e histórico financeiro.</p>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div class="bg-white p-6 rounded-lg card-shadow hover-lift">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-gray-500 text-sm">Receita Total</p>
+                    <p class="text-2xl font-bold text-gray-800">R$ 47.280</p>
+                    <p class="text-green-500 text-sm">+12% este mês</p>
+                </div>
+                <div class="bg-green-100 p-3 rounded-full">
+                    <i class="fas fa-dollar-sign text-green-500 text-xl"></i>
+                </div>
             </div>
-            <a href="{% url 'mensagens' %}" class="block">
-            <div class="flex items-center space-x-6">
-                <div class="relative">
-                    <i class="fas fa-bell text-gray-500 text-lg"></i>
-                    <span
-                        class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">3</span>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg card-shadow hover-lift">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-gray-500 text-sm">Pendentes</p>
+                    <p class="text-2xl font-bold text-gray-800">R$ 8.450</p>
+                    <p class="text-yellow-500 text-sm">5 faturas</p>
                 </div>
-                </a>
-                <a href="{% url 'perfil' %}" class="block">
-                <div class="flex items-center space-x-3">
-                    <div
-                        class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white font-semibold">
-                        A
-                    </div>
-                    <div class="text-sm">
-                        <div class="font-medium text-gray-900">Ricardo</div>
-                        <div class="text-gray-500">Profissional</div>
+                <div class="bg-yellow-100 p-3 rounded-full">
+                    <i class="fas fa-clock text-yellow-500 text-xl"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg card-shadow hover-lift">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-gray-500 text-sm">Este Mês</p>
+                    <p class="text-2xl font-bold text-gray-800">R$ 12.340</p>
+                    <p class="text-blue-500 text-sm">18 transações</p>
+                </div>
+                <div class="bg-blue-100 p-3 rounded-full">
+                    <i class="fas fa-chart-line text-blue-500 text-xl"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg card-shadow hover-lift">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-gray-500 text-sm">Taxa Sucesso</p>
+                    <p class="text-2xl font-bold text-gray-800">98.2%</p>
+                    <div class="flex">
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
                     </div>
                 </div>
-                </a>
+                <div class="bg-purple-100 p-3 rounded-full">
+                    <i class="fas fa-percentage text-purple-500 text-xl"></i>
+                </div>
             </div>
         </div>
     </div>
-</header>
 
-<div class="flex">
-    <!-- Sidebar -->
-    <aside class="w-64 bg-white shadow-sm min-h-screen">
-        <nav class="p-6">
-            <ul class="space-y-2">
-                <li>
-                    <a href="{% url 'dashboard' %}" class="flex items-center space-x-3 px-4 py-3 rounded-lg
-                   {% if request.resolver_match.url_name == 'dashboard' %}
-                        text-blue-600 bg-blue-50
-                   {% else %}
-                        text-gray-700 hover:bg-gray-50
-                   {% endif %}">
-                        <i class="fas fa-home"></i>
-                        <span class="font-medium">Inicio</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="{% url 'meusprojetos' %}" class="flex items-center space-x-3 px-4 py-3 rounded-lg
-                   {% if request.resolver_match.url_name == 'meusprojetos' %}
-                        text-blue-600 bg-blue-50
-                   {% else %}
-                        text-gray-700 hover:bg-gray-50
-                   {% endif %}">
-                        <i class="fas fa-project-diagram"></i>
-                        <span>Meus Projetos</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="{% url 'perfil' %}" class="flex items-center space-x-3 px-4 py-3 rounded-lg
-                   {% if request.resolver_match.url_name == 'perfil' %}
-                        text-blue-600 bg-blue-50
-                   {% else %}
-                        text-gray-700 hover:bg-gray-50
-                   {% endif %}">
-                        <i class="fas fa-search mr-3"></i>
-                        <span>Procurar Projetos </span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="{% url 'profissionais' %}" class="flex items-center space-x-3 px-4 py-3 rounded-lg
-                   {% if request.resolver_match.url_name == 'profissionais' %}
-                        text-blue-600 bg-blue-50
-                   {% else %}
-                        text-gray-700 hover:bg-gray-50
-                   {% endif %}">
-                        <i class="fas fa-users mr-3"></i>
-                        <span>Clientes</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="{% url 'mensagens' %}" class="flex items-center space-x-3 px-4 py-3 rounded-lg
-                   {% if request.resolver_match.url_name == 'mensagens' %}
-                        text-blue-600 bg-blue-50
-                   {% else %}
-                        text-gray-700 hover:bg-gray-50
-                   {% endif %}">
-                        <i class="fas fa-comments"></i>
-                        <span>Mensagens</span>
-                        <span class="ml-auto bg-red-500 text-white text-xs rounded-full px-2 py-1">3</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="{% url 'pagamento' %}" class="flex items-center space-x-3 px-4 py-3 rounded-lg
-                   {% if request.resolver_match.url_name == 'pagamento' %}
-                        text-blue-600 bg-blue-50
-                   {% else %}
-                        text-gray-700 hover:bg-gray-50
-                   {% endif %}">
-                        <i class="fas fa-credit-card"></i>
-                        <span>Pagamentos</span>
-                    </a>
-                </li>
-
-
-                <li>
-                    <a href="{% url 'perfil' %}" class="flex items-center space-x-3 px-4 py-3 rounded-lg
-                   {% if request.resolver_match.url_name == 'perfil' %}
-                        text-blue-600 bg-blue-50
-                   {% else %}
-                        text-gray-700 hover:bg-gray-50
-                   {% endif %}">
-                        <i class="fas fa-cog"></i>
-                        <span>Configurações</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </aside>
-
-    
-    <div class="flex-1 p-8">
-        <!-- Header -->
-        <div class="mb-8">
-            <h2 class="text-3xl font-bold text-gray-800 mb-2">Pagamentos</h2>
-            <p class="text-gray-600">Gerencie seus pagamentos, faturas e histórico financeiro.</p>
-        </div>
-
-        <!-- Stats Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            <div class="bg-white p-6 rounded-lg card-shadow hover-lift">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <p class="text-gray-500 text-sm">Receita Total</p>
-                        <p class="text-2xl font-bold text-gray-800">R$ 47.280</p>
-                        <p class="text-green-500 text-sm">+12% este mês</p>
-                    </div>
-                    <div class="bg-green-100 p-3 rounded-full">
-                        <i class="fas fa-dollar-sign text-green-500 text-xl"></i>
-                    </div>
+    <!-- Search and Filters -->
+    <div class="bg-white p-6 rounded-lg card-shadow mb-8">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+            <div class="flex-1">
+                <div class="relative">
+                    <input type="text" placeholder="Pesquisar transações..." class="search-input w-full pl-10">
                 </div>
             </div>
-
-            <div class="bg-white p-6 rounded-lg card-shadow hover-lift">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <p class="text-gray-500 text-sm">Pendentes</p>
-                        <p class="text-2xl font-bold text-gray-800">R$ 8.450</p>
-                        <p class="text-yellow-500 text-sm">5 faturas</p>
-                    </div>
-                    <div class="bg-yellow-100 p-3 rounded-full">
-                        <i class="fas fa-clock text-yellow-500 text-xl"></i>
-                    </div>
-                </div>
-            </div>
-
-            <div class="bg-white p-6 rounded-lg card-shadow hover-lift">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <p class="text-gray-500 text-sm">Este Mês</p>
-                        <p class="text-2xl font-bold text-gray-800">R$ 12.340</p>
-                        <p class="text-blue-500 text-sm">18 transações</p>
-                    </div>
-                    <div class="bg-blue-100 p-3 rounded-full">
-                        <i class="fas fa-chart-line text-blue-500 text-xl"></i>
-                    </div>
-                </div>
-            </div>
-
-            <div class="bg-white p-6 rounded-lg card-shadow hover-lift">
-                <div class="flex items-center justify-between">
-                    <div>
-                        <p class="text-gray-500 text-sm">Taxa Sucesso</p>
-                        <p class="text-2xl font-bold text-gray-800">98.2%</p>
-                        <div class="flex">
-                            <i class="fas fa-star text-yellow-400"></i>
-                            <i class="fas fa-star text-yellow-400"></i>
-                            <i class="fas fa-star text-yellow-400"></i>
-                            <i class="fas fa-star text-yellow-400"></i>
-                            <i class="fas fa-star text-yellow-400"></i>
-                        </div>
-                    </div>
-                    <div class="bg-purple-100 p-3 rounded-full">
-                        <i class="fas fa-percentage text-purple-500 text-xl"></i>
-                    </div>
-                </div>
+            <div class="flex flex-wrap gap-2">
+                <button
+                    class="filter-btn active px-4 py-2 rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors">Todos</button>
+                <button
+                    class="filter-btn px-4 py-2 rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors">Pagos</button>
+                <button
+                    class="filter-btn px-4 py-2 rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors">Pendentes</button>
+                <button
+                    class="filter-btn px-4 py-2 rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors">Vencidos</button>
             </div>
         </div>
+    </div>
 
-        <!-- Search and Filters -->
-        <div class="bg-white p-6 rounded-lg card-shadow mb-8">
-            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                <div class="flex-1">
-                    <div class="relative">
-                        <input type="text" placeholder="Pesquisar transações..." class="search-input w-full pl-10">
-                    </div>
-                </div>
-                <div class="flex flex-wrap gap-2">
-                    <button class="filter-btn active px-4 py-2 rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors">Todos</button>
-                    <button class="filter-btn px-4 py-2 rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors">Pagos</button>
-                    <button class="filter-btn px-4 py-2 rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors">Pendentes</button>
-                    <button class="filter-btn px-4 py-2 rounded-lg bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors">Vencidos</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Main Content Grid -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <!-- Left Column - Payment List -->
-            <div class="lg:col-span-2 space-y-6">
-                <!-- Payment Cards -->
-                <div class="space-y-4">
-                    <!-- Payment Card 1 -->
-                    <div class="bg-white p-6 rounded-lg card-shadow payment-card">
-                        <div class="flex items-center justify-between mb-4">
-                            <div class="flex items-center space-x-4">
-                                <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center text-white">
-                                    <i class="fas fa-check"></i>
-                                </div>
-                                <div>
-                                    <h3 class="font-semibold text-gray-800">Ana Ferreira - Projeto E-commerce</h3>
-                                    <p class="text-sm text-gray-600">Desenvolvimento de loja online</p>
-                                    <p class="text-xs text-gray-500">Fatura #PAG-2024-001</p>
-                                </div>
+    <!-- Main Content Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <!-- Left Column - Payment List -->
+        <div class="lg:col-span-2 space-y-6">
+            <!-- Payment Cards -->
+            <div class="space-y-4">
+                <!-- Payment Card 1 -->
+                <div class="bg-white p-6 rounded-lg card-shadow payment-card">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center space-x-4">
+                            <div
+                                class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center text-white">
+                                <i class="fas fa-check"></i>
                             </div>
-                            <div class="text-right">
-                                <span class="status-badge bg-green-100 text-green-800">Pago</span>
-                                <p class="text-lg font-bold text-gray-800 mt-1">R$ 5.200</p>
-                                <p class="text-sm text-gray-500">Hoje, 14:30</p>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">Ana Ferreira - Projeto E-commerce</h3>
+                                <p class="text-sm text-gray-600">Desenvolvimento de loja online</p>
+                                <p class="text-xs text-gray-500">Fatura #PAG-2024-001</p>
                             </div>
                         </div>
-                        <div class="flex items-center justify-between text-sm">
-                            <div class="flex space-x-4">
-                                <span class="text-gray-500">Método: <span class="font-medium">PIX</span></span>
-                                <span class="text-gray-500">Taxa: <span class="font-medium">R$ 15,60</span></span>
-                            </div>
-                            <div class="flex space-x-2">
-                                <button class="bg-blue-500 hover:bg-blue-600 text-white py-1 px-3 rounded text-xs transition-colors">
-                                    <i class="fas fa-download mr-1"></i>Recibo
-                                </button>
-                                <button class="bg-gray-100 hover:bg-gray-200 text-gray-700 py-1 px-3 rounded text-xs transition-colors">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-                            </div>
+                        <div class="text-right">
+                            <span class="status-badge bg-green-100 text-green-800">Pago</span>
+                            <p class="text-lg font-bold text-gray-800 mt-1">R$ 5.200</p>
+                            <p class="text-sm text-gray-500">Hoje, 14:30</p>
                         </div>
                     </div>
-
-                    <!-- Payment Card 2 -->
-                    <div class="bg-white p-6 rounded-lg card-shadow payment-card">
-                        <div class="flex items-center justify-between mb-4">
-                            <div class="flex items-center space-x-4">
-                                <div class="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center text-white">
-                                    <i class="fas fa-clock"></i>
-                                </div>
-                                <div>
-                                    <h3 class="font-semibold text-gray-800">Marcos Silva - Consultoria</h3>
-                                    <p class="text-sm text-gray-600">Consultoria em transformação digital</p>
-                                    <p class="text-xs text-gray-500">Fatura #PAG-2024-002</p>
-                                </div>
-                            </div>
-                            <div class="text-right">
-                                <span class="status-badge bg-yellow-100 text-yellow-800">Pendente</span>
-                                <p class="text-lg font-bold text-gray-800 mt-1">R$ 2.800</p>
-                                <p class="text-sm text-gray-500">Vence em 2 dias</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center justify-between text-sm">
-                            <div class="flex space-x-4">
-                                <span class="text-gray-500">Método: <span class="font-medium">Cartão</span></span>
-                                <span class="text-gray-500">Taxa: <span class="font-medium">R$ 84,00</span></span>
-                            </div>
-                            <div class="flex space-x-2">
-                                <button class="bg-green-500 hover:bg-green-600 text-white py-1 px-3 rounded text-xs transition-colors">
-                                    <i class="fas fa-paper-plane mr-1"></i>Cobrar
-                                </button>
-                                <button class="bg-gray-100 hover:bg-gray-200 text-gray-700 py-1 px-3 rounded text-xs transition-colors">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Payment Card 3 -->
-                    <div class="bg-white p-6 rounded-lg card-shadow payment-card">
-                        <div class="flex items-center justify-between mb-4">
-                            <div class="flex items-center space-x-4">
-                                <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center text-white">
-                                    <i class="fas fa-credit-card"></i>
-                                </div>
-                                <div>
-                                    <h3 class="font-semibold text-gray-800">Lucia Santos - App Mobile</h3>
-                                    <p class="text-sm text-gray-600">Desenvolvimento de aplicativo</p>
-                                    <p class="text-xs text-gray-500">Fatura #PAG-2024-003</p>
-                                </div>
-                            </div>
-                            <div class="text-right">
-                                <span class="status-badge bg-blue-100 text-blue-800">Processando</span>
-                                <p class="text-lg font-bold text-gray-800 mt-1">R$ 4.600</p>
-                                <p class="text-sm text-gray-500">Ontem, 16:45</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center justify-between text-sm">
-                            <div class="flex space-x-4">
-                                <span class="text-gray-500">Método: <span class="font-medium">Transferência</span></span>
-                                <span class="text-gray-500">Taxa: <span class="font-medium">R$ 23,00</span></span>
-                            </div>
-                            <div class="flex space-x-2">
-                                <button class="bg-gray-300 text-gray-600 py-1 px-3 rounded text-xs cursor-not-allowed">
-                                    <i class="fas fa-spinner fa-spin mr-1"></i>Aguardando
-                                </button>
-                                <button class="bg-gray-100 hover:bg-gray-200 text-gray-700 py-1 px-3 rounded text-xs transition-colors">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Payment Card 4 -->
-                    <div class="bg-white p-6 rounded-lg card-shadow payment-card">
-                        <div class="flex items-center justify-between mb-4">
-                            <div class="flex items-center space-x-4">
-                                <div class="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center text-white">
-                                    <i class="fas fa-exclamation-triangle"></i>
-                                </div>
-                                <div>
-                                    <h3 class="font-semibold text-gray-800">Carlos Mendes - Website</h3>
-                                    <p class="text-sm text-gray-600">Desenvolvimento de site institucional</p>
-                                    <p class="text-xs text-gray-500">Fatura #PAG-2024-004</p>
-                                </div>
-                            </div>
-                            <div class="text-right">
-                                <span class="status-badge bg-red-100 text-red-800">Vencido</span>
-                                <p class="text-lg font-bold text-gray-800 mt-1">R$ 1.850</p>
-                                <p class="text-sm text-red-500">Venceu há 3 dias</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center justify-between text-sm">
-                            <div class="flex space-x-4">
-                                <span class="text-gray-500">Método: <span class="font-medium">Boleto</span></span>
-                                <span class="text-gray-500">Multa: <span class="font-medium text-red-600">R$ 18,50</span></span>
-                            </div>
-                            <div class="flex space-x-2">
-                                <button class="bg-red-500 hover:bg-red-600 text-white py-1 px-3 rounded text-xs transition-colors">
-                                    <i class="fas fa-bell mr-1"></i>Lembrar
-                                </button>
-                                <button class="bg-gray-100 hover:bg-gray-200 text-gray-700 py-1 px-3 rounded text-xs transition-colors">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Payment Card 5 -->
-                    <div class="bg-white p-6 rounded-lg card-shadow payment-card">
-                        <div class="flex items-center justify-between mb-4">
-                            <div class="flex items-center space-x-4">
-                                <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center text-white">
-                                    <i class="fas fa-check"></i>
-                                </div>
-                                <div>
-                                    <h3 class="font-semibold text-gray-800">Fernando Costa - Sistema ERP</h3>
-                                    <p class="text-sm text-gray-600">Implementação de sistema empresarial</p>
-                                    <p class="text-xs text-gray-500">Fatura #PAG-2024-005</p>
-                                </div>
-                            </div>
-                            <div class="text-right">
-                                <span class="status-badge bg-green-100 text-green-800">Pago</span>
-                                <p class="text-lg font-bold text-gray-800 mt-1">R$ 8.200</p>
-                                <p class="text-sm text-gray-500">Anteontem, 09:15</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center justify-between text-sm">
-                            <div class="flex space-x-4">
-                                <span class="text-gray-500">Método: <span class="font-medium">PIX</span></span>
-                                <span class="text-gray-500">Taxa: <span class="font-medium">R$ 24,60</span></span>
-                            </div>
-                            <div class="flex space-x-2">
-                                <button class="bg-blue-500 hover:bg-blue-600 text-white py-1 px-3 rounded text-xs transition-colors">
-                                    <i class="fas fa-download mr-1"></i>Recibo
-                                </button>
-                                <button class="bg-gray-100 hover:bg-gray-200 text-gray-700 py-1 px-3 rounded text-xs transition-colors">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Pagination -->
-                <div class="bg-white p-4 rounded-lg card-shadow">
-                    <div class="flex items-center justify-between">
-                        <div class="text-sm text-gray-500">
-                            Mostrando <span class="font-medium">5</span> de <span class="font-medium">24</span> transações
+                    <div class="flex items-center justify-between text-sm">
+                        <div class="flex space-x-4">
+                            <span class="text-gray-500">Método: <span class="font-medium">PIX</span></span>
+                            <span class="text-gray-500">Taxa: <span class="font-medium">R$ 15,60</span></span>
                         </div>
                         <div class="flex space-x-2">
-                            <button class="px-3 py-2 border border-gray-300 rounded-lg text-sm text-gray-500 hover:bg-gray-50">Anterior</button>
-                            <button class="px-3 py-2 bg-blue-500 text-white rounded-lg text-sm">1</button>
-                            <button class="px-3 py-2 border border-gray-300 rounded-lg text-sm text-gray-700 hover:bg-gray-50">2</button>
-                            <button class="px-3 py-2 border border-gray-300 rounded-lg text-sm text-gray-700 hover:bg-gray-50">3</button>
-                            <button class="px-3 py-2 border border-gray-300 rounded-lg text-sm text-gray-700 hover:bg-gray-50">Próximo</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Right Column -->
-            <div class="space-y-6">
-                <!-- Resumo Mensal -->
-                <div class="bg-white p-6 rounded-lg card-shadow">
-                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Resumo Mensal</h3>
-                    <canvas id="paymentsChart" style="height: 250px;"></canvas>
-                </div>
-
-                <!-- Métodos de Pagamento -->
-                <div class="bg-white p-6 rounded-lg card-shadow">
-                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Métodos Preferidos</h3>
-                    <div class="space-y-3">
-                        <div class="flex items-center justify-between p-3 border border-gray-200 rounded-lg">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white text-sm">
-                                    <i class="fas fa-mobile-alt"></i>
-                                </div>
-                                <div>
-                                    <p class="font-medium text-gray-800">PIX</p>
-                                    <p class="text-sm text-gray-600">Instantâneo</p>
-                                </div>
-                            </div>
-                            <div class="text-right">
-                                <p class="font-medium text-green-600">65%</p>
-                                <p class="text-xs text-gray-500">15 transações</p>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-center justify-between p-3 border border-gray-200 rounded-lg">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm">
-                                    <i class="fas fa-credit-card"></i>
-                                </div>
-                                <div>
-                                    <p class="font-medium text-gray-800">Cartão</p>
-                                    <p class="text-sm text-gray-600">Crédito/Débito</p>
-                                </div>
-                            </div>
-                            <div class="text-right">
-                                <p class="font-medium text-blue-600">25%</p>
-                                <p class="text-xs text-gray-500">6 transações</p>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-center justify-between p-3 border border-gray-200 rounded-lg">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center text-white text-sm">
-                                    <i class="fas fa-barcode"></i>
-                                </div>
-                                <div>
-                                    <p class="font-medium text-gray-800">Boleto</p>
-                                    <p class="text-sm text-gray-600">Bancário</p>
-                                </div>
-                            </div>
-                            <div class="text-right">
-                                <p class="font-medium text-orange-600">10%</p>
-                                <p class="text-xs text-gray-500">3 transações</p>
-                            </div>
+                            <button
+                                class="bg-blue-500 hover:bg-blue-600 text-white py-1 px-3 rounded text-xs transition-colors">
+                                <i class="fas fa-download mr-1"></i>Recibo
+                            </button>
+                            <button
+                                class="bg-gray-100 hover:bg-gray-200 text-gray-700 py-1 px-3 rounded text-xs transition-colors">
+                                <i class="fas fa-eye"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Transações Recentes -->
-                <div class="bg-white p-6 rounded-lg card-shadow">
-                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Atividade Recente</h3>
-                    <div class="space-y-3">
-                        <div class="flex items-start space-x-3 p-3 hover:bg-gray-50 rounded-lg cursor-pointer">
-                            <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white text-sm">
-                                <i class="fas fa-plus"></i>
-                            </div>
-                            <div class="flex-1">
-                                <p class="font-medium text-gray-800">Pagamento recebido</p>
-                                <p class="text-sm text-gray-600">Ana Ferreira - R$ 5.200</p>
-                                <p class="text-xs text-gray-500">Hoje, 14:30</p>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-start space-x-3 p-3 hover:bg-gray-50 rounded-lg cursor-pointer">
-                            <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm">
-                                <i class="fas fa-paper-plane"></i>
-                            </div>
-                            <div class="flex-1">
-                                <p class="font-medium text-gray-800">Fatura enviada</p>
-                                <p class="text-sm text-gray-600">Marcos Silva - R$ 2.800</p>
-                                <p class="text-xs text-gray-500">Hoje, 10:15</p>
-                            </div>
-                        </div>
-                        
-                        <div class="flex items-start space-x-3 p-3 hover:bg-gray-50 rounded-lg cursor-pointer">
-                            <div class="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center text-white text-sm">
+                <!-- Payment Card 2 -->
+                <div class="bg-white p-6 rounded-lg card-shadow payment-card">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center space-x-4">
+                            <div
+                                class="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center text-white">
                                 <i class="fas fa-clock"></i>
                             </div>
-                            <div class="flex-1">
-                                <p class="font-medium text-gray-800">Pagamento processando</p>
-                                <p class="text-sm text-gray-600">Lucia Santos - R$ 4.600</p>
-                                <p class="text-xs text-gray-500">Ontem, 16:45</p>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">Marcos Silva - Consultoria</h3>
+                                <p class="text-sm text-gray-600">Consultoria em transformação digital</p>
+                                <p class="text-xs text-gray-500">Fatura #PAG-2024-002</p>
                             </div>
+                        </div>
+                        <div class="text-right">
+                            <span class="status-badge bg-yellow-100 text-yellow-800">Pendente</span>
+                            <p class="text-lg font-bold text-gray-800 mt-1">R$ 2.800</p>
+                            <p class="text-sm text-gray-500">Vence em 2 dias</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between text-sm">
+                        <div class="flex space-x-4">
+                            <span class="text-gray-500">Método: <span class="font-medium">Cartão</span></span>
+                            <span class="text-gray-500">Taxa: <span class="font-medium">R$ 84,00</span></span>
+                        </div>
+                        <div class="flex space-x-2">
+                            <button
+                                class="bg-green-500 hover:bg-green-600 text-white py-1 px-3 rounded text-xs transition-colors">
+                                <i class="fas fa-paper-plane mr-1"></i>Cobrar
+                            </button>
+                            <button
+                                class="bg-gray-100 hover:bg-gray-200 text-gray-700 py-1 px-3 rounded text-xs transition-colors">
+                                <i class="fas fa-edit"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Ações Rápidas -->
-                <div class="bg-white p-6 rounded-lg card-shadow">
-                    <h3 class="text-lg font-semibold text-gray-800 mb-4">Ações Rápidas</h3>
-                    <div class="space-y-3">
-                        <button class="w-full bg-blue-500 hover:bg-blue-600 text-white px-4 py-3 rounded-lg flex items-center justify-center transition-colors">
-                            <i class="fas fa-plus mr-2"></i>
-                            Nova Fatura
-                        </button>
-                        <button class="w-full bg-green-500 hover:bg-green-600 text-white px-4 py-3 rounded-lg flex items-center justify-center transition-colors">
-                            <i class="fas fa-download mr-2"></i>
-                            Exportar Relatório
-                        </button>
-                        <button class="w-full bg-purple-500 hover:bg-purple-600 text-white px-4 py-3 rounded-lg flex items-center justify-center transition-colors">
-                            <i class="fas fa-cog mr-2"></i>
-                            Configurar Gateway
-                        </button>
+                <!-- Payment Card 3 -->
+                <div class="bg-white p-6 rounded-lg card-shadow payment-card">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center text-white">
+                                <i class="fas fa-credit-card"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">Lucia Santos - App Mobile</h3>
+                                <p class="text-sm text-gray-600">Desenvolvimento de aplicativo</p>
+                                <p class="text-xs text-gray-500">Fatura #PAG-2024-003</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <span class="status-badge bg-blue-100 text-blue-800">Processando</span>
+                            <p class="text-lg font-bold text-gray-800 mt-1">R$ 4.600</p>
+                            <p class="text-sm text-gray-500">Ontem, 16:45</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between text-sm">
+                        <div class="flex space-x-4">
+                            <span class="text-gray-500">Método: <span class="font-medium">Transferência</span></span>
+                            <span class="text-gray-500">Taxa: <span class="font-medium">R$ 23,00</span></span>
+                        </div>
+                        <div class="flex space-x-2">
+                            <button class="bg-gray-300 text-gray-600 py-1 px-3 rounded text-xs cursor-not-allowed">
+                                <i class="fas fa-spinner fa-spin mr-1"></i>Aguardando
+                            </button>
+                            <button
+                                class="bg-gray-100 hover:bg-gray-200 text-gray-700 py-1 px-3 rounded text-xs transition-colors">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Payment Card 4 -->
+                <div class="bg-white p-6 rounded-lg card-shadow payment-card">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center text-white">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">Carlos Mendes - Website</h3>
+                                <p class="text-sm text-gray-600">Desenvolvimento de site institucional</p>
+                                <p class="text-xs text-gray-500">Fatura #PAG-2024-004</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <span class="status-badge bg-red-100 text-red-800">Vencido</span>
+                            <p class="text-lg font-bold text-gray-800 mt-1">R$ 1.850</p>
+                            <p class="text-sm text-red-500">Venceu há 3 dias</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between text-sm">
+                        <div class="flex space-x-4">
+                            <span class="text-gray-500">Método: <span class="font-medium">Boleto</span></span>
+                            <span class="text-gray-500">Multa: <span class="font-medium text-red-600">R$
+                                    18,50</span></span>
+                        </div>
+                        <div class="flex space-x-2">
+                            <button
+                                class="bg-red-500 hover:bg-red-600 text-white py-1 px-3 rounded text-xs transition-colors">
+                                <i class="fas fa-bell mr-1"></i>Lembrar
+                            </button>
+                            <button
+                                class="bg-gray-100 hover:bg-gray-200 text-gray-700 py-1 px-3 rounded text-xs transition-colors">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Payment Card 5 -->
+                <div class="bg-white p-6 rounded-lg card-shadow payment-card">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center space-x-4">
+                            <div
+                                class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center text-white">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-semibold text-gray-800">Fernando Costa - Sistema ERP</h3>
+                                <p class="text-sm text-gray-600">Implementação de sistema empresarial</p>
+                                <p class="text-xs text-gray-500">Fatura #PAG-2024-005</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <span class="status-badge bg-green-100 text-green-800">Pago</span>
+                            <p class="text-lg font-bold text-gray-800 mt-1">R$ 8.200</p>
+                            <p class="text-sm text-gray-500">Anteontem, 09:15</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between text-sm">
+                        <div class="flex space-x-4">
+                            <span class="text-gray-500">Método: <span class="font-medium">PIX</span></span>
+                            <span class="text-gray-500">Taxa: <span class="font-medium">R$ 24,60</span></span>
+                        </div>
+                        <div class="flex space-x-2">
+                            <button
+                                class="bg-blue-500 hover:bg-blue-600 text-white py-1 px-3 rounded text-xs transition-colors">
+                                <i class="fas fa-download mr-1"></i>Recibo
+                            </button>
+                            <button
+                                class="bg-gray-100 hover:bg-gray-200 text-gray-700 py-1 px-3 rounded text-xs transition-colors">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pagination -->
+            <div class="bg-white p-4 rounded-lg card-shadow">
+                <div class="flex items-center justify-between">
+                    <div class="text-sm text-gray-500">
+                        Mostrando <span class="font-medium">5</span> de <span class="font-medium">24</span> transações
+                    </div>
+                    <div class="flex space-x-2">
+                        <button
+                            class="px-3 py-2 border border-gray-300 rounded-lg text-sm text-gray-500 hover:bg-gray-50">Anterior</button>
+                        <button class="px-3 py-2 bg-blue-500 text-white rounded-lg text-sm">1</button>
+                        <button
+                            class="px-3 py-2 border border-gray-300 rounded-lg text-sm text-gray-700 hover:bg-gray-50">2</button>
+                        <button
+                            class="px-3 py-2 border border-gray-300 rounded-lg text-sm text-gray-700 hover:bg-gray-50">3</button>
+                        <button
+                            class="px-3 py-2 border border-gray-300 rounded-lg text-sm text-gray-700 hover:bg-gray-50">Próximo</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Footer -->
-        <div class="mt-12 text-center">
-            <p class="text-gray-500 text-sm">
-                <i class="fas fa-headset mr-1"></i> Suporte
-            </p>
-            <p class="text-gray-400 text-xs mt-2">Feito com Genspark</p>
+        <!-- Right Column -->
+        <div class="space-y-6">
+            <!-- Resumo Mensal -->
+            <div class="bg-white p-6 rounded-lg card-shadow">
+                <h3 class="text-lg font-semibold text-gray-800 mb-4">Resumo Mensal</h3>
+                <div style="height:250px;">
+                    <canvas id="paymentsChart" style="width:100%;height:100%;display:block;"></canvas>
+                </div>
+            </div>
+
+            <!-- Métodos de Pagamento -->
+            <div class="bg-white p-6 rounded-lg card-shadow">
+                <h3 class="text-lg font-semibold text-gray-800 mb-4">Métodos Preferidos</h3>
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between p-3 border border-gray-200 rounded-lg">
+                        <div class="flex items-center space-x-3">
+                            <div
+                                class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white text-sm">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <div>
+                                <p class="font-medium text-gray-800">PIX</p>
+                                <p class="text-sm text-gray-600">Instantâneo</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <p class="font-medium text-green-600">65%</p>
+                            <p class="text-xs text-gray-500">15 transações</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between p-3 border border-gray-200 rounded-lg">
+                        <div class="flex items-center space-x-3">
+                            <div
+                                class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm">
+                                <i class="fas fa-credit-card"></i>
+                            </div>
+                            <div>
+                                <p class="font-medium text-gray-800">Cartão</p>
+                                <p class="text-sm text-gray-600">Crédito/Débito</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <p class="font-medium text-blue-600">25%</p>
+                            <p class="text-xs text-gray-500">6 transações</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between p-3 border border-gray-200 rounded-lg">
+                        <div class="flex items-center space-x-3">
+                            <div
+                                class="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center text-white text-sm">
+                                <i class="fas fa-barcode"></i>
+                            </div>
+                            <div>
+                                <p class="font-medium text-gray-800">Boleto</p>
+                                <p class="text-sm text-gray-600">Bancário</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <p class="font-medium text-orange-600">10%</p>
+                            <p class="text-xs text-gray-500">3 transações</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Transações Recentes -->
+            <div class="bg-white p-6 rounded-lg card-shadow">
+                <h3 class="text-lg font-semibold text-gray-800 mb-4">Atividade Recente</h3>
+                <div class="space-y-3">
+                    <div class="flex items-start space-x-3 p-3 hover:bg-gray-50 rounded-lg cursor-pointer">
+                        <div
+                            class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white text-sm">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                        <div class="flex-1">
+                            <p class="font-medium text-gray-800">Pagamento recebido</p>
+                            <p class="text-sm text-gray-600">Ana Ferreira - R$ 5.200</p>
+                            <p class="text-xs text-gray-500">Hoje, 14:30</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start space-x-3 p-3 hover:bg-gray-50 rounded-lg cursor-pointer">
+                        <div
+                            class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm">
+                            <i class="fas fa-paper-plane"></i>
+                        </div>
+                        <div class="flex-1">
+                            <p class="font-medium text-gray-800">Fatura enviada</p>
+                            <p class="text-sm text-gray-600">Marcos Silva - R$ 2.800</p>
+                            <p class="text-xs text-gray-500">Hoje, 10:15</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start space-x-3 p-3 hover:bg-gray-50 rounded-lg cursor-pointer">
+                        <div
+                            class="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center text-white text-sm">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="flex-1">
+                            <p class="font-medium text-gray-800">Pagamento processando</p>
+                            <p class="text-sm text-gray-600">Lucia Santos - R$ 4.600</p>
+                            <p class="text-xs text-gray-500">Ontem, 16:45</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ações Rápidas -->
+            <div class="bg-white p-6 rounded-lg card-shadow">
+                <h3 class="text-lg font-semibold text-gray-800 mb-4">Ações Rápidas</h3>
+                <div class="space-y-3">
+                    <button
+                        class="w-full bg-blue-500 hover:bg-blue-600 text-white px-4 py-3 rounded-lg flex items-center justify-center transition-colors">
+                        <i class="fas fa-plus mr-2"></i>
+                        Nova Fatura
+                    </button>
+                    <button
+                        class="w-full bg-green-500 hover:bg-green-600 text-white px-4 py-3 rounded-lg flex items-center justify-center transition-colors">
+                        <i class="fas fa-download mr-2"></i>
+                        Exportar Relatório
+                    </button>
+                    <button
+                        class="w-full bg-purple-500 hover:bg-purple-600 text-white px-4 py-3 rounded-lg flex items-center justify-center transition-colors">
+                        <i class="fas fa-cog mr-2"></i>
+                        Configurar Gateway
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
+
+    <!-- Footer -->
+    <div class="mt-12 text-center">
+        <p class="text-gray-500 text-sm">
+            <i class="fas fa-headset mr-1"></i> Suporte
+        </p>
+        <p class="text-gray-400 text-xs mt-2">Feito com Genspark</p>
+    </div>
+</div>
 </div>
 
 <script>
@@ -624,7 +540,7 @@
                 y: {
                     beginAtZero: true,
                     ticks: {
-                        callback: function(value) {
+                        callback: function (value) {
                             return 'R$ ' + value.toLocaleString();
                         }
                     }
@@ -635,7 +551,7 @@
 
     // Filter functionality
     document.querySelectorAll('.filter-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
+        btn.addEventListener('click', function () {
             document.querySelectorAll('.filter-btn').forEach(b => {
                 b.classList.remove('active');
                 b.classList.add('bg-gray-100', 'text-gray-700');
@@ -648,10 +564,10 @@
     });
 
     // Search functionality
-    document.querySelector('.search-input').addEventListener('input', function() {
+    document.querySelector('.search-input').addEventListener('input', function () {
         const searchTerm = this.value.toLowerCase();
         const paymentCards = document.querySelectorAll('.payment-card');
-        
+
         paymentCards.forEach(card => {
             const paymentText = card.textContent.toLowerCase();
             if (paymentText.includes(searchTerm)) {

@@ -1,430 +1,526 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>TechConnect - Configurações</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
   <link rel="stylesheet" href="{% static 'css/perfil.css' %}">
+  <style>
+    /* ====== Layout principal ====== */
+.content {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+/* ====== Seções de configuração ====== */
+.config-section {
+  background: #fff;
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  margin-bottom: 2rem;
+  overflow: hidden;
+}
+
+.config-header {
+  background: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 1.25rem 1.5rem;
+}
+
+.config-header h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #111827;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.config-header p {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin-top: 0.25rem;
+}
+
+.config-body {
+  padding: 1.5rem;
+}
+
+/* ====== Formulários ====== */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: #374151;
+}
+
+.form-control {
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  padding: 0.625rem 0.75rem;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-control:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+}
+
+/* ====== Botões ====== */
+.btn-group {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.btn {
+  padding: 0.625rem 1.25rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn-primary {
+  background: #3b82f6;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: #2563eb;
+}
+
+.btn-secondary {
+  background: #6b7280;
+  color: #fff;
+}
+
+.btn-secondary:hover {
+  background: #4b5563;
+}
+
+.btn-danger {
+  background: #ef4444;
+  color: #fff;
+}
+
+.btn-danger:hover {
+  background: #dc2626;
+}
+
+/* ====== Itens de configuração (notificações, segurança etc.) ====== */
+.setting-item,
+.security-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.setting-item:last-child,
+.security-item:last-child {
+  border-bottom: none;
+}
+
+.setting-info h4,
+.security-item-info h4 {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #111827;
+}
+
+.setting-info p,
+.security-item-info p {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+/* ====== Segurança (ícones coloridos) ====== */
+.security-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+}
+
+.security-icon.success {
+  background: #d1fae5;
+  color: #10b981;
+}
+
+.security-icon.warning {
+  background: #fef3c7;
+  color: #f59e0b;
+}
+
+/* ====== Toggle switch ====== */
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 46px;
+  height: 24px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background-color: #d1d5db;
+  border-radius: 9999px;
+  transition: 0.3s;
+}
+
+.toggle-slider:before {
+  content: "";
+  position: absolute;
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  top: 3px;
+  background: white;
+  border-radius: 50%;
+  transition: 0.3s;
+}
+
+.toggle-switch input:checked + .toggle-slider {
+  background-color: #3b82f6;
+}
+
+.toggle-switch input:checked + .toggle-slider:before {
+  transform: translateX(22px);
+}
+
+  </style>
 </head>
 
-<body class="bg-gray-50">
-  <header class="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
-    <div class="px-6 py-4">
-        <div class="flex items-center justify-between">
-            <div class="flex items-center space-x-4">
-                <div class="text-2xl font-bold text-blue-600">Obramo</div>
+{% include 'partials/_navP.html' %}
 
-            </div>
-            <a href="{% url 'mensagens' %}" class="block">
-            <div class="flex items-center space-x-6">
-                <div class="relative">
-                    <i class="fas fa-bell text-gray-500 text-lg"></i>
-                    <span
-                        class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">3</span>
-                </div>
-                </a>
-                <a href="{% url 'perfil' %}" class="block">
-                <div class="flex items-center space-x-3">
-                    <div
-                        class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white font-semibold">
-                        A
-                    </div>
-                    <div class="text-sm">
-                        <div class="font-medium text-gray-900">Ricardo</div>
-                        <div class="text-gray-500">Profissional</div>
-                    </div>
-                </div>
-                </a>
-            </div>
-        </div>
-    </div>
-</header>
+<!-- Conteúdo principal (irmão da sidebar aberta na partial) -->
+<main class="flex-1 bg-gray-50 px-6 mt-1">
 
-<div class="flex">
-    <!-- Sidebar -->
-    <aside class="w-64 bg-white shadow-sm min-h-screen">
-        <nav class="p-6">
-            <ul class="space-y-2">
-                <li>
-                    <a href="{% url 'dashboard' %}" class="flex items-center space-x-3 px-4 py-3 rounded-lg
-                   {% if request.resolver_match.url_name == 'dashboard' %}
-                        text-blue-600 bg-blue-50
-                   {% else %}
-                        text-gray-700 hover:bg-gray-50
-                   {% endif %}">
-                        <i class="fas fa-home"></i>
-                        <span class="font-medium">Inicio</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="{% url 'meusprojetos' %}" class="flex items-center space-x-3 px-4 py-3 rounded-lg
-                   {% if request.resolver_match.url_name == 'meusprojetos' %}
-                        text-blue-600 bg-blue-50
-                   {% else %}
-                        text-gray-700 hover:bg-gray-50
-                   {% endif %}">
-                        <i class="fas fa-project-diagram"></i>
-                        <span>Meus Projetos</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="{% url 'perfil' %}" class="flex items-center space-x-3 px-4 py-3 rounded-lg
-                   {% if request.resolver_match.url_name == 'perfil' %}
-                        text-blue-600 bg-blue-50
-                   {% else %}
-                        text-gray-700 hover:bg-gray-50
-                   {% endif %}">
-                        <i class="fas fa-search mr-3"></i>
-                        <span>Procurar Projetos </span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="{% url 'profissionais' %}" class="flex items-center space-x-3 px-4 py-3 rounded-lg
-                   {% if request.resolver_match.url_name == 'profissionais' %}
-                        text-blue-600 bg-blue-50
-                   {% else %}
-                        text-gray-700 hover:bg-gray-50
-                   {% endif %}">
-                        <i class="fas fa-users mr-3"></i>
-                        <span>Clientes</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="{% url 'mensagens' %}" class="flex items-center space-x-3 px-4 py-3 rounded-lg
-                   {% if request.resolver_match.url_name == 'mensagens' %}
-                        text-blue-600 bg-blue-50
-                   {% else %}
-                        text-gray-700 hover:bg-gray-50
-                   {% endif %}">
-                        <i class="fas fa-comments"></i>
-                        <span>Mensagens</span>
-                        <span class="ml-auto bg-red-500 text-white text-xs rounded-full px-2 py-1">3</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="{% url 'pagamento' %}" class="flex items-center space-x-3 px-4 py-3 rounded-lg
-                   {% if request.resolver_match.url_name == 'pagamento' %}
-                        text-blue-600 bg-blue-50
-                   {% else %}
-                        text-gray-700 hover:bg-gray-50
-                   {% endif %}">
-                        <i class="fas fa-credit-card"></i>
-                        <span>Pagamentos</span>
-                    </a>
-                </li>
-
-
-                <li>
-                    <a href="{% url 'perfil' %}" class="flex items-center space-x-3 px-4 py-3 rounded-lg
-                   {% if request.resolver_match.url_name == 'perfil' %}
-                        text-blue-600 bg-blue-50
-                   {% else %}
-                        text-gray-700 hover:bg-gray-50
-                   {% endif %}">
-                        <i class="fas fa-cog"></i>
-                        <span>Configurações</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </aside>
-
-  <!-- Conteúdo principal (irmão da sidebar aberta na partial) -->
-  <main class="flex-1 bg-gray-50 px-6 mt-1">
-
-    <!-- Content -->
-    <div class="content">
-      <!-- Perfil -->
-      <div class="config-section">
-        <div class="config-header">
-          <h3><i class="fas fa-user"></i> Informações do Perfil</h3>
-          <p>Gerencie suas informações pessoais e dados de contato</p>
-        </div>
-        <div class="config-body">
-          <div class="form-row">
-            <div class="form-group">
-              <label for="nome">Nome Completo</label>
-              <input type="text" id="nome" class="form-control" value="Ana Ferreira" placeholder="Digite seu nome completo">
-            </div>
-            <div class="form-group">
-              <label for="email">Email</label>
-              <input type="email" id="email" class="form-control" value="ana.ferreira@email.com" placeholder="Digite seu email">
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label for="telefone">Telefone</label>
-              <input type="tel" id="telefone" class="form-control" value="(11) 99999-9999" placeholder="Digite seu telefone">
-            </div>
-            <div class="form-group">
-              <label for="empresa">Empresa</label>
-              <input type="text" id="empresa" class="form-control" value="Obramo" placeholder="Nome da empresa">
-            </div>
-          </div>
-
+  <!-- Content -->
+  <div class="content">
+    <!-- Perfil -->
+    <div class="config-section">
+      <div class="config-header">
+        <h3><i class="fas fa-user"></i> Informações do Perfil</h3>
+        <p>Gerencie suas informações pessoais e dados de contato</p>
+      </div>
+      <div class="config-body">
+        <div class="form-row">
           <div class="form-group">
-            <label for="bio">Biografia</label>
-            <textarea id="bio" class="form-control" rows="4" placeholder="Conte um pouco sobre você e sua empresa...">Empreendedora na área de tecnologia, sempre em busca de profissionais qualificados para projetos inovadores.</textarea>
+            <label for="nome">Nome Completo</label>
+            <input type="text" id="nome" class="form-control" value="Ana Ferreira"
+              placeholder="Digite seu nome completo">
           </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" class="form-control" value="ana.ferreira@email.com"
+              placeholder="Digite seu email">
+          </div>
+        </div>
 
-          <div class="btn-group">
-            <button class="btn btn-primary">Salvar Alterações</button>
-            <button class="btn btn-secondary">Cancelar</button>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="telefone">Telefone</label>
+            <input type="tel" id="telefone" class="form-control" value="(11) 99999-9999"
+              placeholder="Digite seu telefone">
           </div>
+          <div class="form-group">
+            <label for="empresa">Empresa</label>
+            <input type="text" id="empresa" class="form-control" value="Obramo" placeholder="Nome da empresa">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="bio">Biografia</label>
+          <textarea id="bio" class="form-control" rows="4"
+            placeholder="Conte um pouco sobre você e sua empresa...">Empreendedora na área de tecnologia, sempre em busca de profissionais qualificados para projetos inovadores.</textarea>
+        </div>
+
+        <div class="btn-group">
+          <button class="btn btn-primary">Salvar Alterações</button>
+          <button class="btn btn-secondary">Cancelar</button>
         </div>
       </div>
+    </div>
 
-      <!-- Notificações -->
-      <div class="config-section">
-        <div class="config-header">
-          <h3><i class="fas fa-bell"></i> Notificações</h3>
-          <p>Configure como e quando você deseja receber notificações</p>
+    <!-- Notificações -->
+    <div class="config-section">
+      <div class="config-header">
+        <h3><i class="fas fa-bell"></i> Notificações</h3>
+        <p>Configure como e quando você deseja receber notificações</p>
+      </div>
+      <div class="config-body">
+        <div class="setting-item">
+          <div class="setting-info">
+            <h4>Novos projetos disponíveis</h4>
+            <p>Receba notificações quando profissionais se candidatarem aos seus projetos</p>
+          </div>
+          <label class="toggle-switch">
+            <input type="checkbox" checked>
+            <span class="toggle-slider"></span>
+          </label>
         </div>
-        <div class="config-body">
-          <div class="setting-item">
-            <div class="setting-info">
-              <h4>Novos projetos disponíveis</h4>
-              <p>Receba notificações quando profissionais se candidatarem aos seus projetos</p>
-            </div>
-            <label class="toggle-switch">
-              <input type="checkbox" checked>
-              <span class="toggle-slider"></span>
-            </label>
-          </div>
 
-          <div class="setting-item">
-            <div class="setting-info">
-              <h4>Mensagens recebidas</h4>
-              <p>Seja notificado quando receber novas mensagens</p>
-            </div>
-            <label class="toggle-switch">
-              <input type="checkbox" checked>
-              <span class="toggle-slider"></span>
-            </label>
+        <div class="setting-item">
+          <div class="setting-info">
+            <h4>Mensagens recebidas</h4>
+            <p>Seja notificado quando receber novas mensagens</p>
           </div>
+          <label class="toggle-switch">
+            <input type="checkbox" checked>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
 
-          <div class="setting-item">
-            <div class="setting-info">
-              <h4>Atualizações de projeto</h4>
-              <p>Receba notificações sobre o progresso dos seus projetos</p>
-            </div>
-            <label class="toggle-switch">
-              <input type="checkbox" checked>
-              <span class="toggle-slider"></span>
-            </label>
+        <div class="setting-item">
+          <div class="setting-info">
+            <h4>Atualizações de projeto</h4>
+            <p>Receba notificações sobre o progresso dos seus projetos</p>
           </div>
+          <label class="toggle-switch">
+            <input type="checkbox" checked>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
 
-          <div class="setting-item">
-            <div class="setting-info">
-              <h4>Lembretes de pagamento</h4>
-              <p>Seja lembrado sobre pagamentos pendentes ou vencimentos</p>
-            </div>
-            <label class="toggle-switch">
-              <input type="checkbox" checked>
-              <span class="toggle-slider"></span>
-            </label>
+        <div class="setting-item">
+          <div class="setting-info">
+            <h4>Lembretes de pagamento</h4>
+            <p>Seja lembrado sobre pagamentos pendentes ou vencimentos</p>
           </div>
+          <label class="toggle-switch">
+            <input type="checkbox" checked>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
 
-          <div class="setting-item">
-            <div class="setting-info">
-              <h4>Newsletter e promoções</h4>
-              <p>Receba novidades sobre a plataforma e ofertas especiais</p>
-            </div>
-            <label class="toggle-switch">
-              <input type="checkbox">
-              <span class="toggle-slider"></span>
-            </label>
+        <div class="setting-item">
+          <div class="setting-info">
+            <h4>Newsletter e promoções</h4>
+            <p>Receba novidades sobre a plataforma e ofertas especiais</p>
           </div>
+          <label class="toggle-switch">
+            <input type="checkbox">
+            <span class="toggle-slider"></span>
+          </label>
         </div>
       </div>
+    </div>
 
-      <!-- Segurança -->
-      <div class="config-section">
-        <div class="config-header">
-          <h3><i class="fas fa-shield-alt"></i> Segurança</h3>
-          <p>Mantenha sua conta segura com essas configurações</p>
+    <!-- Segurança -->
+    <div class="config-section">
+      <div class="config-header">
+        <h3><i class="fas fa-shield-alt"></i> Segurança</h3>
+        <p>Mantenha sua conta segura com essas configurações</p>
+      </div>
+      <div class="config-body">
+        <div class="security-item">
+          <div class="security-icon success">
+            <i class="fas fa-lock"></i>
+          </div>
+          <div class="security-item-info">
+            <h4>Senha forte ativa</h4>
+            <p>Sua senha atende aos critérios de segurança</p>
+          </div>
+          <button class="btn btn-secondary">Alterar Senha</button>
         </div>
-        <div class="config-body">
-          <div class="security-item">
-            <div class="security-icon success">
-              <i class="fas fa-lock"></i>
-            </div>
-            <div class="security-item-info">
-              <h4>Senha forte ativa</h4>
-              <p>Sua senha atende aos critérios de segurança</p>
-            </div>
-            <button class="btn btn-secondary">Alterar Senha</button>
-          </div>
 
-          <div class="security-item">
-            <div class="security-icon warning">
-              <i class="fas fa-mobile-alt"></i>
-            </div>
-            <div class="security-item-info">
-              <h4>Autenticação de dois fatores</h4>
-              <p>Adicione uma camada extra de segurança à sua conta</p>
-            </div>
-            <button class="btn btn-primary">Ativar 2FA</button>
+        <div class="security-item">
+          <div class="security-icon warning">
+            <i class="fas fa-mobile-alt"></i>
           </div>
+          <div class="security-item-info">
+            <h4>Autenticação de dois fatores</h4>
+            <p>Adicione uma camada extra de segurança à sua conta</p>
+          </div>
+          <button class="btn btn-primary">Ativar 2FA</button>
+        </div>
 
-          <div class="security-item">
-            <div class="security-icon success">
-              <i class="fas fa-history"></i>
-            </div>
-            <div class="security-item-info">
-              <h4>Histórico de login</h4>
-              <p>Último acesso: Hoje às 14:30 de São Paulo, SP</p>
-            </div>
-            <button class="btn btn-secondary">Ver Histórico</button>
+        <div class="security-item">
+          <div class="security-icon success">
+            <i class="fas fa-history"></i>
           </div>
+          <div class="security-item-info">
+            <h4>Histórico de login</h4>
+            <p>Último acesso: Hoje às 14:30 de São Paulo, SP</p>
+          </div>
+          <button class="btn btn-secondary">Ver Histórico</button>
         </div>
       </div>
+    </div>
 
-      <!-- Pagamentos -->
-      <div class="config-section">
-        <div class="config-header">
-          <h3><i class="fas fa-credit-card"></i> Métodos de Pagamento</h3>
-          <p>Gerencie suas formas de pagamento e preferências</p>
+    <!-- Pagamentos -->
+    <div class="config-section">
+      <div class="config-header">
+        <h3><i class="fas fa-credit-card"></i> Métodos de Pagamento</h3>
+        <p>Gerencie suas formas de pagamento e preferências</p>
+      </div>
+      <div class="config-body">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="metodo-preferido">Método Preferido</label>
+            <select id="metodo-preferido" class="form-control">
+              <option value="cartao">Cartão de Crédito</option>
+              <option value="pix">PIX</option>
+              <option value="boleto">Boleto Bancário</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="moeda">Moeda Padrão</label>
+            <select id="moeda" class="form-control">
+              <option value="BRL" selected>Real (R$)</option>
+              <option value="USD">Dólar (US$)</option>
+              <option value="EUR">Euro (€)</option>
+            </select>
+          </div>
         </div>
-        <div class="config-body">
-          <div class="form-row">
-            <div class="form-group">
-              <label for="metodo-preferido">Método Preferido</label>
-              <select id="metodo-preferido" class="form-control">
-                <option value="cartao">Cartão de Crédito</option>
-                <option value="pix">PIX</option>
-                <option value="boleto">Boleto Bancário</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="moeda">Moeda Padrão</label>
-              <select id="moeda" class="form-control">
-                <option value="BRL" selected>Real (R$)</option>
-                <option value="USD">Dólar (US$)</option>
-                <option value="EUR">Euro (€)</option>
-              </select>
-            </div>
-          </div>
 
-          <div class="setting-item">
-            <div class="setting-info">
-              <h4>Pagamento automático</h4>
-              <p>Ative o pagamento automático para projetos recorrentes</p>
-            </div>
-            <label class="toggle-switch">
-              <input type="checkbox">
-              <span class="toggle-slider"></span>
-            </label>
+        <div class="setting-item">
+          <div class="setting-info">
+            <h4>Pagamento automático</h4>
+            <p>Ative o pagamento automático para projetos recorrentes</p>
           </div>
+          <label class="toggle-switch">
+            <input type="checkbox">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
 
-          <div class="setting-item">
-            <div class="setting-info">
-              <h4>Recibos por email</h4>
-              <p>Receba automaticamente os recibos de pagamento por email</p>
-            </div>
-            <label class="toggle-switch">
-              <input type="checkbox" checked>
-              <span class="toggle-slider"></span>
-            </label>
+        <div class="setting-item">
+          <div class="setting-info">
+            <h4>Recibos por email</h4>
+            <p>Receba automaticamente os recibos de pagamento por email</p>
           </div>
+          <label class="toggle-switch">
+            <input type="checkbox" checked>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
 
-          <div class="btn-group">
-            <button class="btn btn-primary">Adicionar Cartão</button>
-            <button class="btn btn-secondary">Ver Histórico</button>
-          </div>
+        <div class="btn-group">
+          <button class="btn btn-primary">Adicionar Cartão</button>
+          <button class="btn btn-secondary">Ver Histórico</button>
         </div>
       </div>
+    </div>
 
-      <!-- Preferências do Sistema -->
-      <div class="config-section">
-        <div class="config-header">
-          <h3><i class="fas fa-cogs"></i> Preferências do Sistema</h3>
-          <p>Personalize sua experiência na plataforma</p>
+    <!-- Preferências do Sistema -->
+    <div class="config-section">
+      <div class="config-header">
+        <h3><i class="fas fa-cogs"></i> Preferências do Sistema</h3>
+        <p>Personalize sua experiência na plataforma</p>
+      </div>
+      <div class="config-body">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="idioma">Idioma</label>
+            <select id="idioma" class="form-control">
+              <option value="pt-BR" selected>Português (Brasil)</option>
+              <option value="en-US">English (US)</option>
+              <option value="es-ES">Español</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="timezone">Fuso Horário</label>
+            <select id="timezone" class="form-control">
+              <option value="America/Sao_Paulo" selected>Brasília (GMT-3)</option>
+              <option value="America/New_York">Nova York (GMT-5)</option>
+              <option value="Europe/London">Londres (GMT+0)</option>
+            </select>
+          </div>
         </div>
-        <div class="config-body">
-          <div class="form-row">
-            <div class="form-group">
-              <label for="idioma">Idioma</label>
-              <select id="idioma" class="form-control">
-                <option value="pt-BR" selected>Português (Brasil)</option>
-                <option value="en-US">English (US)</option>
-                <option value="es-ES">Español</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="timezone">Fuso Horário</label>
-              <select id="timezone" class="form-control">
-                <option value="America/Sao_Paulo" selected>Brasília (GMT-3)</option>
-                <option value="America/New_York">Nova York (GMT-5)</option>
-                <option value="Europe/London">Londres (GMT+0)</option>
-              </select>
-            </div>
-          </div>
 
-          <div class="setting-item">
-            <div class="setting-info">
-              <h4>Modo escuro</h4>
-              <p>Use uma interface mais escura para reduzir o cansaço visual</p>
-            </div>
-            <label class="toggle-switch">
-              <input type="checkbox">
-              <span class="toggle-slider"></span>
-            </label>
+        <div class="setting-item">
+          <div class="setting-info">
+            <h4>Modo escuro</h4>
+            <p>Use uma interface mais escura para reduzir o cansaço visual</p>
           </div>
+          <label class="toggle-switch">
+            <input type="checkbox">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
 
-          <div class="setting-item">
-            <div class="setting-info">
-              <h4>Animações da interface</h4>
-              <p>Ative ou desative as animações da interface</p>
-            </div>
-            <label class="toggle-switch">
-              <input type="checkbox" checked>
-              <span class="toggle-slider"></span>
-            </label>
+        <div class="setting-item">
+          <div class="setting-info">
+            <h4>Animações da interface</h4>
+            <p>Ative ou desative as animações da interface</p>
           </div>
+          <label class="toggle-switch">
+            <input type="checkbox" checked>
+            <span class="toggle-slider"></span>
+          </label>
         </div>
       </div>
+    </div>
 
-      <!-- Zona de Perigo -->
-      <div class="config-section">
-        <div class="config-header">
-          <h3><i class="fas fa-exclamation-triangle"></i> Zona de Perigo</h3>
-          <p>Ações irreversíveis que afetam permanentemente sua conta</p>
+    <!-- Zona de Perigo -->
+    <div class="config-section">
+      <div class="config-header">
+        <h3><i class="fas fa-exclamation-triangle"></i> Zona de Perigo</h3>
+        <p>Ações irreversíveis que afetam permanentemente sua conta</p>
+      </div>
+      <div class="config-body">
+        <div class="security-item">
+          <div class="security-item-info">
+            <h4>Desativar conta temporariamente</h4>
+            <p>Sua conta ficará invisível até você reativá-la</p>
+          </div>
+          <button class="btn btn-secondary">Desativar</button>
         </div>
-        <div class="config-body">
-          <div class="security-item">
-            <div class="security-item-info">
-              <h4>Desativar conta temporariamente</h4>
-              <p>Sua conta ficará invisível até você reativá-la</p>
-            </div>
-            <button class="btn btn-secondary">Desativar</button>
-          </div>
 
-          <div class="security-item">
-            <div class="security-item-info">
-              <h4>Excluir conta permanentemente</h4>
-              <p>Esta ação não pode ser desfeita. Todos os seus dados serão removidos</p>
-            </div>
-            <button class="btn btn-danger">Excluir Conta</button>
+        <div class="security-item">
+          <div class="security-item-info">
+            <h4>Excluir conta permanentemente</h4>
+            <p>Esta ação não pode ser desfeita. Todos os seus dados serão removidos</p>
           </div>
+          <button class="btn btn-danger">Excluir Conta</button>
         </div>
       </div>
-    </div><!-- /.content -->
+    </div>
+  </div><!-- /.content -->
 
-  </main>
+</main>
 
-  <!-- Fecha o .flex que foi ABERTO na partial nav.html -->
-  </div>
+<!-- Fecha o .flex que foi ABERTO na partial nav.html -->
+</div>
 
-  <script src="{% static 'css/js/perfil.js' %}"></script>
+<script src="{% static 'css/js/perfil.js' %}"></script>
 </body>
+
 </html>
