@@ -19,4 +19,5 @@ urlpatterns = [
     path('pagamentoP/', views.pagamentoP, name='pagamentoP'),
     path('perfilP/', views.perfilP, name='perfilP'),
     path('procurarprojetosP/', views.procurarprojetosP, name='procurarprojetosP'),
+    path('delete_account/', views.delete_account, name='delete_account'),
 ]

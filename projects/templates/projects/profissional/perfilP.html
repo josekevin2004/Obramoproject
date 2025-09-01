@@ -5,7 +5,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TechConnect - Configurações</title>
+  <title>Obramo - Configurações</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
   <link rel="stylesheet" href="{% static 'css/perfil.css' %}">
@@ -509,9 +509,23 @@
             <h4>Excluir conta permanentemente</h4>
             <p>Esta ação não pode ser desfeita. Todos os seus dados serão removidos</p>
           </div>
-          <button class="btn btn-danger">Excluir Conta</button>
+          <form method="post" action="{% url 'delete_account' %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Excluir Conta</button>
+          </form>
+        <div class="security-item">
+            <div class="security-item-info">
+              <h4>Encerrar sessão</h4>
+              <p>Você será desconectado da sua conta</p>
+            </div>
+            <form method="post" action="{% url 'logout' %}">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-danger">
+                <i class="fas fa-sign-out-alt"></i> Logout
+              </button>
+            </form>
+          </div>
         </div>
-      </div>
     </div>
   </div><!-- /.content -->
 

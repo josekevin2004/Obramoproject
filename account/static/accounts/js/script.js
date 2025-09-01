@@ -110,3 +110,62 @@ nextBtn.addEventListener("click", goNext);
 // Init
 showStep(currentStep);
 
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const nextBtn = document.getElementById("nextBtn");
+    const prevBtn = document.getElementById("prevBtn");
+
+    let currentStep = 1;
+    const totalSteps = 5;
+
+    function showStep(step) {
+        document.querySelectorAll(".step-content").forEach(el => el.classList.add("hidden"));
+        document.getElementById("step" + step).classList.remove("hidden");
+        document.getElementById("currentStep").textContent = step;
+        document.getElementById("progressPercent").textContent = (step / totalSteps) * 100;
+        document.getElementById("progressBar").style.width = ((step / totalSteps) * 100) + "%";
+    }
+
+    nextBtn.addEventListener("click", function () {
+        if (currentStep === 2) {
+            const form = document.getElementById("registerForm");
+            if (!form.checkValidity()) {
+                form.reportValidity(); // mostra os erros nativos do navegador
+                return; // impede de ir para a etapa 3
+            }
+        }
+
+        if (currentStep < totalSteps) {
+            currentStep++;
+            showStep(currentStep);
+            prevBtn.disabled = currentStep === 1;
+            if (currentStep === totalSteps) nextBtn.disabled = true;
+        }
+    });
+
+    prevBtn.addEventListener("click", function () {
+        if (currentStep > 1) {
+            currentStep--;
+            showStep(currentStep);
+            nextBtn.disabled = false;
+            prevBtn.disabled = currentStep === 1;
+        }
+    });
+
+    // inicia na etapa 1
+    showStep(currentStep);
+});
+
+
+
+document.addEventListener("DOMContentLoaded", function() {
+    const submitBtn = document.getElementById("submitBtn");
+
+    submitBtn.addEventListener("click", function() {
+        // Adiciona uma classe para mudar a cor
+        this.classList.remove("btn-success");   // remove verde
+        this.classList.add("bg-blue-600", "hover:bg-blue-700"); // adiciona azul Tailwind
+        this.textContent = "Enviando..."; // opcional, muda o texto
+    });
+});

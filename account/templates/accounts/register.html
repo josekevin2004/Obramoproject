@@ -7,7 +7,7 @@
     <title>Obramo - Bem-vindo à Plataforma</title>
 
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"> -->
     
     <!-- Ícones e Fonte -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
@@ -84,7 +84,7 @@
                 </div>
                 <!-- se der errado colocar aq em baixo -->
                 <div class="card">
-                    <form action="{% url 'register' %}" method="post">
+                    <form id="registerForm" action="{% url 'register' %}" method="post">
                         {% include 'partials/_form-fields.html' %}
                         {% if message in messages %}
                         <div class="alert alert-{{message.tag}}">
@@ -93,19 +93,39 @@
                         {% endif %}
                         <div class="form-group">
                             <label>Localização</label>
-                            <select class="select">
-                                <option>Selecione sua cidade</option>
-                                <option>São Paulo, SP</option>
-                                <option>Rio de Janeiro, RJ</option>
-                                <option>Belo Horizonte, MG</option>
-                                <option>Brasília, DF</option>
-                                <option>Salvador, BA</option>
-                                <option>Outro</option>
-                            </select>
+                            <input type="text" class="input" name="localizacao" list="cidades" placeholder="Digite sua cidade"
+                                autocomplete="off">
+                            <datalist id="cidades">
+                                <option value="São Paulo, SP">
+                                <option value="Rio de Janeiro, RJ">
+                                <option value="Belo Horizonte, MG">
+                                <option value="Brasília, DF">
+                                <option value="Salvador, BA">
+                                <option value="Curitiba, PR">
+                                <option value="Porto Alegre, RS">
+                                <option value="Recife, PE">
+                                <option value="Fortaleza, CE">
+                                <option value="Manaus, AM">
+                                <option value="Belém, PA">
+                                <option value="Goiânia, GO">
+                                <option value="Vitória, ES">
+                                <option value="Campo Grande, MS">
+                                <option value="Cuiabá, MT">
+                                <option value="Maceió, AL">
+                                <option value="Natal, RN">
+                                <option value="João Pessoa, PB">
+                                <option value="Aracaju, SE">
+                                <option value="Palmas, TO">
+                                <option value="Porto Velho, RO">
+                                <option value="Rio Branco, AC">
+                                <option value="Macapá, AP">
+                                <option value="Boa Vista, RR">
+                                <option value="Outro">
+                            </datalist>
                         </div>
 
                         <div class="col-12 text-center pt-3">
-                            <button class="btn btn-success col-2 mx-auto d-block" type="submit">Cadastrar</button>
+                            <button id="submitBtn" class="btn btn-success col-2 mx-auto d-block" type="submit">Cadastrar</button>
                         </div>
                 </div>
                 </form>
@@ -133,7 +153,9 @@
                                 <span class="skill-tag">BI & Analytics</span>
                                 <span class="skill-tag">UX/UI Design</span>
                                 <span class="skill-tag">Suporte Técnico</span>
-                                <span class="skill-tag">Infraestrutura</span>
+                                <span class="skill-tag">Nuvem e Backup</span>
+                                <span class="skill-tag">Redes e Conectividade</span>
+                                <span class="skill-tag">Manutenção de PCs e Periféricos</span>
                             </div>
                         </div>
 
@@ -289,7 +311,9 @@
 
                     <div class="actions">
                         <!-- <button class="btn btn-primary">Ir para Dashboard</button> -->
-                        <button class="btn btn-outline">Explorar Plataforma</button>
+                        <!-- <button class="btn btn-outline">Explorar Plataforma</button> -->
+                         <a class="btn btn-primary" href="{% url 'login' %}">Ir para Dashboard</a>
+                         <a class="btn btn-outline" href="{% url 'inicio' %}">Explorar Plataforma</a>
                     </div>
                 </div>
             </div>

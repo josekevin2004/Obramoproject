@@ -1,4 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
 
 def inicio(request):
 	return render(request, 'landingpage/inicio.html')
@@ -48,5 +50,12 @@ def perfilP(request):
 def procurarprojetosP(request):
     return render(request, 'projects/profissional/procurarprojetosP.html')
 	
-
+@login_required
+def delete_account(request):
+    if request.method == "POST":
+        user = request.user
+        user.delete()
+        logout(request)
+        return redirect('home')  # ou a página inicial
+    return redirect('perfilP')
 
