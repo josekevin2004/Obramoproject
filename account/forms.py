@@ -22,7 +22,7 @@ class LoginForm(forms.Form):
                'placeholder': 'Informe a sua senha',   
            }
        ),
-   )
+    )
 
 class RegisterForm(forms.Form):
     login = forms.CharField(
@@ -69,4 +69,3 @@ class RegisterForm(forms.Form):
             }
         ),
     )
-

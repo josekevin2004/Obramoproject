@@ -1,26 +1,29 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Obramo - Bem-vindo à Plataforma</title>
 
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"> -->
-    
+
     <!-- Ícones e Fonte -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
     <!-- CSS Externo -->
     <link rel="stylesheet" href="{% static 'accounts/css/styleregister.css' %}">
-  </head>
-  <body>
-    
+</head>
+
+<body>
+
     <!-- Header -->
     {% include 'partials/_nav-header.html' %}
-    
+
     <!-- Onboarding -->
     <section class="onboarding">
         <div class="container">
@@ -82,19 +85,27 @@
                     <h2>Informações Básicas</h2>
                     <p>Conte-nos um pouco sobre você</p>
                 </div>
-                <!-- se der errado colocar aq em baixo -->
                 <div class="card">
                     <form id="registerForm" action="{% url 'register' %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="user_type" id="userTypeInput">
+
+                        <!-- CORRIGIDO: Linha duplicada removida e sintaxe corrigida -->
                         {% include 'partials/_form-fields.html' %}
-                        {% if message in messages %}
-                        <div class="alert alert-{{message.tag}}">
+
+                        {% if messages %}
+                        {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} mt-3">
                             {{ message }}
                         </div>
+                        {% endfor %}
                         {% endif %}
+
                         <div class="form-group">
                             <label>Localização</label>
-                            <input type="text" class="input" name="localizacao" list="cidades" placeholder="Digite sua cidade"
-                                autocomplete="off">
+                            <input type="text"
+                                class="form-control block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                name="localizacao" list="cidades" placeholder="Digite sua cidade" autocomplete="off">
                             <datalist id="cidades">
                                 <option value="São Paulo, SP">
                                 <option value="Rio de Janeiro, RJ">
@@ -125,7 +136,8 @@
                         </div>
 
                         <div class="col-12 text-center pt-3">
-                            <button id="submitBtn" class="btn btn-success col-2 mx-auto d-block" type="submit">Cadastrar</button>
+                            <button id="submitBtn" class="btn btn-success col-2 mx-auto d-block"
+                                type="submit">Cadastrar</button>
                         </div>
                 </div>
                 </form>
@@ -221,7 +233,8 @@
 
                         <div class="form-group">
                             <label>Sobre sua empresa/projeto</label>
-                            <textarea class="textarea" rows="4" placeholder="Conte-nos sobre sua empresa e o tipo de projetos que você costuma ter..."></textarea>
+                            <textarea class="textarea" rows="4"
+                                placeholder="Conte-nos sobre sua empresa e o tipo de projetos que você costuma ter..."></textarea>
                         </div>
                     </div>
                 </div>
@@ -248,7 +261,8 @@
 
                     <div class="form-group mt-10">
                         <label>Código de Verificação</label>
-                        <input id="codeInput" type="text" class="input" placeholder="Digite o código de 6 dígitos" maxlength="6">
+                        <input id="codeInput" type="text" class="input" placeholder="Digite o código de 6 dígitos"
+                            maxlength="6">
                     </div>
 
                     <div class="divider"></div>
@@ -271,11 +285,13 @@
                         <h4 class="subtitle">Termos e Condições</h4>
                         <label class="check">
                             <input id="termsCheck" type="checkbox" class="checkbox-custom">
-                            <span>Aceito os <a href="#" class="link">Termos de Uso</a> e <a href="#" class="link">Política de Privacidade</a></span>
+                            <span>Aceito os <a href="#" class="link">Termos de Uso</a> e <a href="#"
+                                    class="link">Política de Privacidade</a></span>
                         </label>
                         <label class="check">
                             <input type="checkbox" class="checkbox-custom">
-                            <span>Desejo receber emails sobre atualizações da plataforma e oportunidades relevantes</span>
+                            <span>Desejo receber emails sobre atualizações da plataforma e oportunidades
+                                relevantes</span>
                         </label>
                     </div>
                 </div>
@@ -286,7 +302,8 @@
                 <div class="center">
                     <div class="success-circle"><i class="fas fa-check"></i></div>
                     <h2 class="mb-10">Parabéns!</h2>
-                    <p class="muted mb-24">Sua conta foi criada com sucesso. Agora você pode começar a usar o Obramo.</p>
+                    <p class="muted mb-24">Sua conta foi criada com sucesso. Agora você pode começar a usar o Obramo.
+                    </p>
 
                     <div class="card mb-24">
                         <h3 class="mb-16">Próximos Passos</h3>
@@ -312,8 +329,8 @@
                     <div class="actions">
                         <!-- <button class="btn btn-primary">Ir para Dashboard</button> -->
                         <!-- <button class="btn btn-outline">Explorar Plataforma</button> -->
-                         <a class="btn btn-primary" href="{% url 'login' %}">Ir para Dashboard</a>
-                         <a class="btn btn-outline" href="{% url 'inicio' %}">Explorar Plataforma</a>
+                        <a class="btn btn-primary" href="{% url 'login' %}">Ir para Dashboard</a>
+                        <a class="btn btn-outline" href="{% url 'inicio' %}">Explorar Plataforma</a>
                     </div>
                 </div>
             </div>
@@ -327,6 +344,7 @@
     </section>
 
     <!-- JS Externo -->
-        <script src="{% static 'accounts/js/script.js' %}"></script>
+    <script src="{% static 'accounts/js/script.js' %}"></script>
 </body>
+
 </html>

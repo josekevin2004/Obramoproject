@@ -1,171 +1,147 @@
-// ===== State =====
-let currentStep = 1;
-const totalSteps = 5;
-let userType = ""; // 'client' | 'professional'
+// ----- CÓDIGO UNIFICADO E CORRIGIDO -----
 
-// ===== Elements =====
-const prevBtn = document.getElementById("prevBtn");
-const nextBtn = document.getElementById("nextBtn");
-const progressBar = document.getElementById("progressBar");
-const currentStepEl = document.getElementById("currentStep");
-const progressPercentEl = document.getElementById("progressPercent");
-
-// Step 3 dynamic containers
-const professionalSkills = document.getElementById("professionalSkills");
-const clientNeeds = document.getElementById("clientNeeds");
-
-// Terms checkbox (step 4)
-const termsCheck = document.getElementById("termsCheck");
-
-// ===== Helpers =====
-function showStep(step) {
-  // hide all
-  document.querySelectorAll(".step-content").forEach(s => s.classList.add("hidden"));
-  // show requested
-  const el = document.getElementById(`step${step}`);
-  if (el) el.classList.remove("hidden");
-
-  // dynamic content on step 3
-  if (step === 3) {
-    if (userType === "professional") {
-      professionalSkills.classList.remove("hidden");
-      clientNeeds.classList.add("hidden");
-    } else {
-      clientNeeds.classList.remove("hidden");
-      professionalSkills.classList.add("hidden");
-    }
-  }
-
-  // progress
-  const pct = Math.round((step / totalSteps) * 100);
-  progressBar.style.width = `${pct}%`;
-  currentStepEl.textContent = step.toString();
-  progressPercentEl.textContent = pct.toString();
-
-  // nav buttons
-  prevBtn.disabled = step === 1;
-  if (step === totalSteps) {
-    nextBtn.style.display = "none";
-  } else {
-    nextBtn.style.display = "inline-flex";
-  }
-
-  // step 1 guard (need userType to enable next)
-  if (step === 1) {
-    nextBtn.disabled = userType === "";
-  } else {
-    nextBtn.disabled = false;
-  }
-}
-
-function goNext() {
-  if (currentStep >= totalSteps) return;
-
-  // Guards
-  if (currentStep === 1 && !userType) {
-    alert("Por favor, selecione como você pretende usar a plataforma.");
-    return;
-  }
-
-  // (Opcional) exemplo simples de validação no passo 4: aceitar termos
-  if (currentStep === 4 && !termsCheck.checked) {
-    alert("Você precisa aceitar os Termos de Uso e a Política de Privacidade para continuar.");
-    return;
-  }
-
-  currentStep++;
-  showStep(currentStep);
-}
-
-function goPrev() {
-  if (currentStep <= 1) return;
-  currentStep--;
-  showStep(currentStep);
-}
-
-// ===== Listeners =====
-// User type cards
-document.querySelectorAll(".user-type-card").forEach(card => {
-  card.addEventListener("click", () => {
-    document.querySelectorAll(".user-type-card").forEach(c => c.classList.remove("selected"));
-    card.classList.add("selected");
-    userType = card.dataset.type || "";
-    // enable next on step 1
-    if (currentStep === 1) nextBtn.disabled = userType === "";
-  });
-});
-
-// Skill tags multi-select
-function attachSkillTagHandlers(scope = document) {
-  scope.querySelectorAll(".skill-tag").forEach(tag => {
-    tag.addEventListener("click", () => tag.classList.toggle("selected"));
-  });
-}
-attachSkillTagHandlers(document);
-
-// Nav buttons
-prevBtn.addEventListener("click", goPrev);
-nextBtn.addEventListener("click", goNext);
-
-// Init
-showStep(currentStep);
-
-
-
+// Espera o documento carregar completamente antes de executar qualquer script.
 document.addEventListener("DOMContentLoaded", function () {
-    const nextBtn = document.getElementById("nextBtn");
-    const prevBtn = document.getElementById("prevBtn");
 
-    let currentStep = 1;
-    const totalSteps = 5;
+  // ===== State (Estado da Aplicação) =====
+  let currentStep = 1;
+  const totalSteps = 5;
+  let userType = ""; // 'client' ou 'professional'
 
-    function showStep(step) {
-        document.querySelectorAll(".step-content").forEach(el => el.classList.add("hidden"));
-        document.getElementById("step" + step).classList.remove("hidden");
-        document.getElementById("currentStep").textContent = step;
-        document.getElementById("progressPercent").textContent = (step / totalSteps) * 100;
-        document.getElementById("progressBar").style.width = ((step / totalSteps) * 100) + "%";
-    }
+  // ===== Elements (Elementos do DOM) =====
+  const prevBtn = document.getElementById("prevBtn");
+  const nextBtn = document.getElementById("nextBtn");
+  const submitBtn = document.getElementById("submitBtn");
+  const registerForm = document.getElementById("registerForm");
 
-    nextBtn.addEventListener("click", function () {
-        if (currentStep === 2) {
-            const form = document.getElementById("registerForm");
-            if (!form.checkValidity()) {
-                form.reportValidity(); // mostra os erros nativos do navegador
-                return; // impede de ir para a etapa 3
-            }
-        }
+  // Elementos da barra de progresso
+  const progressBar = document.getElementById("progressBar");
+  const currentStepEl = document.getElementById("currentStep");
+  const progressPercentEl = document.getElementById("progressPercent");
 
-        if (currentStep < totalSteps) {
-            currentStep++;
-            showStep(currentStep);
-            prevBtn.disabled = currentStep === 1;
-            if (currentStep === totalSteps) nextBtn.disabled = true;
-        }
-    });
-
-    prevBtn.addEventListener("click", function () {
-        if (currentStep > 1) {
-            currentStep--;
-            showStep(currentStep);
-            nextBtn.disabled = false;
-            prevBtn.disabled = currentStep === 1;
-        }
-    });
-
-    // inicia na etapa 1
-    showStep(currentStep);
-});
+  // Conteúdos dinâmicos da Etapa 3
+  const professionalSkills = document.getElementById("professionalSkills");
+  const clientNeeds = document.getElementById("clientNeeds");
+  
+  // Checkbox de termos (Etapa 4)
+  const termsCheck = document.getElementById("termsCheck");
 
 
+  // ===== Functions (Funções) =====
 
-document.addEventListener("DOMContentLoaded", function() {
-    const submitBtn = document.getElementById("submitBtn");
+  /**
+   * Mostra uma etapa específica do formulário e atualiza a interface.
+   * @param {number} step - O número da etapa a ser exibida.
+   */
+  function showStep(step) {
+      // Esconde todas as etapas
+      document.querySelectorAll(".step-content").forEach(s => s.classList.add("hidden"));
+      
+      // Mostra a etapa correta
+      const el = document.getElementById(`step${step}`);
+      if (el) el.classList.remove("hidden");
 
-    submitBtn.addEventListener("click", function() {
-        // Adiciona uma classe para mudar a cor
-        this.classList.remove("btn-success");   // remove verde
-        this.classList.add("bg-blue-600", "hover:bg-blue-700"); // adiciona azul Tailwind
-        this.textContent = "Enviando..."; // opcional, muda o texto
-    });
+      // Lógica para a Etapa 3: mostra o conteúdo do cliente ou profissional
+      if (step === 3) {
+          if (userType === "professional") {
+              professionalSkills.classList.remove("hidden");
+              clientNeeds.classList.add("hidden");
+          } else {
+              clientNeeds.classList.remove("hidden");
+              professionalSkills.classList.add("hidden");
+          }
+      }
+
+      // Atualiza a barra de progresso
+      const pct = Math.round((step / totalSteps) * 100);
+      progressBar.style.width = `${pct}%`;
+      currentStepEl.textContent = step.toString();
+      progressPercentEl.textContent = pct.toString();
+
+      // Habilita/desabilita os botões de navegação
+      prevBtn.disabled = step === 1;
+      nextBtn.style.display = (step === totalSteps) ? "none" : "inline-flex";
+
+      // Regra especial para a Etapa 1 (só pode avançar se escolher um tipo)
+      if (step === 1) {
+          nextBtn.disabled = userType === "";
+      } else {
+          nextBtn.disabled = false;
+      }
+  }
+
+  /**
+   * Avança para a próxima etapa do formulário.
+   */
+  function goNext() {
+      if (currentStep >= totalSteps) return;
+
+      // Validação da Etapa 2 (Informações Básicas)
+      if (currentStep === 2) {
+          // Usa a validação nativa do navegador para os campos do formulário
+          if (!registerForm.checkValidity()) {
+              registerForm.reportValidity();
+              return; // Impede de avançar se o formulário for inválido
+          }
+      }
+
+      // Validação da Etapa 4 (Termos e Condições)
+      if (currentStep === 4 && !termsCheck.checked) {
+          alert("Você precisa aceitar os Termos de Uso e a Política de Privacidade para continuar.");
+          return;
+      }
+
+      currentStep++;
+      showStep(currentStep);
+  }
+
+  /**
+   * Retorna para a etapa anterior do formulário.
+   */
+  function goPrev() {
+      if (currentStep <= 1) return;
+      currentStep--;
+      showStep(currentStep);
+  }
+
+
+  // ===== Event Listeners (Escutadores de Eventos) =====
+
+  // 1. Clique nos cards de tipo de usuário
+  document.querySelectorAll(".user-type-card").forEach(card => {
+      card.addEventListener("click", () => {
+          document.querySelectorAll(".user-type-card").forEach(c => c.classList.remove("selected"));
+          card.classList.add("selected");
+          userType = card.dataset.type || "";
+          
+          // NOVO: Atualiza o campo oculto do formulário com o tipo de usuário
+          document.getElementById("userTypeInput").value = userType; 
+
+          // Habilita o botão "Próximo"
+          if (currentStep === 1) nextBtn.disabled = false;
+      });
+  });
+
+  // 2. Clique nas tags de habilidades (permite selecionar/deselecionar)
+  document.querySelectorAll(".skill-tag").forEach(tag => {
+      tag.addEventListener("click", () => tag.classList.toggle("selected"));
+  });
+
+  // 3. Botões de navegação
+  prevBtn.addEventListener("click", goPrev);
+  nextBtn.addEventListener("click", goNext);
+  
+  // 4. Efeito visual no botão de cadastro
+  if (submitBtn) {
+      submitBtn.addEventListener("click", function() {
+          this.classList.remove("btn-success");
+          this.classList.add("bg-blue-600", "hover:bg-blue-700");
+          this.textContent = "Enviando...";
+      });
+  }
+
+  // ===== Initialization (Inicialização) =====
+  // Mostra a primeira etapa quando a página carrega.
+  showStep(currentStep);
+
 });
